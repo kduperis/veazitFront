@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function mapScreen() {
   return (
     <View style={styles.container}>
-      <Text>Map Screen</Text>
+      <Text>Salut c'est la Map Screen</Text>
     </View>
   );
 }
