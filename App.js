@@ -35,13 +35,16 @@ var stackNavigation = () => {
         } else if (route.name === 'Profil') {
           iconName = faUserAstronaut
         }
-        return <FontAwesomeIcon icon={iconName} />;
+        return <FontAwesomeIcon icon={iconName} color={color}/>;
       },
     })}
 
       tabBarOptions={{
-        activeTintColor: '#0984e3',
-        inactiveTintColor: '#dfe6e9',
+        activeTintColor: '#06D4B6',
+        inactiveTintColor: '#4b667f',
+        style: {
+          backgroundColor: '#2C3A47',
+        }
       }}
 
     >
