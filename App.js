@@ -66,7 +66,6 @@ var stackNavigation = () => {
 
 export default function App() {
   return (
-<<<<<<< HEAD
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -78,14 +77,5 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
-=======
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={homepageScreen} />
-        <Stack.Screen name="HomeFilter" component={homefilterScreen} />
-        <Stack.Screen name="StackNavigation" component={stackNavigation} />
-      </Stack.Navigator>
-    </NavigationContainer>
->>>>>>> 78e6f4ca3b26937dbc0b6e6d3eb8b6a0078dc039
   );
 }
