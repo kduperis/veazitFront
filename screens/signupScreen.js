@@ -3,10 +3,23 @@ import { Input } from 'react-native-elements';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import {
+    PressStart2P_400Regular
+} from '@expo-google-fonts/press-start-2p';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
 export default function connectScreen(props) {
+    let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
+
+    if (!fontLoaded) {
+        return <AppLoading />
+    }
+
     return (
         <View style={styles.container}>
-            <Text h2 style={{ marginBottom: 25, color: '#FFFFFF', fontSize: 34 }}>Welcome New Veaziter </Text>
+            <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily:'PressStart2P_400Regular' }}>Welcome new</Text>
+            <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily:'PressStart2P_400Regular' }}>Veaziter</Text>
             <Input
                 containerStyle={{ marginBottom: 25, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
@@ -65,7 +78,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#06D4B6",
         padding: 15,
-        paddingTop: 30,
+        paddingTop: 25,
         borderRadius: 30
     },
     buttonText: {
@@ -73,5 +86,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         alignItems: 'center',
         justifyContent: 'center',
+        fontFamily: "PressStart2P_400Regular"
     },
 });
