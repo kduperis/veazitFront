@@ -1,12 +1,37 @@
-import { StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Input, Icon } from 'react-native';
 import {
   PressStart2P_400Regular
 } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function homepageScreen(props) {
+  const [pseudo, setPseudo] = useState('');
+  const [pseudoIsSubmited, setPseudoIsSubmited] = useState(false);
+
+  useEffect(() => {
+    AsyncStorage.getItem('pseudo', function (error, pseudo) {
+      if (pseudo) {
+        setPseudo(pseudo);
+        setPseudoIsSubmited(true);
+      }
+    });
+  }, []);
+
+  var inputPseudo;
+  if (!pseudoIsSubmited) {
+    inputPseudo = <SafeAreaView>
+      <TextInput style={styles.input} placeholder='Entrez votre nom' onChangeText={(val) => setPseudo(val)} />
+
+    </SafeAreaView>
+
+  } else {
+    inputPseudo = <Text h4 style={{ marginBottom: 25, color: '#FFFFFF', fontSize: 20 }}>Welcome back {pseudo}</Text>
+  }
+
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
@@ -19,12 +44,12 @@ export default function homepageScreen(props) {
       <Text style={{ color: "#D1D8E0", fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>&</Text>
       <Text style={{ color: "#06D4B6", fontSize: 50, marginBottom: 50, fontFamily: "PressStart2P_400Regular" }}>Play</Text>
 
-      <SafeAreaView>
-        <TextInput style={styles.input} placeholder='Entrez votre nom' />
-      </SafeAreaView>
-      <TouchableOpacity style={styles.touchable} onPress={() => props.navigation.navigate("HomeFilter")}>
+      {inputPseudo}
+
+
+      <TouchableOpacity onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }} >
         <View style={styles.button}>
-          <Text style={styles.buttonText}>START</Text>
+          <Text style={styles.buttonText} >START</Text>
         </View>
       </TouchableOpacity>
     </View >
@@ -57,7 +82,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#06D4B6",
     padding: 15,
-    paddingTop: 30,
+    paddingTop: 25,
     borderRadius: 30
 
 
