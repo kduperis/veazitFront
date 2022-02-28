@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Input } from 'react-native-elements';
+import { useDispatch } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -10,17 +12,63 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
 export default function connectScreen(props) {
-    let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
+    //Déclaration des constantes nécessaires pour création d'un nouveau User
+    const [signUpPassword, setSignUpPassword] = useState('');
+    const [signUpUsername, setSignUpUsername] = useState('');
+    const [signUpEmail, setSignUpEmail] = useState('');
+
+    const [userExists, setUserExists] = useState(false);
+
+    const [listErrorsSignup, setErrorsSignup] = useState([])
+
+    //Vérification de la bonne écriture des données des Inputs dans la console
+    console.log(signUpUsername);
+
+    const dispatch = useDispatch();
+
+    //Au clic sur le Bouton Start on va récupérer les INPUT
+    var handleSubmitSignup = async () => {
+
+        const data = await fetch('http://192.168.43.124:3000/sign-up', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
+        })
+
+        const body = await data.json()
+        if(body.result == true) {
+            dispatch({ type: 'addToken', token: body.token})
+            setUserExists(true)
+        } else {
+            setErrorsSignup(body.error)
+        }
+    };
+
+    if(userExists) {
+        return props.navigation.navigate('Map')
+    }
+
+    var tabErrorsSignup = listErrorsSignup.map((error, i) => {
+        return(<Text>{error}</Text>)
+    })
+
+    //Mise en place de la Font Press Start 2P ATTENTION - A DÉCLARER JUSTE AVANT LE RETURN DE LA FONCTION
+    let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
     if (!fontLoaded) {
         return <AppLoading />
     }
 
     return (
         <View style={styles.container}>
-            <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily:'PressStart2P_400Regular' }}>Welcome new</Text>
-            <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily:'PressStart2P_400Regular' }}>Veaziter</Text>
+            {/*Titre*/}
+            <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome new</Text>
+            <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
+
+            {/*Input pour l'USERNAME'*/}
             <Input
+                onChangeText={(e) => setSignUpUsername(e)}
+                value={signUpUsername}
                 containerStyle={{ marginBottom: 25, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Username'
@@ -32,7 +80,11 @@ export default function connectScreen(props) {
                     />
                 }
             />
+
+            {/*Input pour l'EMAIL'*/}
             <Input
+                onChangeText={(e) => setSignUpEmail(e)}
+                value={signUpEmail}
                 containerStyle={{ marginBottom: 25, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Email'
@@ -44,7 +96,11 @@ export default function connectScreen(props) {
                     />
                 }
             />
+
+            {/*Input pour le MOT DE PASSE*/}
             <Input
+                onChangeText={(e) => setSignUpPassword(e)}
+                value={signUpPassword}
                 containerStyle={{ marginBottom: 25, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Mot de passe'
@@ -57,11 +113,19 @@ export default function connectScreen(props) {
                     />
                 }
             />
-            <TouchableOpacity style={styles.touchable} onPress={() => props.navigation.navigate("SignIn")}>
+
+            {tabErrorsSignup}
+
+            {/*Bouton qui redirige vers le 'JEU'*/}
+            <TouchableOpacity style={styles.touchable} onPress={() => handleSubmitSignup()}>
                 <View style={styles.button}>
-                    <Text style={styles.buttonText}>Let's Veazit</Text>
+                    <Text style={styles.buttonText}>Start</Text>
                 </View>
             </TouchableOpacity>
+
+            {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
+            <Text style={styles.text}>Si vous avez deja un compte:</Text>
+            <Text style={styles.textConnect} onPress={() => props.navigation.navigate('SignIn')}>Connectez-vous</Text>
         </View >
     );
 }
@@ -88,4 +152,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         fontFamily: "PressStart2P_400Regular"
     },
+    text: {
+        marginTop: 30,
+        color: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textConnect: {
+        color: '#06D4B6',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: "PressStart2P_400Regular",
+        marginTop: 10,
+        textDecorationLine: 'underline'
+    }
 });

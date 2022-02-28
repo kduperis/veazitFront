@@ -16,9 +16,14 @@ import signinScreen from './screens/signinScreen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUserAstronaut, faTrophy, faMapLocationDot, faFilter } from '@fortawesome/free-solid-svg-icons'
 import { faFortAwesome } from '@fortawesome/free-brands-svg-icons'
+import { Provider } from 'react-redux';
+import {createStore, combineReducers} from 'redux'
+import token from './reducers/token';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const store = createStore(combineReducers({token}))
 
 var stackNavigation = () => {
   return (
@@ -58,14 +63,16 @@ var stackNavigation = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name='SignUp' component={signupScreen} />
-        <Stack.Screen name='SignIn' component={signinScreen} />
-        <Stack.Screen name="Home" component={homepageScreen} />
-        <Stack.Screen name="HomeFilter" component={homefilterScreen} />
-        <Stack.Screen name="StackNavigation" component={stackNavigation} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='SignUp' component={signupScreen} />
+          <Stack.Screen name='SignIn' component={signinScreen} />
+          <Stack.Screen name="Home" component={homepageScreen} />
+          <Stack.Screen name="HomeFilter" component={homefilterScreen} />
+          <Stack.Screen name="StackNavigation" component={stackNavigation} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
