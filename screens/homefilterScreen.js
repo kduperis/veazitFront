@@ -1,14 +1,16 @@
-import { StyleSheet} from 'react-native';
-import { NativeBaseProvider, Text, Box, Button} from 'native-base';
+import { StyleSheet, View} from 'react-native';
+import { Button, Text} from 'react-native-elements';
 
 export default function homefilterScreen(props) {
   return (
-    <NativeBaseProvider>
-      <Box flex={1} bg="#fff" alignItems="center" justifyContent="center">
+    <View style={styles.container}>
+ 
         <Text>Home filter page Screen</Text>
-        <Button onPress={() => props.navigation.navigate('StackNavigation')} >To Nav Bar</Button>
-      </Box>
-    </NativeBaseProvider>
+        <Button 
+        title={'To Nav Bar'}
+        onPress={() => props.navigation.navigate('StackNavigation')} />
+
+    </View>
   );
 }
 

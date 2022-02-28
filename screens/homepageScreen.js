@@ -1,14 +1,16 @@
-import { StyleSheet} from 'react-native';
-import { NativeBaseProvider, Text, Box, Button} from 'native-base';
+import { StyleSheet, View} from 'react-native';
+import { Button, Text} from 'react-native-elements';
 
 export default function homepageScreen(props) {
   return (
-    <NativeBaseProvider>
-      <Box flex={1} bg="#fff" alignItems="center" justifyContent="center">
+    <View style={styles.container}>
+      
         <Text>Home page Screen</Text>
-        <Button onPress={() => props.navigation.navigate('HomeFilter')} >To Home Filter</Button>
-      </Box>
-    </NativeBaseProvider>
+        <Button 
+        title={'To Home Filter'}
+        onPress={() => props.navigation.navigate('HomeFilter')} />
+
+    </View>
   );
 }
 
