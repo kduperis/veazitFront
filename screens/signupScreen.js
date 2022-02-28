@@ -46,11 +46,11 @@ export default function connectScreen(props) {
     };
 
     if(userExists) {
-        return props.navigation.navigate('Map')
+        props.navigation.navigate('StackNavigation')
     }
 
     var tabErrorsSignup = listErrorsSignup.map((error, i) => {
-        return(<Text>{error}</Text>)
+        return(<Text style={styles.error}>{error}</Text>)
     })
 
     //Mise en place de la Font Press Start 2P ATTENTION - A DÉCLARER JUSTE AVANT LE RETURN DE LA FONCTION
@@ -101,7 +101,7 @@ export default function connectScreen(props) {
             <Input
                 onChangeText={(e) => setSignUpPassword(e)}
                 value={signUpPassword}
-                containerStyle={{ marginBottom: 25, width: '70%' }}
+                containerStyle={{ width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Mot de passe'
                 secureTextEntry={true}
@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
         borderColor: "#06D4B6",
         padding: 15,
         paddingTop: 25,
+        marginTop: 25,
         borderRadius: 30
     },
     buttonText: {
@@ -165,5 +166,8 @@ const styles = StyleSheet.create({
         fontFamily: "PressStart2P_400Regular",
         marginTop: 10,
         textDecorationLine: 'underline'
+    },
+    error: {
+        color: 'red'
     }
 });
