@@ -11,6 +11,7 @@ import filterScreen from './screens/filterScreen';
 import questScreen from './screens/questScreen';
 import trophyScreen from './screens/trophyScreen';
 import signupScreen from './screens/signupScreen';
+import signinScreen from './screens/signinScreen';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUserAstronaut, faTrophy, faMapLocationDot, faFilter } from '@fortawesome/free-solid-svg-icons'
@@ -60,6 +61,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name='SignUp' component={signupScreen} />
+        <Stack.Screen name='SignIn' component={signinScreen} />
         <Stack.Screen name="Home" component={homepageScreen} />
         <Stack.Screen name="HomeFilter" component={homefilterScreen} />
         <Stack.Screen name="StackNavigation" component={stackNavigation} />

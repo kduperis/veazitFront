@@ -18,20 +18,8 @@ export default function connectScreen(props) {
 
     return (
         <View style={styles.container}>
-            <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily:'PressStart2P_400Regular' }}>Welcome new</Text>
+            <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily:'PressStart2P_400Regular' }}>Welcome back</Text>
             <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily:'PressStart2P_400Regular' }}>Veaziter</Text>
-            <Input
-                containerStyle={{ marginBottom: 25, width: '70%' }}
-                inputStyle={{ marginLeft: 10, color: '#fff' }}
-                placeholder='Username'
-                leftIcon={
-                    <Icon
-                        name='user-astronaut'
-                        size={24}
-                        color='#06D4B6'
-                    />
-                }
-            />
             <Input
                 containerStyle={{ marginBottom: 25, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
@@ -57,7 +45,7 @@ export default function connectScreen(props) {
                     />
                 }
             />
-            <TouchableOpacity style={styles.touchable} onPress={() => props.navigation.navigate("SignIn")}>
+            <TouchableOpacity style={styles.touchable} onPress={() => props.navigation.navigate("StackNavigation")}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>Let's Veazit</Text>
                 </View>
