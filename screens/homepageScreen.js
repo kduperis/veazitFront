@@ -15,8 +15,7 @@ export default function homepageScreen(props) {
   useEffect(() => {
     AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
-        setPseudo(pseudo);
-        setPseudoIsSubmited(true);
+        props.navigation.navigate('StackNavigation')
       }
     });
   }, []);
