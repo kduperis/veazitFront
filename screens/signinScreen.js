@@ -10,7 +10,7 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { useState } from 'react';
 
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function signIn(props) {
 
@@ -23,7 +23,7 @@ export default function signIn(props) {
 
     var handleSubmitSignin = async () => {
 
-        const data = await fetch('http://192.168.1.28:3000/sign-in', {
+        const data = await fetch('http://172.16.188.146:3000/sign-in', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}`
@@ -33,7 +33,7 @@ export default function signIn(props) {
 
         if (body.result == true) {
             dispatch({ type: 'addToken', token: body.user.token })
-            props.navigation.navigate('StackNavigation', {screen: 'Map'});
+            props.navigation.navigate('StackNavigation', { screen: 'Map' });
         } else {
             setErrorsSignin(body.error)
         }

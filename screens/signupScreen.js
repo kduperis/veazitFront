@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Input } from 'react-native-elements';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -25,7 +25,7 @@ export default function signupScreen(props) {
     //Au clic sur le Bouton Start on va récupérer les INPUT
     var handleSubmitSignup = async () => {
 
-        const data = await fetch('http://192.168.1.28:3000/sign-up', {
+        const data = await fetch('http://172.16.188.146:3000/sign-up', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
@@ -34,7 +34,7 @@ export default function signupScreen(props) {
         const body = await data.json()
         if (body.result == true) {
             dispatch({ type: 'addToken', token: body.saveUser.token })
-            props.navigation.navigate('StackNavigation', {screen: 'Map'});
+            props.navigation.navigate('StackNavigation', { screen: 'Map' });
         } else {
             setErrorsSignup(body.error)
         }
@@ -49,7 +49,7 @@ export default function signupScreen(props) {
     if (!fontLoaded) {
         return <AppLoading />
     }
-        
+
     return (
         <View style={styles.container}>
             {/*Titre*/}
@@ -120,7 +120,7 @@ export default function signupScreen(props) {
         </View >
     );
 
-    }
+}
 
 
 const styles = StyleSheet.create({

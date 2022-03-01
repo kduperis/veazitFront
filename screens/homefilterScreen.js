@@ -8,6 +8,7 @@ import {
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
 
 
 export default function homefilterScreen(props) {
@@ -17,24 +18,30 @@ export default function homefilterScreen(props) {
   const [check3, setCheck3] = useState(false);
   const [check4, setCheck4] = useState(false);
 
+  const dispatch = useDispatch()
+
 
   const checkBox = () => {
     let category = [];
-    if (check1){
+    if (check1) {
       category.push("aquatique")
     }
-    if (check2){
+    if (check2) {
       category.push("Domaine")
     }
-    if (check3){
+    if (check3) {
       category.push("Parc")
     }
-    if (check4){
+    if (check4) {
       category.push("category 4")
     }
-    AsyncStorage.setItem("category", JSON.stringify(category)) 
+    AsyncStorage.setItem("category", JSON.stringify(category))
     props.navigation.navigate('StackNavigation')
+    dispatch({ type: "addchecked", category: category })
+
+
   }
+
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
