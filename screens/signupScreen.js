@@ -54,76 +54,80 @@ export default function signupScreen(props) {
         return <AppLoading />
     }
 
-    return (
-        <View style={styles.container}>
-            {/*Titre*/}
-            <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome new</Text>
-            <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
+    if (tokenUser) {
+        props.navigation.navigate('Map')
+    } else {
+        
+        return (
+            <View style={styles.container}>
+                {/*Titre*/}
+                <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome new</Text>
+                <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
 
-            {/*Input pour l'USERNAME'*/}
-            <Input
-                onChangeText={(e) => setSignUpUsername(e)}
-                value={signUpUsername}
-                containerStyle={{ marginBottom: 25, width: '70%' }}
-                inputStyle={{ marginLeft: 10, color: '#fff' }}
-                placeholder='Username'
-                leftIcon={
-                    <Icon
-                        name='user-astronaut'
-                        size={24}
-                        color='#06D4B6'
-                    />
-                }
-            />
+                {/*Input pour l'USERNAME'*/}
+                <Input
+                    onChangeText={(e) => setSignUpUsername(e)}
+                    value={signUpUsername}
+                    containerStyle={{ marginBottom: 25, width: '70%' }}
+                    inputStyle={{ marginLeft: 10, color: '#fff' }}
+                    placeholder='Username'
+                    leftIcon={
+                        <Icon
+                            name='user-astronaut'
+                            size={24}
+                            color='#06D4B6'
+                        />
+                    }
+                />
 
-            {/*Input pour l'EMAIL'*/}
-            <Input
-                onChangeText={(e) => setSignUpEmail(e)}
-                value={signUpEmail}
-                containerStyle={{ marginBottom: 25, width: '70%' }}
-                inputStyle={{ marginLeft: 10, color: '#fff' }}
-                placeholder='Email'
-                leftIcon={
-                    <Icon
-                        name='at'
-                        size={24}
-                        color='#06D4B6'
-                    />
-                }
-            />
+                {/*Input pour l'EMAIL'*/}
+                <Input
+                    onChangeText={(e) => setSignUpEmail(e)}
+                    value={signUpEmail}
+                    containerStyle={{ marginBottom: 25, width: '70%' }}
+                    inputStyle={{ marginLeft: 10, color: '#fff' }}
+                    placeholder='Email'
+                    leftIcon={
+                        <Icon
+                            name='at'
+                            size={24}
+                            color='#06D4B6'
+                        />
+                    }
+                />
 
-            {/*Input pour le MOT DE PASSE*/}
-            <Input
-                onChangeText={(e) => setSignUpPassword(e)}
-                value={signUpPassword}
-                containerStyle={{ width: '70%' }}
-                inputStyle={{ marginLeft: 10, color: '#fff' }}
-                placeholder='Mot de passe'
-                secureTextEntry={true}
-                leftIcon={
-                    <Icon
-                        name='key'
-                        size={24}
-                        color='#06D4B6'
-                    />
-                }
-            />
+                {/*Input pour le MOT DE PASSE*/}
+                <Input
+                    onChangeText={(e) => setSignUpPassword(e)}
+                    value={signUpPassword}
+                    containerStyle={{ width: '70%' }}
+                    inputStyle={{ marginLeft: 10, color: '#fff' }}
+                    placeholder='Mot de passe'
+                    secureTextEntry={true}
+                    leftIcon={
+                        <Icon
+                            name='key'
+                            size={24}
+                            color='#06D4B6'
+                        />
+                    }
+                />
 
-            {tabErrorsSignup}
+                {tabErrorsSignup}
 
-            {/*Bouton qui redirige vers le 'JEU'*/}
-            <TouchableOpacity style={styles.touchable} onPress={() => handleSubmitSignup()}>
-                <View style={styles.button}>
-                    <Text style={styles.buttonText}>Start</Text>
-                </View>
-            </TouchableOpacity>
+                {/*Bouton qui redirige vers le 'JEU'*/}
+                <TouchableOpacity style={styles.touchable} onPress={() => handleSubmitSignup()}>
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>Start</Text>
+                    </View>
+                </TouchableOpacity>
 
-            {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
-            <Text style={styles.text}>Si vous avez deja un compte:</Text>
-            <Text style={styles.textConnect} onPress={() => props.navigation.navigate('SignIn')}>Connectez-vous</Text>
-        </View >
-    );
-    
+                {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
+                <Text style={styles.text}>Si vous avez deja un compte:</Text>
+                <Text style={styles.textConnect} onPress={() => props.navigation.navigate('SignIn')}>Connectez-vous</Text>
+            </View >
+        );
+    }
 }
 
 const styles = StyleSheet.create({
