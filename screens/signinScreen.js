@@ -9,7 +9,8 @@ import {
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+
+import { useDispatch} from 'react-redux';
 
 export default function signIn(props) {
 
@@ -18,7 +19,7 @@ export default function signIn(props) {
 
     const [listErrorsSignin, setErrorsSignin] = useState([]);
 
-    const tokenUser = useSelector(state => state.token);
+    const dispatch = useDispatch();
 
     var handleSubmitSignin = async () => {
 
@@ -29,9 +30,9 @@ export default function signIn(props) {
         })
 
         const body = await data.json()
-        console.log(body);
 
         if (body.result == true) {
+            dispatch({ type: 'addToken', token: body.user.token })
             props.navigation.navigate('StackNavigation', {screen: 'Map'});
         } else {
             setErrorsSignin(body.error)
@@ -48,54 +49,51 @@ export default function signIn(props) {
         return <AppLoading />
     }
 
-    if (tokenUser) {
-        props.navigation.navigate('Map')
-    } else {
-        return (
-            <View style={styles.container}>
-                <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome back</Text>
-                <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
-                <Input
-                    onChangeText={(e) => setSignInEmail(e)}
-                    value={signInEmail}
-                    containerStyle={{ marginBottom: 25, width: '70%' }}
-                    inputStyle={{ marginLeft: 10, color: '#fff' }}
-                    placeholder='Email'
-                    leftIcon={
-                        <Icon
-                            name='at'
-                            size={24}
-                            color='#06D4B6'
-                        />
-                    }
-                />
-                <Input
-                    onChangeText={(e) => setSignInPassword(e)}
-                    value={signInPassword}
-                    containerStyle={{ marginBottom: 25, width: '70%' }}
-                    inputStyle={{ marginLeft: 10, color: '#fff' }}
-                    placeholder='Mot de passe'
-                    secureTextEntry={true}
-                    leftIcon={
-                        <Icon
-                            name='key'
-                            size={24}
-                            color='#06D4B6'
-                        />
-                    }
-                />
+    return (
+        <View style={styles.container}>
+            <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome back</Text>
+            <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
+            <Input
+                onChangeText={(e) => setSignInEmail(e)}
+                value={signInEmail}
+                containerStyle={{ marginBottom: 25, width: '70%' }}
+                inputStyle={{ marginLeft: 10, color: '#fff' }}
+                placeholder='Email'
+                leftIcon={
+                    <Icon
+                        name='at'
+                        size={24}
+                        color='#06D4B6'
+                    />
+                }
+            />
+            <Input
+                onChangeText={(e) => setSignInPassword(e)}
+                value={signInPassword}
+                containerStyle={{ marginBottom: 25, width: '70%' }}
+                inputStyle={{ marginLeft: 10, color: '#fff' }}
+                placeholder='Mot de passe'
+                secureTextEntry={true}
+                leftIcon={
+                    <Icon
+                        name='key'
+                        size={24}
+                        color='#06D4B6'
+                    />
+                }
+            />
 
-                {tabErrorsSignin}
+            {tabErrorsSignin}
 
-                <TouchableOpacity style={styles.touchable} onPress={() => handleSubmitSignin()}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Let's Veazit</Text>
-                    </View>
-                </TouchableOpacity>
-            </View >
-        );
-    }
+            <TouchableOpacity style={styles.touchable} onPress={() => handleSubmitSignin()}>
+                <View style={styles.button}>
+                    <Text style={styles.buttonText}>Let's Veazit</Text>
+                </View>
+            </TouchableOpacity>
+        </View >
+    );
 }
+
 
 const styles = StyleSheet.create({
     container: {

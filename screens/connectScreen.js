@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 export default function connectScreen(props) {
 
   const tokenUser = useSelector(state => state.token);
+  
   if(!tokenUser){
     props.navigation.navigate("SignUp")
   }

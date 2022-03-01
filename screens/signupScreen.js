@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Input } from 'react-native-elements';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -21,7 +21,6 @@ export default function signupScreen(props) {
     const [listErrorsSignup, setErrorsSignup] = useState([])
 
     const dispatch = useDispatch();
-    const tokenUser = useSelector(state => state.token);
 
     //Au clic sur le Bouton Start on va récupérer les INPUT
     var handleSubmitSignup = async () => {
