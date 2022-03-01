@@ -30,27 +30,27 @@ export default function connectScreen(props) {
     //Au clic sur le Bouton Start on va récupérer les INPUT
     var handleSubmitSignup = async () => {
 
-        const data = await fetch('http://192.168.43.124:3000/sign-up', {
+        const data = await fetch('http://172.16.188.146:3000/sign-up', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
         })
 
         const body = await data.json()
-        if(body.result == true) {
-            dispatch({ type: 'addToken', token: body.token})
+        if (body.result == true) {
+            dispatch({ type: 'addToken', token: body.token })
             setUserExists(true)
         } else {
             setErrorsSignup(body.error)
         }
     };
 
-    if(userExists) {
+    if (userExists) {
         props.navigation.navigate('StackNavigation')
     }
 
     var tabErrorsSignup = listErrorsSignup.map((error, i) => {
-        return(<Text style={styles.error}>{error}</Text>)
+        return (<Text style={styles.error}>{error}</Text>)
     })
 
     //Mise en place de la Font Press Start 2P ATTENTION - A DÉCLARER JUSTE AVANT LE RETURN DE LA FONCTION

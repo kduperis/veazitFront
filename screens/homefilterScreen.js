@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { Text, CheckBox } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   PressStart2P_400Regular
 } from '@expo-google-fonts/press-start-2p';
