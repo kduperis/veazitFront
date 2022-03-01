@@ -21,7 +21,7 @@ export default function signupScreen(props) {
     const [listErrorsSignup, setErrorsSignup] = useState([])
 
     //Vérification de la bonne écriture des données des Inputs dans la console
-/*     console.log(signUpUsername); */
+    /*     console.log(signUpUsername); */
 
     const dispatch = useDispatch();
     const tokenUser = useSelector(state => state.token);
