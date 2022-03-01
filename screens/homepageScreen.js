@@ -7,14 +7,23 @@ import AppLoading from 'expo-app-loading';
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { useDispatch } from 'react-redux';
 
 export default function homepageScreen(props) {
   const [pseudo, setPseudo] = useState('');
   const [pseudoIsSubmited, setPseudoIsSubmited] = useState(false);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
+        props.navigation.navigate('StackNavigation')
+      }
+    });
+    AsyncStorage.getItem('token', function (error, token) {
+      if (token) {
+        dispatch({ type: 'addToken', token: token }) 
         props.navigation.navigate('StackNavigation')
       }
     });
