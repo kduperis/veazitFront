@@ -22,7 +22,7 @@ export default function signIn(props) {
 
     var handleSubmitSignin = async () => {
 
-        const data = await fetch('http://172.16.189.9:3000/sign-in', {
+        const data = await fetch('http://192.168.1.28:3000/sign-in', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}`
@@ -32,7 +32,7 @@ export default function signIn(props) {
         console.log(body);
 
         if (body.result == true) {
-            props.navigation.navigate('Map')
+            props.navigation.navigate('StackNavigation')
         } else {
             setErrorsSignin(body.error)
         }
