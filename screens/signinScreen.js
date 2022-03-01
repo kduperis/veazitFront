@@ -8,10 +8,15 @@ import {
 } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { useState } from 'react';
 
-export default function connectScreen(props) {
+export default function signIn(props) {
+
+    const [signInEmail, setSignInEmail] = useState('');
+    const [signInPassword, setSignInPassword] = useState('');
+
+    //Mise en place de la Font Press Start 2P ATTENTION - A DÉCLARER JUSTE AVANT LE RETURN DE LA FONCTION
     let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
-
     if (!fontLoaded) {
         return <AppLoading />
     }
@@ -21,6 +26,8 @@ export default function connectScreen(props) {
             <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily:'PressStart2P_400Regular' }}>Welcome back</Text>
             <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily:'PressStart2P_400Regular' }}>Veaziter</Text>
             <Input
+                onChangeText={(e) => setSignInEmail(e)}
+                value={signInEmail}
                 containerStyle={{ marginBottom: 25, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Email'
@@ -33,6 +40,8 @@ export default function connectScreen(props) {
                 }
             />
             <Input
+                onChangeText={(e) => setSignInPassword(e)}
+                value={signInPassword}
                 containerStyle={{ marginBottom: 25, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Mot de passe'
