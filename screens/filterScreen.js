@@ -1,17 +1,17 @@
 import { StyleSheet, View } from 'react-native';
 import { Text, CheckBox } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   PressStart2P_400Regular
 } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector } from 'react-redux';
 
 
 export default function homefilterScreen(props) {
-
 
 
   const [check1, setCheck1] = useState(false);
@@ -19,12 +19,32 @@ export default function homefilterScreen(props) {
   const [check3, setCheck3] = useState(false);
   const [check4, setCheck4] = useState(false);
 
+  const checked = useSelector((state) => state.category)
 
+  var filter = ["aquatique", "Domaine", "Parc", "category 4"]
 
+  useEffect(() => {
+    function checkB(allCategory, selected) {
+      for (var i = 0; i < selected.length; i++) {
 
-  var checkedBox = AsyncStorage.getItem("category")
-  console.log(checkedBox);
-
+        switch (allCategory.indexOf(selected[i])) {
+          case 0:
+            setCheck1(true);
+            break;
+          case 1:
+            setCheck2(true);
+            break;
+          case 2:
+            setCheck3(true);
+            break;
+          case 3:
+            setCheck4(true);
+            break;
+        }
+      }
+    }
+    checkB(filter, checked)
+  }, [])
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
@@ -39,11 +59,9 @@ export default function homefilterScreen(props) {
       <CheckBox
         center
         title="Aquatique"
-        checked={checkedBox}
+        checked={check1}
         checkedColor="#06D4B6"
         onPress={() => setCheck1(!check1)}
-
-
       />
 
       <CheckBox
@@ -60,7 +78,6 @@ export default function homefilterScreen(props) {
         checked={check3}
         checkedColor="#06D4B6"
         onPress={() => setCheck3(!check3)}
-
       />
 
       <CheckBox

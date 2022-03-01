@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Input } from 'react-native-elements';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -53,7 +53,7 @@ export default function signupScreen(props) {
     if (!fontLoaded) {
         return <AppLoading />
     }
-        
+
     return (
         <View style={styles.container}>
             {/*Titre*/}
@@ -124,7 +124,7 @@ export default function signupScreen(props) {
         </View >
     );
 
-    }
+}
 
 
 const styles = StyleSheet.create({
