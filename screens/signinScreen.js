@@ -32,7 +32,7 @@ export default function signIn(props) {
         console.log(body);
 
         if (body.result == true) {
-            props.navigation.navigate('StackNavigation')
+            props.navigation.navigate('StackNavigation', {screen: 'Map'});
         } else {
             setErrorsSignin(body.error)
         }
