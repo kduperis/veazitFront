@@ -57,6 +57,7 @@ export default function connectScreen(props) {
     if (tokenUser) {
         props.navigation.navigate('Map')
     } else {
+        
         return (
             <View style={styles.container}>
                 {/*Titre*/}
