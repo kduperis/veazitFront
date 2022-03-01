@@ -72,7 +72,7 @@ export default function homefilterScreen(props) {
         onPress={() => setCheck4(!check4)}
       />
 
-      <TouchableOpacity onPress={() => checkBox()}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('StackNavigation')}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>GO!</Text>
         </View>
