@@ -1,19 +1,33 @@
 import { StyleSheet, View } from 'react-native';
-import { Button, Text, CheckBox, Icon } from 'react-native-elements';
+import { Text, CheckBox } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   PressStart2P_400Regular
 } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function homefilterScreen(props) {
+
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const [check3, setCheck3] = useState(false);
   const [check4, setCheck4] = useState(false);
+
+
+  const checkBox = () => {
+    let category = [];
+    check1 ? category.push("aquatique") : null;
+    check2 ? category.push("Domaine") : null;
+    check3 ? category.push("Parc") : null;
+    check4 ? category.push("category 4") : null;
+    AsyncStorage.setItem("category", category)
+    props.navigation.navigate('StackNavigation')
+
+  }
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
@@ -27,15 +41,16 @@ export default function homefilterScreen(props) {
 
       <CheckBox
         center
-        title="Click Here"
+        title="Aquatique"
         checked={check1}
         checkedColor="#06D4B6"
         onPress={() => setCheck1(!check1)}
+
       />
 
       <CheckBox
         center
-        title="Click Here"
+        title="Domaine"
         checked={check2}
         checkedColor="#06D4B6"
         onPress={() => setCheck2(!check2)}
@@ -43,7 +58,7 @@ export default function homefilterScreen(props) {
 
       <CheckBox
         center
-        title="Click Here"
+        title="Parc"
         checked={check3}
         checkedColor="#06D4B6"
         onPress={() => setCheck3(!check3)}
@@ -51,20 +66,18 @@ export default function homefilterScreen(props) {
 
       <CheckBox
         center
-        title="Click Here"
+        title="category 4"
         checked={check4}
         checkedColor="#06D4B6"
         onPress={() => setCheck4(!check4)}
       />
 
-      <TouchableOpacity onPress={() => props.navigation.navigate('StackNavigation')}>
+      <TouchableOpacity onPress={() => checkBox()}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>GO!</Text>
         </View>
       </TouchableOpacity>
-
     </View>
-
   );
 }
 

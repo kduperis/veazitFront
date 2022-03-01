@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Input, Icon } from 'react-native';
+import { StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
 import {
   PressStart2P_400Regular
 } from '@expo-google-fonts/press-start-2p';
@@ -25,7 +25,6 @@ export default function homepageScreen(props) {
   if (!pseudoIsSubmited) {
     inputPseudo = <SafeAreaView>
       <TextInput style={styles.input} placeholder='Entrez votre nom' onChangeText={(val) => setPseudo(val)} />
-
     </SafeAreaView>
 
   } else {
@@ -45,7 +44,6 @@ export default function homepageScreen(props) {
       <Text style={{ color: "#06D4B6", fontSize: 50, marginBottom: 50, fontFamily: "PressStart2P_400Regular" }}>Play</Text>
 
       {inputPseudo}
-
 
       <TouchableOpacity onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }} >
         <View style={styles.button}>
@@ -74,9 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#D1D8E0",
     marginBottom: 50,
     width: 200
-
   },
-
   button: {
     backgroundColor: "#2C3A47",
     borderWidth: 1,
@@ -84,8 +80,6 @@ const styles = StyleSheet.create({
     padding: 15,
     paddingTop: 25,
     borderRadius: 30
-
-
   },
   buttonText: {
     color: "#06D4B6",
