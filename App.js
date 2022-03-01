@@ -58,7 +58,7 @@ var stackNavigation = () => {
       <Tab.Screen name="Filter" component={filterScreen} />
       <Tab.Screen name="Quest" component={questScreen} />
       <Tab.Screen name="Trophy" component={trophyScreen} />
-      <Tab.Screen name="Profil" component={signupScreen} />
+      <Tab.Screen name="Profil" component={connectScreen} />
     </Tab.Navigator>
   )
 }
@@ -69,11 +69,11 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name='SignUp' component={signupScreen} />
-          <Stack.Screen name='SignIn' component={signinScreen} />
           <Stack.Screen name="Home" component={homepageScreen} />
           <Stack.Screen name="HomeFilter" component={homefilterScreen} />
           <Stack.Screen name="StackNavigation" component={stackNavigation} />
+          <Stack.Screen name="SignUp" component={signupScreen} />
+          <Stack.Screen name="SignIn" component={signinScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

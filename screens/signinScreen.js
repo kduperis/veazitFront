@@ -9,7 +9,7 @@ import {
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
-export default function connectScreen(props) {
+export default function signinScreen(props) {
     let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
     if (!fontLoaded) {

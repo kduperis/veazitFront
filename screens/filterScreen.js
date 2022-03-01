@@ -23,7 +23,7 @@ export default function homefilterScreen(props) {
 
 
   var checkedBox = AsyncStorage.getItem("category")
-
+  console.log(checkedBox);
 
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });

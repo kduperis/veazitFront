@@ -20,13 +20,20 @@ export default function homefilterScreen(props) {
 
   const checkBox = () => {
     let category = [];
-    check1 ? category.push("aquatique") : null;
-    check2 ? category.push("Domaine") : null;
-    check3 ? category.push("Parc") : null;
-    check4 ? category.push("category 4") : null;
-    AsyncStorage.setItem("category", category)
+    if (check1){
+      category.push("aquatique")
+    }
+    if (check2){
+      category.push("Domaine")
+    }
+    if (check3){
+      category.push("Parc")
+    }
+    if (check4){
+      category.push("category 4")
+    }
+    AsyncStorage.setItem("category", JSON.stringify(category)) 
     props.navigation.navigate('StackNavigation')
-
   }
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });

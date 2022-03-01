@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Input } from 'react-native-elements';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -11,26 +11,25 @@ import {
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
-export default function connectScreen(props) {
+export default function signupScreen(props) {
 
     //Déclaration des constantes nécessaires pour création d'un nouveau User
     const [signUpPassword, setSignUpPassword] = useState('');
     const [signUpUsername, setSignUpUsername] = useState('');
     const [signUpEmail, setSignUpEmail] = useState('');
 
-    const [userExists, setUserExists] = useState(false);
-
     const [listErrorsSignup, setErrorsSignup] = useState([])
 
     //Vérification de la bonne écriture des données des Inputs dans la console
-    console.log(signUpUsername);
+    /*     console.log(signUpUsername); */
 
     const dispatch = useDispatch();
+    const tokenUser = useSelector(state => state.token);
 
     //Au clic sur le Bouton Start on va récupérer les INPUT
     var handleSubmitSignup = async () => {
 
-        const data = await fetch('http://172.16.188.146:3000/sign-up', {
+        const data = await fetch('http://192.168.1.28:3000/sign-up', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
@@ -38,19 +37,15 @@ export default function connectScreen(props) {
 
         const body = await data.json()
         if (body.result == true) {
-            dispatch({ type: 'addToken', token: body.token })
-            setUserExists(true)
+            dispatch({ type: 'addToken', token: body.saveUser.token })
+            props.navigation.navigate('StackNavigation')
         } else {
             setErrorsSignup(body.error)
         }
     };
 
-    if (userExists) {
-        props.navigation.navigate('StackNavigation')
-    }
-
     var tabErrorsSignup = listErrorsSignup.map((error, i) => {
-        return (<Text style={styles.error}>{error}</Text>)
+        return (<Text key={i} style={styles.error}>{error}</Text>)
     })
 
     //Mise en place de la Font Press Start 2P ATTENTION - A DÉCLARER JUSTE AVANT LE RETURN DE LA FONCTION
@@ -128,6 +123,7 @@ export default function connectScreen(props) {
             <Text style={styles.textConnect} onPress={() => props.navigation.navigate('SignIn')}>Connectez-vous</Text>
         </View >
     );
+
 }
 
 const styles = StyleSheet.create({
