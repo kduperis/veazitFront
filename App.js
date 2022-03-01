@@ -41,7 +41,7 @@ var stackNavigation = () => {
         } else if (route.name === 'Profil') {
           iconName = faUserAstronaut
         }
-        return <FontAwesomeIcon icon={iconName} color={color}/>;
+        return <FontAwesomeIcon icon={iconName} color={color} />;
       },
     })}
 
