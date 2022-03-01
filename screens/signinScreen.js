@@ -11,8 +11,6 @@ import AppLoading from 'expo-app-loading';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-export default function signinScreen(props) {
-    let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 export default function signIn(props) {
 
     const [signInEmail, setSignInEmail] = useState('');
@@ -125,4 +123,4 @@ const styles = StyleSheet.create({
         color: 'red'
     },
 
-})}
+})
