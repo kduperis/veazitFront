@@ -104,64 +104,70 @@ export default function mapScreen() {
 
       <View style={styles.best}>
         <View style={styles.cardPlayer}>
-          <Avatar
-            size={55}
-            rounded
-            source={require('../assets/kevin.jpeg')}
-            containerStyle={{
-              borderColor: '#c0c0c0',
-              borderStyle: 'solid',
-              borderWidth: 3,
-            }}
-          />
-          <View >
-            <Text style={styles.detailPlayer}>
-              Player
+          <View>
+            <Avatar
+              size={55}
+              rounded
+              source={require('../assets/kevin.jpeg')}
+              containerStyle={{
+                borderColor: '#c0c0c0',
+                borderStyle: 'solid',
+                borderWidth: 3,
+              }}
+            />
+          </View>
+          <View style={styles.detailPlayer}>
+            <Text style={styles.nameScorePlayer}>
+              Kévin
             </Text>
-            <Text style={styles.detailPlayer}>
-              Score:
+            <Text style={styles.nameScorePlayer}>
+              900 pts
             </Text>
           </View>
         </View>
 
-        <View style={styles.player}>
-          <Avatar
-            size={55}
-            rounded
-            source={require('../assets/regis.jpeg')}
-            containerStyle={{
-              borderColor: '#ffd700',
-              borderStyle: 'solid',
-              borderWidth: 3,
-            }}
-          />
+        <View style={styles.cardPlayer}>
           <View>
-            <Text style={styles.detailPlayer}>
-              Player
+            <Avatar
+              size={55}
+              rounded
+              source={require('../assets/regis.jpeg')}
+              containerStyle={{
+                borderColor: '#ffd700',
+                borderStyle: 'solid',
+                borderWidth: 3,
+              }}
+            />
+          </View>
+          <View style={styles.detailPlayer}>
+            <Text style={styles.nameScorePlayer}>
+              Régis
             </Text>
-            <Text style={styles.detailPlayer}>
-              Score:
+            <Text style={styles.nameScorePlayer}>
+              1200 pts
             </Text>
           </View>
         </View>
 
-        <View style={styles.player}>
-          <Avatar
-            size={55}
-            rounded
-            source={require('../assets/nicolas.jpeg')}
-            containerStyle={{
-              borderColor: '#cd7f32',
-              borderStyle: 'solid',
-              borderWidth: 3,
-            }}
-          />
+        <View style={styles.cardPlayer}>
           <View>
-            <Text style={styles.detailPlayer}>
-              Player
+            <Avatar
+              size={55}
+              rounded
+              source={require('../assets/nicolas.jpeg')}
+              containerStyle={{
+                borderColor: '#cd7f32',
+                borderStyle: 'solid',
+                borderWidth: 3,
+              }}
+            />
+          </View>
+          <View style={styles.detailPlayer}>
+            <Text style={styles.nameScorePlayer}>
+              Nicolas
             </Text>
-            <Text style={styles.detailPlayer}>
-              Score:
+            <Text style={styles.nameScorePlayer}>
+              400 pts
             </Text>
           </View>
         </View>
@@ -229,12 +235,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#2C3A47',
     padding: 5
   },
+  cardPlayer: {
+    flexDirection: 'row'
+  },
   subtitle: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#2C3A47',
-    marginTop: 25,
-    paddingTop:5,
+    paddingTop: '10%',
   },
   desc: {
     color: '#06D4B6',
@@ -243,6 +251,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   detailPlayer: {
+    justifyContent: 'center',
+    marginLeft: 3
+  },
+  nameScorePlayer: {
     color: 'white',
   },
   progressContainer: {
