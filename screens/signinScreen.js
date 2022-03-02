@@ -14,6 +14,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useDispatch } from 'react-redux';
 
+import { IP_URL } from '@env'
+
 export default function signIn(props) {
 
     const [signInEmail, setSignInEmail] = useState('');
@@ -25,7 +27,7 @@ export default function signIn(props) {
 
     var handleSubmitSignin = async () => {
 
-        const data = await fetch('http://172.16.188.148:3000/users/sign-in', {
+        const data = await fetch(`http://${IP_URL}:3000/users/sign-in`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}`

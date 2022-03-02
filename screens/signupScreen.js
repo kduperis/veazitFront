@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Input } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
@@ -13,6 +13,8 @@ import AppLoading from 'expo-app-loading';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { IP_URL } from '@env'
+
 export default function signupScreen(props) {
 
     //Déclaration des constantes nécessaires pour création d'un nouveau User
@@ -26,8 +28,8 @@ export default function signupScreen(props) {
 
     //Au clic sur le Bouton Start on va récupérer les INPUT
     var handleSubmitSignup = async () => {
-
-        const data = await fetch('http://172.16.188.148:3000/users/sign-up', {
+        console.log({ IP_URL })
+        const data = await fetch(`http://${IP_URL}:3000/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
