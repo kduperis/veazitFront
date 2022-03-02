@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function signIn(props) {
 
@@ -25,7 +25,7 @@ export default function signIn(props) {
 
     var handleSubmitSignin = async () => {
 
-        const data = await fetch('http://192.168.1.28:3000/users/sign-in', {
+        const data = await fetch('http://172.16.188.148:3000/users/sign-in', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}`
@@ -37,7 +37,7 @@ export default function signIn(props) {
             dispatch({ type: 'addToken', token: body.user.token })
             AsyncStorage.clear()
             AsyncStorage.setItem("token", body.user.token)
-            props.navigation.navigate('StackNavigation', {screen: 'Map'});
+            props.navigation.navigate('StackNavigation', { screen: 'Map' });
         } else {
             setErrorsSignin(body.error)
         }

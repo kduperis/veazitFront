@@ -27,7 +27,7 @@ export default function signupScreen(props) {
     //Au clic sur le Bouton Start on va récupérer les INPUT
     var handleSubmitSignup = async () => {
 
-        const data = await fetch('http://192.168.1.28:3000/users/sign-up', {
+        const data = await fetch('http://172.16.188.148:3000/users/sign-up', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
@@ -38,7 +38,7 @@ export default function signupScreen(props) {
             dispatch({ type: 'addToken', token: body.saveUser.token })
             AsyncStorage.clear()
             AsyncStorage.setItem("token", body.saveUser.token)
-            props.navigation.navigate('StackNavigation', {screen: 'Map'});
+            props.navigation.navigate('StackNavigation', { screen: 'Map' });
         } else {
             setErrorsSignup(body.error)
         }
