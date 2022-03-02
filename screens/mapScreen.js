@@ -1,12 +1,21 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { Avatar, Button, Overlay } from 'react-native-elements'
+import { StyleSheet, View, Text, Image, Animated } from 'react-native';
+import { Button, Overlay } from 'react-native-elements'
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCircleDot, faMapPin, faDroplet, faGopuram, faTree } from '@fortawesome/free-solid-svg-icons'
+import ProgressBar from "react-native-animated-progress";
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+import {
+  PressStart2P_400Regular
+} from '@expo-google-fonts/press-start-2p';
+
 
 export default function mapScreen() {
 
@@ -80,6 +89,11 @@ export default function mapScreen() {
 
   var launchNavigation = () => {
 
+  }
+
+  let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
+  if (!fontLoaded) {
+    return <AppLoading />
   }
 
   return (
@@ -183,7 +197,15 @@ export default function mapScreen() {
 
         {listPointOfInterest}
       </MapView>
+
+      <View style={styles.progressContainer}>
+        <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Ta progression avant le prochain niveau </Text>
+      </View>
+
+      <ProgressBar progress={80} height={20} backgroundColor="#06D4B6" />
+
     </View>
+
   );
 }
 
@@ -223,4 +245,14 @@ const styles = StyleSheet.create({
   detailPlayer: {
     color: 'white',
   }
+  },
+
+  progressContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "#2C3A47",
+    height: 20
+
+  },
+
 });
