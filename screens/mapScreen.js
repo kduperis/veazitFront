@@ -234,11 +234,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#2C3A47',
     marginTop: 25,
-    paddingTop:5
+    paddingTop:5,
   },
   desc: {
-    color: 'white',
-    fontSize: 20
+    color: '#06D4B6',
+    fontSize: 13,
+    fontFamily: "PressStart2P_400Regular",
+    justifyContent: 'center'
   },
   detailPlayer: {
     color: 'white',
