@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
 import { Avatar, Button, Overlay } from 'react-native-elements'
-import { StyleSheet, View, Text, Image, Animated } from 'react-native';
-import { Button, Overlay } from 'react-native-elements'
+import { StyleSheet, View, Text, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
@@ -244,9 +242,7 @@ const styles = StyleSheet.create({
   },
   detailPlayer: {
     color: 'white',
-  }
   },
-
   progressContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -254,5 +250,4 @@ const styles = StyleSheet.create({
     height: 20
 
   },
-
 });
