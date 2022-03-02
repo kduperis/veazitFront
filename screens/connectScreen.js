@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function connectScreen(props) {
 
