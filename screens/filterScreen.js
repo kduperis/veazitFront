@@ -1,18 +1,16 @@
 import { StyleSheet, View } from 'react-native';
-import { Text, CheckBox } from 'react-native-elements';
+import { Text, CheckBox, Button } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
-import {
-  PressStart2P_400Regular
-} from '@expo-google-fonts/press-start-2p';
+import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from 'react-redux';
+import Modal from 'react-native-modal';
 
+export default function FilterScreen(props) {
 
-export default function homefilterScreen(props) {
-
+  const [modalVisible, setModalVisible] = useState(false);
 
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
@@ -53,56 +51,93 @@ export default function homefilterScreen(props) {
   }
   return (
 
-    <View style={styles.container}>
-      <Text style={{ color: "#06D4B6", fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 80 }}>Modifiez vos genres de lieu ici : </Text>
+    <View>
 
-      <CheckBox
-        center
-        title="Aquatique"
-        checked={check1}
-        checkedColor="#06D4B6"
-        onPress={() => setCheck1(!check1)}
+      <Button onPress={() => setModalVisible(true)}
+                                  buttonStyle={styles.buttonStyle}
+                                  icon={{
+                                    name: 'filter',
+                                    type: 'font-awesome',
+                                    size: 18,
+                                    color: '#4b667f',
+                                  }}
+                                  iconPosition='top'
+                                  title={<Text style={{ fontSize: 10, color:'#4b667f', marginTop:7 }}>Filter</Text>}
       />
 
-      <CheckBox
-        center
-        title="Domaine"
-        checked={check2}
-        checkedColor="#06D4B6"
-        onPress={() => setCheck2(!check2)}
-      />
 
-      <CheckBox
-        center
-        title="Parc"
-        checked={check3}
-        checkedColor="#06D4B6"
-        onPress={() => setCheck3(!check3)}
-      />
+        <Modal
+          backdropOpacity={0.3}
+          isVisible={modalVisible}
+          onBackdropPress={() => {setModalVisible(false)}}
+          style={styles.contentView}
+        >
 
-      <CheckBox
-        center
-        title="category 4"
-        checked={check4}
-        checkedColor="#06D4B6"
-        onPress={() => setCheck4(!check4)}
-      />
+          <View style={styles.content}>
+            <Text style={styles.contentTitle}>Filter Screen !</Text>
 
-      <TouchableOpacity onPress={() => props.navigation.navigate('Map')}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>GO!</Text>
-        </View>
-      </TouchableOpacity>
+            <Text style={{ color: "#06D4B6", fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 80 }}>Modifiez vos genres de lieu ici : </Text>
+
+            <CheckBox
+              center
+              title="Aquatique"
+              checked={check1}
+              checkedColor="#06D4B6"
+              onPress={() => setCheck1(!check1)}
+            />
+
+            <CheckBox
+              center
+              title="Domaine"
+              checked={check2}
+              checkedColor="#06D4B6"
+              onPress={() => setCheck2(!check2)}
+            />
+
+            <CheckBox
+              center
+              title="Parc"
+              checked={check3}
+              checkedColor="#06D4B6"
+              onPress={() => setCheck3(!check3)}
+            />
+
+            <CheckBox
+              center
+              title="category 4"
+              checked={check4}
+              checkedColor="#06D4B6"
+              onPress={() => setCheck4(!check4)}
+            />
+
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>GO!</Text>
+              </View>
+            </TouchableOpacity>
+
+          </View>
+
+        </Modal>
+
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#2C3A47',
-    alignItems: 'center',
+  content: {
+    backgroundColor: 'white',
+    padding: 22,
     justifyContent: 'center',
+    alignItems: 'center',
+    borderTopRightRadius: 17,
+    borderTopLeftRadius: 17,
+    height:500,
+  },
+  contentTitle: {
+    fontSize: 20,
+    marginBottom: 12,
   },
   button: {
     backgroundColor: "#2C3A47",
@@ -118,5 +153,14 @@ const styles = StyleSheet.create({
     color: "#06D4B6",
     fontSize: 20,
     fontFamily: "PressStart2P_400Regular"
+  },
+  buttonStyle: {
+    height: 60,
+    width: 60,
+    backgroundColor:'#2C3A47'
+  },
+  contentView: {
+    justifyContent: 'flex-end',
+    margin: 0,
   },
 });

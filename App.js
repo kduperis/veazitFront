@@ -7,15 +7,14 @@ import homepageScreen from './screens/homepageScreen';
 import homefilterScreen from './screens/homefilterScreen';
 import mapScreen from './screens/mapScreen';
 import connectScreen from './screens/connectScreen';
-import filterScreen from './screens/filterScreen';
-import questScreen from './screens/questScreen';
-import trophyScreen from './screens/trophyScreen';
+import FilterScreen from './screens/filterScreen';
+import QuestScreen from './screens/questScreen';
+import TrophyScreen from './screens/trophyScreen';
 import signupScreen from './screens/signupScreen';
 import signinScreen from './screens/signinScreen';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUserAstronaut, faTrophy, faMapLocationDot, faFilter } from '@fortawesome/free-solid-svg-icons'
-import { faFortAwesome } from '@fortawesome/free-brands-svg-icons'
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux'
 import token from './reducers/token';
@@ -26,6 +25,10 @@ const Tab = createBottomTabNavigator();
 
 const store = createStore(combineReducers({ token, category }))
 
+var fakeComponent = () => {
+  return null
+}
+
 var stackNavigation = () => {
   return (
     <Tab.Navigator screenOptions={({ route }) => ({
@@ -33,16 +36,10 @@ var stackNavigation = () => {
         let iconName;
         if (route.name === 'Map') {
           iconName = faMapLocationDot
-        } else if (route.name === 'Filter') {
-          iconName = faFilter
-        } else if (route.name === 'Quest') {
-          iconName = faFortAwesome
-        } else if (route.name === 'Trophy') {
-          iconName = faTrophy
         } else if (route.name === 'Profil') {
           iconName = faUserAstronaut
         }
-        return <FontAwesomeIcon icon={iconName} color={color} />;
+        return <FontAwesomeIcon icon={iconName} color={color}/>;
       },
     })}
 
@@ -56,9 +53,9 @@ var stackNavigation = () => {
 
     >
       <Tab.Screen name="Map" component={mapScreen} />
-      <Tab.Screen name="Filter" component={filterScreen} />
-      <Tab.Screen name="Quest" component={questScreen} />
-      <Tab.Screen name="Trophy" component={trophyScreen} />
+      <Tab.Screen name="Filter" component={fakeComponent} options={{tabBarButton: () => (<FilterScreen />),}} />
+      <Tab.Screen name="Quest" component={fakeComponent} options={{tabBarButton: () => (<QuestScreen />),}} />
+      <Tab.Screen name="Trophy" component={fakeComponent} options={{tabBarButton: () => (<TrophyScreen />),}} />
       <Tab.Screen name="Profil" component={connectScreen} />
     </Tab.Navigator>
   )
