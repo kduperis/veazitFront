@@ -13,6 +13,8 @@ import AppLoading from 'expo-app-loading';
 import {
   PressStart2P_400Regular
 } from '@expo-google-fonts/press-start-2p';
+import axios from 'axios';
+import { IP_URL } from '@env'
 
 
 export default function mapScreen() {
@@ -23,6 +25,7 @@ export default function mapScreen() {
   const [visible, setVisible] = useState(false);
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [userData, setUserData] = useState([])
 
   var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique' },
   { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, alreadyView: false, categorie: 'Aquatique' },
@@ -71,6 +74,15 @@ export default function mapScreen() {
   })
 
   useEffect(() => {
+    axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => setUserData(res.data.bestUserName));
+
+  }, [])
+
+  userData.sort((a, b) => {
+    return b.score - a.score
+  })
+
+  useEffect(() => {
     async function askPermissions() {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status === 'granted') {
@@ -94,6 +106,36 @@ export default function mapScreen() {
     return <AppLoading />
   }
 
+  var bestUserCard = userData.map((user, i) => {
+
+
+    return (
+      <View style={styles.cardPlayer}>
+        <View>
+          <Avatar
+            size={55}
+            rounded
+            source={{ uri: user.avatar }}
+            containerStyle={{
+              borderColor: '#c0c0c0',
+              borderStyle: 'solid',
+              borderWidth: 3,
+            }}
+          />
+        </View>
+        <View style={styles.detailPlayer}>
+          <Text style={styles.nameScorePlayer}>
+            {user.username}
+          </Text>
+          <Text style={styles.nameScorePlayer}>
+            {user.score}
+          </Text>
+        </View>
+      </View>
+
+    )
+  })
+
   return (
     <View style={styles.container}>
       <View style={styles.subtitle}>
@@ -103,74 +145,11 @@ export default function mapScreen() {
       </View>
 
       <View style={styles.best}>
-        <View style={styles.cardPlayer}>
-          <View>
-            <Avatar
-              size={55}
-              rounded
-              source={require('../assets/kevin.jpeg')}
-              containerStyle={{
-                borderColor: '#c0c0c0',
-                borderStyle: 'solid',
-                borderWidth: 3,
-              }}
-            />
-          </View>
-          <View style={styles.detailPlayer}>
-            <Text style={styles.nameScorePlayer}>
-              Kévin
-            </Text>
-            <Text style={styles.nameScorePlayer}>
-              900 pts
-            </Text>
-          </View>
-        </View>
 
-        <View style={styles.cardPlayer}>
-          <View>
-            <Avatar
-              size={55}
-              rounded
-              source={require('../assets/regis.jpeg')}
-              containerStyle={{
-                borderColor: '#ffd700',
-                borderStyle: 'solid',
-                borderWidth: 3,
-              }}
-            />
-          </View>
-          <View style={styles.detailPlayer}>
-            <Text style={styles.nameScorePlayer}>
-              Régis
-            </Text>
-            <Text style={styles.nameScorePlayer}>
-              1200 pts
-            </Text>
-          </View>
-        </View>
+        {bestUserCard[0]}
+        {bestUserCard[1]}
+        {bestUserCard[2]}
 
-        <View style={styles.cardPlayer}>
-          <View>
-            <Avatar
-              size={55}
-              rounded
-              source={require('../assets/nicolas.jpeg')}
-              containerStyle={{
-                borderColor: '#cd7f32',
-                borderStyle: 'solid',
-                borderWidth: 3,
-              }}
-            />
-          </View>
-          <View style={styles.detailPlayer}>
-            <Text style={styles.nameScorePlayer}>
-              Nicolas
-            </Text>
-            <Text style={styles.nameScorePlayer}>
-              400 pts
-            </Text>
-          </View>
-        </View>
       </View>
 
       <Overlay

@@ -39,7 +39,7 @@ var stackNavigation = () => {
         } else if (route.name === 'Profil') {
           iconName = faUserAstronaut
         }
-        return <FontAwesomeIcon icon={iconName} color={color}/>;
+        return <FontAwesomeIcon icon={iconName} color={color} />;
       },
     })}
 
@@ -53,10 +53,10 @@ var stackNavigation = () => {
 
     >
       <Tab.Screen name="Map" component={mapScreen} />
-      <Tab.Screen name="Filter" component={fakeComponent} options={{tabBarButton: () => (<FilterScreen />),}} />
-      <Tab.Screen name="Quest" component={fakeComponent} options={{tabBarButton: () => (<QuestScreen />),}} />
-      <Tab.Screen name="Trophy" component={fakeComponent} options={{tabBarButton: () => (<TrophyScreen />),}} />
-      <Tab.Screen name="Profil" component={connectScreen} />
+      <Tab.Screen name="Filter" component={fakeComponent} options={{ tabBarButton: () => (<FilterScreen />), }} />
+      <Tab.Screen name="Quest" component={fakeComponent} options={{ tabBarButton: () => (<QuestScreen />), }} />
+      <Tab.Screen name="Trophy" component={fakeComponent} options={{ tabBarButton: () => (<TrophyScreen />), }} />
+      <Tab.Screen name="Profil" component={signupScreen} />
     </Tab.Navigator>
   )
 }
