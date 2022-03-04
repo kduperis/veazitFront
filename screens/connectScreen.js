@@ -1,13 +1,24 @@
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
+
+import { useIsFocused } from '@react-navigation/native';
 
 export default function connectScreen(props) {
 
   const tokenUser = useSelector(state => state.token);
 
-  if(!tokenUser){
-    props.navigation.navigate("SignUp")
-  } 
+  const isFocused = useIsFocused();
+
+  useEffect(()=>{
+    var verifyUser = () => {
+      if(!tokenUser){
+        props.navigation.navigate("SignUp")
+      } 
+    }
+    verifyUser()
+  },[isFocused])
+
 
   return (
     <View style={styles.container}>

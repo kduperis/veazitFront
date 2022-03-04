@@ -28,7 +28,7 @@ export default function signupScreen(props) {
 
     //Au clic sur le Bouton Start on va récupérer les INPUT
     var handleSubmitSignup = async () => {
-        console.log({ IP_URL })
+    
         const data = await fetch(`http://${IP_URL}:3000/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
