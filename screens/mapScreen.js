@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Avatar, Button, Overlay } from 'react-native-elements'
 import { StyleSheet, View, Text, Image } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 
@@ -16,16 +16,206 @@ import {
 import axios from 'axios';
 import { IP_URL } from '@env'
 
+var mapStyle = [
+  {
+      "featureType": "water",
+      "elementType": "geometry",
+      "stylers": [
+          {
+              "visibility": "on"
+          },
+          {
+              "color": "#aee2e0"
+          }
+      ]
+  },
+  {
+      "featureType": "landscape",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#abce83"
+          }
+      ]
+  },
+  {
+      "featureType": "poi",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#769E72"
+          }
+      ]
+  },
+  {
+      "featureType": "poi",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#7B8758"
+          }
+      ]
+  },
+  {
+      "featureType": "poi",
+      "elementType": "labels.text.stroke",
+      "stylers": [
+          {
+              "color": "#EBF4A4"
+          }
+      ]
+  },
+  {
+      "featureType": "poi.park",
+      "elementType": "geometry",
+      "stylers": [
+          {
+              "visibility": "simplified"
+          },
+          {
+              "color": "#8dab68"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "visibility": "simplified"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#5B5B3F"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "labels.text.stroke",
+      "stylers": [
+          {
+              "color": "#ABCE83"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "labels.icon",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "road.local",
+      "elementType": "geometry",
+      "stylers": [
+          {
+              "color": "#A4C67D"
+          }
+      ]
+  },
+  {
+      "featureType": "road.arterial",
+      "elementType": "geometry",
+      "stylers": [
+          {
+              "color": "#9BBF72"
+          }
+      ]
+  },
+  {
+      "featureType": "road.highway",
+      "elementType": "geometry",
+      "stylers": [
+          {
+              "color": "#EBF4A4"
+          }
+      ]
+  },
+  {
+      "featureType": "transit",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "administrative",
+      "elementType": "geometry.stroke",
+      "stylers": [
+          {
+              "visibility": "on"
+          },
+          {
+              "color": "#87ae79"
+          }
+      ]
+  },
+  {
+      "featureType": "administrative",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#7f2200"
+          },
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "administrative",
+      "elementType": "labels.text.stroke",
+      "stylers": [
+          {
+              "color": "#ffffff"
+          },
+          {
+              "visibility": "on"
+          },
+          {
+              "weight": 4.1
+          }
+      ]
+  },
+  {
+      "featureType": "administrative",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#495421"
+          }
+      ]
+  },
+  {
+      "featureType": "administrative.neighborhood",
+      "elementType": "labels",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  }
+]
 
 export default function mapScreen() {
 
   const [currentLatitude, setCurrentLatitude] = useState(0);
   const [currentLongitude, setCurrentLongitude] = useState(0);
-  const [listPoi, setListPoi] = useState([]);
   const [visible, setVisible] = useState(false);
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [userData, setUserData] = useState([])
+  const [location, setLocation] = useState(false)
 
   var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique' },
   { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, alreadyView: false, categorie: 'Aquatique' },
@@ -86,12 +276,13 @@ export default function mapScreen() {
     async function askPermissions() {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status === 'granted') {
+        setLocation(true)
         Location.watchPositionAsync({ distanceInterval: 2 },
           (location) => {
             setCurrentLatitude(location.coords.latitude);
             setCurrentLongitude(location.coords.longitude);
           }
-        );
+        ); 
       }
     }
     askPermissions();
@@ -107,8 +298,6 @@ export default function mapScreen() {
   }
 
   var bestUserCard = userData.map((user, i) => {
-
-
     return (
       <View style={styles.cardPlayer}>
         <View>
@@ -132,7 +321,6 @@ export default function mapScreen() {
           </Text>
         </View>
       </View>
-
     )
   })
 
@@ -169,16 +357,17 @@ export default function mapScreen() {
         </View>
 
       </Overlay>
+
       <MapView
         style={{ flex: 1 }}
-        showsPointsOfInterest={false}>
-        <Marker coordinate={{ latitude: currentLatitude, longitude: currentLongitude }}>
-          <FontAwesomeIcon icon={faCircleDot} color='black' />
-        </Marker>
-
-
-
+        provider={PROVIDER_GOOGLE}
+        customMapStyle={mapStyle}
+        showsUserLocation={location}
+        showsCompass={true}
+        showsMyLocationButton={true}>
+        
         {listPointOfInterest}
+      
       </MapView>
 
       <View style={styles.progressContainer}>

@@ -11,7 +11,6 @@ import { useDispatch } from 'react-redux';
 
 export default function homepageScreen(props) {
   const [pseudo, setPseudo] = useState('');
-  const [pseudoIsSubmited, setPseudoIsSubmited] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -29,17 +28,6 @@ export default function homepageScreen(props) {
     });
   }, []);
 
-  var inputPseudo;
-  if (!pseudoIsSubmited) {
-    inputPseudo = <SafeAreaView>
-      <TextInput style={styles.input} placeholder='Entrez votre nom' onChangeText={(val) => setPseudo(val)} />
-    </SafeAreaView>
-
-  } else {
-    inputPseudo = <Text h4 style={{ marginBottom: 25, color: '#FFFFFF', fontSize: 20 }}>Welcome back {pseudo}</Text>
-  }
-
-
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
   if (!fontLoaded) {
@@ -51,14 +39,17 @@ export default function homepageScreen(props) {
       <Text style={{ color: "#D1D8E0", fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>&</Text>
       <Text style={{ color: "#06D4B6", fontSize: 50, marginBottom: 50, fontFamily: "PressStart2P_400Regular" }}>Play</Text>
 
-      {inputPseudo}
+      <SafeAreaView>
+        <TextInput style={styles.input} placeholder='Entrez votre nom' onChangeText={(val) => setPseudo(val)} />
+      </SafeAreaView>
+
 
       <TouchableOpacity onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }} >
         <View style={styles.button}>
           <Text style={styles.buttonText} >START</Text>
         </View>
       </TouchableOpacity>
-    </View >
+    </View>
 
   );
 }
