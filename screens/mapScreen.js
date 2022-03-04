@@ -16,6 +16,8 @@ import {
 import axios from 'axios';
 import { IP_URL } from '@env'
 
+import { useIsFocused } from '@react-navigation/native';
+
 var mapStyle = [
   {
       "featureType": "all",
@@ -315,6 +317,8 @@ export default function mapScreen() {
   const [location, setLocation] = useState(false)
   const [visibleWin, setVisibleWin] = useState(false)
 
+  const isFocused = useIsFocused();
+
   var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique' },
   { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, alreadyView: false, categorie: 'Aquatique' },
   { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711, alreadyView: false, categorie: 'Domaine' },
@@ -376,6 +380,14 @@ export default function mapScreen() {
       }
 
     }
+    
+
+    askPermissions();
+   
+
+  }, []);
+
+  useEffect(()=>{
     async function bestUser(){
       
       axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => {
@@ -388,11 +400,8 @@ export default function mapScreen() {
       });
 
     }
-
-    askPermissions();
     bestUser();
-
-  }, []);
+  },[isFocused])
 
   var launchNavigation = () => {
     //ADD NAVIGATION
@@ -425,7 +434,6 @@ export default function mapScreen() {
               borderWidth: 3,
             }}
           />
-          
 
           <View style={styles.detailPlayer}>
             <Text style={styles.nameScorePlayer}>{user.username}</Text>
