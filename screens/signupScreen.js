@@ -58,6 +58,21 @@ export default function signupScreen(props) {
 
     return (
         <View style={styles.container}>
+
+            {/*Bouton previous*/}
+            <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.touchable} onPress={() => props.navigation.navigate('StackNavigation', { screen: 'Map' })}>
+                <View style={styles.buttonPrevious}>
+                <Icon
+                        name='arrow-left'
+                        size={24}
+                        color='#06D4B6'
+                    />
+                </View>
+            </TouchableOpacity>
+            </View>
+
+
             {/*Titre*/}
             <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome new</Text>
             <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
@@ -114,14 +129,14 @@ export default function signupScreen(props) {
             {tabErrorsSignup}
 
             {/*Bouton qui redirige vers le 'JEU'*/}
-            <TouchableOpacity style={styles.touchable} onPress={() => handleSubmitSignup()}>
+            <TouchableOpacity onPress={() => handleSubmitSignup()}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>Start</Text>
                 </View>
             </TouchableOpacity>
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
-            <Text style={styles.text}>Si vous avez deja un compte:</Text>
+            <Text style={styles.text}>Vous avez un compte ?</Text>
             <Text style={styles.textConnect} onPress={() => props.navigation.navigate('SignIn')}>Connectez-vous</Text>
         </View >
     );
@@ -168,5 +183,19 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red'
-    }
+    },
+    buttonPrevious: {
+        backgroundColor: "#2C3A47",
+        borderWidth: 1,
+        borderColor: "#06D4B6",
+        borderRadius: 10,
+        padding:10,
+
+    },
+    buttonContainer:{
+        position:'absolute',
+        bottom:50,
+        left:30,
+        flexDirection:'row'
+    },
 });

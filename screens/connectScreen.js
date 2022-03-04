@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function connectScreen(props) {
 

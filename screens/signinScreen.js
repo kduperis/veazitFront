@@ -91,11 +91,15 @@ export default function signIn(props) {
 
             {tabErrorsSignin}
 
-            <TouchableOpacity style={styles.touchable} onPress={() => handleSubmitSignin()}>
+            <TouchableOpacity onPress={() => handleSubmitSignin()}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>Let's Veazit</Text>
                 </View>
             </TouchableOpacity>
+
+            {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
+            <Text style={styles.text}>Vous n’avez pas de compte ?</Text>
+            <Text style={styles.textConnect} onPress={() => props.navigation.navigate('SignUp')}>Inscrivez-vous</Text>
         </View >
     );
 }
@@ -125,6 +129,20 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red'
+    },
+    text: {
+        marginTop: 30,
+        color: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textConnect: {
+        color: '#06D4B6',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: "PressStart2P_400Regular",
+        marginTop: 10,
+        textDecorationLine: 'underline'
     },
 
 })

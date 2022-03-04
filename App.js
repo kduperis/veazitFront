@@ -56,7 +56,7 @@ var stackNavigation = () => {
       <Tab.Screen name="Filter" component={fakeComponent} options={{ tabBarButton: () => (<FilterScreen />), }} />
       <Tab.Screen name="Quest" component={fakeComponent} options={{ tabBarButton: () => (<QuestScreen />), }} />
       <Tab.Screen name="Trophy" component={fakeComponent} options={{ tabBarButton: () => (<TrophyScreen />), }} />
-      <Tab.Screen name="Profil" component={signupScreen} />
+      <Tab.Screen name="Profil" component={connectScreen} />
     </Tab.Navigator>
   )
 }
