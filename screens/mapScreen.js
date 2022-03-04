@@ -313,6 +313,7 @@ export default function mapScreen() {
   const [description, setDescription] = useState('')
   const [userData, setUserData] = useState([])
   const [location, setLocation] = useState(false)
+  const [visibleWin, setVisibleWin] = useState(false)
 
   var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique' },
   { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, alreadyView: false, categorie: 'Aquatique' },
@@ -386,7 +387,12 @@ export default function mapScreen() {
   }, []);
 
   var launchNavigation = () => {
+    setVisibleWin(true)
+    setVisible(false)
+  }
 
+  var addScore = () => {
+    setVisibleWin(false)
   }
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
@@ -451,6 +457,24 @@ export default function mapScreen() {
           <Button
             title='Go veazit'
             onPress={() => launchNavigation()} />
+        </View>
+
+      </Overlay>
+
+      <Overlay
+        isVisible={visibleWin}
+        onBackdropPress={() => { setVisibleWin(false) }}
+      >
+        <View style={styles.overlayPoi}>
+          <Image
+            source={require('../assets/noImg.jpg')}
+            style={styles.item}
+          />
+          <Text>Félicitations tu remportes:</Text>
+          <Text>100 pts</Text>
+          <Button
+            title='Veazited'
+            onPress={() => addScore()} />
         </View>
 
       </Overlay>
