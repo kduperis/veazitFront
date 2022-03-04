@@ -309,9 +309,9 @@ export default function mapScreen() {
   const [currentLatitude, setCurrentLatitude] = useState(0);
   const [currentLongitude, setCurrentLongitude] = useState(0);
   const [visible, setVisible] = useState(false);
+  const [bestList,setBestList] = useState([])
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [userData, setUserData] = useState([])
   const [location, setLocation] = useState(false)
   const [visibleWin, setVisibleWin] = useState(false)
 
@@ -321,6 +321,13 @@ export default function mapScreen() {
   { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, alreadyView: true, categorie: 'Domaine' },
   { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, alreadyView: false, categorie: 'Domaine' },
   { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, alreadyView: false, categorie: 'Parc' }]
+
+
+  var showOverlay = (title, description) => {
+    setTitle(title)
+    setDescription(description)
+    setVisible(true)
+  }
 
   var listPointOfInterest = poi.map((lieu, i) => {
 
@@ -343,13 +350,6 @@ export default function mapScreen() {
         break;
     }
 
-    var showOverlay = (title, description) => {
-      setTitle(title)
-      setDescription(description)
-      setVisible(true)
-    }
-
-
     return (
       <Marker
         key={i}
@@ -362,16 +362,8 @@ export default function mapScreen() {
   })
 
   useEffect(() => {
-    axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => setUserData(res.data.bestUserName));
-
-  }, [])
-
-  userData.sort((a, b) => {
-    return b.score - a.score
-  })
-
-  useEffect(() => {
     async function askPermissions() {
+
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status === 'granted') {
         setLocation(true)
@@ -382,16 +374,34 @@ export default function mapScreen() {
           }
         ); 
       }
+
     }
+    async function bestUser(){
+      
+      axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => {
+        var userData = res.data.bestUserName;
+        userData.sort((a, b) => {
+          return b.score - a.score
+        })
+        userData = userData.slice(0,3)
+        setBestList(userData);
+      });
+
+    }
+
     askPermissions();
+    bestUser();
+
   }, []);
 
   var launchNavigation = () => {
+    //ADD NAVIGATION
     setVisibleWin(true)
     setVisible(false)
   }
 
   var addScore = () => {
+    //ADD ROUTE FETCH UPDATE SCORE
     setVisibleWin(false)
   }
 
@@ -400,10 +410,11 @@ export default function mapScreen() {
     return <AppLoading />
   }
 
-  var bestUserCard = userData.map((user, i) => {
-    return (
-      <View style={styles.cardPlayer}>
-        <View>
+  var bestUserCard = bestList.map((user, i) => {
+
+      return (
+        <View key={i} style={styles.cardPlayer} >
+
           <Avatar
             size={55}
             rounded
@@ -414,17 +425,16 @@ export default function mapScreen() {
               borderWidth: 3,
             }}
           />
+          
+
+          <View style={styles.detailPlayer}>
+            <Text style={styles.nameScorePlayer}>{user.username}</Text>
+            <Text style={styles.nameScorePlayer}>{user.score}</Text>
+          </View>
+
         </View>
-        <View style={styles.detailPlayer}>
-          <Text style={styles.nameScorePlayer}>
-            {user.username}
-          </Text>
-          <Text style={styles.nameScorePlayer}>
-            {user.score}
-          </Text>
-        </View>
-      </View>
-    )
+      )
+
   })
 
   return (
@@ -437,9 +447,7 @@ export default function mapScreen() {
 
       <View style={styles.best}>
 
-        {bestUserCard[0]}
-        {bestUserCard[1]}
-        {bestUserCard[2]}
+        {bestUserCard}
 
       </View>
 
