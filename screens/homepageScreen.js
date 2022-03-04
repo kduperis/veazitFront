@@ -5,11 +5,15 @@ import {
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { useState, useEffect } from 'react';
+import { Input } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { useDispatch } from 'react-redux';
 
 export default function homepageScreen(props) {
+
   const [pseudo, setPseudo] = useState('');
 
   const dispatch = useDispatch();
@@ -40,7 +44,20 @@ export default function homepageScreen(props) {
       <Text style={{ color: "#06D4B6", fontSize: 50, marginBottom: 50, fontFamily: "PressStart2P_400Regular" }}>Play</Text>
 
       <SafeAreaView>
-        <TextInput style={styles.input} placeholder='Entrez votre nom' onChangeText={(val) => setPseudo(val)} />
+      <Input
+                onChangeText={(val) => setPseudo(val)}
+                value={pseudo}
+                containerStyle={{ marginBottom: 25, width: 275 }}
+                inputStyle={{ marginLeft: 10, color: '#fff' }}
+                placeholder='Entrez votre nom'
+                leftIcon={
+                    <Icon
+                        name='user-astronaut'
+                        size={24}
+                        color='#06D4B6'
+                    />
+                }
+            />
       </SafeAreaView>
 
 
