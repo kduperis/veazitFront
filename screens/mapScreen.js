@@ -467,7 +467,7 @@ export default function mapScreen() {
       >
         <View style={styles.overlayPoi}>
           <Image
-            source={require('../assets/noImg.jpg')}
+            source={require('../assets/clap.jpg')}
             style={styles.item}
           />
           <Text>Félicitations tu remportes:</Text>
