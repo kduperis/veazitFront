@@ -17,6 +17,7 @@ import axios from 'axios';
 import { IP_URL } from '@env'
 
 import { useIsFocused } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 var mapStyle = [
   {
@@ -317,6 +318,8 @@ export default function mapScreen() {
   const [location, setLocation] = useState(false)
   const [visibleWin, setVisibleWin] = useState(false)
 
+  const [userScore,setUserScore] = useState(0) //For presentation
+
   const isFocused = useIsFocused();
 
   var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique' },
@@ -387,6 +390,7 @@ export default function mapScreen() {
 
   }, []);
 
+
   useEffect(()=>{
     async function bestUser(){
       
@@ -412,6 +416,8 @@ export default function mapScreen() {
   var addScore = () => {
     //ADD ROUTE FETCH UPDATE SCORE
     setVisibleWin(false)
+    var count = userScore + (100)/10 //For presentation
+    setUserScore(count)              //For presentation
   }
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
@@ -511,7 +517,7 @@ export default function mapScreen() {
         <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Ta progression avant le prochain niveau </Text>
       </View>
 
-      <ProgressBar progress={80} height={20} backgroundColor="#06D4B6" />
+      <ProgressBar progress={userScore} height={20} backgroundColor="#06D4B6" />
 
     </View>
 
