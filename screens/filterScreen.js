@@ -76,7 +76,7 @@ export default function FilterScreen(props) {
           <View style={styles.content}>
             <Text style={styles.contentTitle}>Filter Screen !</Text>
 
-            <Text style={{ color: "#06D4B6", fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 80 }}>Modifiez vos genres de lieu ici : </Text>
+            <Text style={{ color: "#06D4B6", fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20}}>Modifiez vos genres de lieu ici : </Text>
 
             <CheckBox
               center
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   contentTitle: {
     fontSize: 20,
-    marginBottom: 12,
+    marginBottom:20,
   },
   button: {
     backgroundColor: "#2C3A47",
@@ -146,8 +146,7 @@ const styles = StyleSheet.create({
     padding: 15,
     paddingTop: 25,
     borderRadius: 30,
-    marginTop: 60
-
+    marginTop:20,
   },
   buttonText: {
     color: "#06D4B6",
