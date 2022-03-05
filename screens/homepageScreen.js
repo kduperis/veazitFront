@@ -21,15 +21,15 @@ export default function homepageScreen(props) {
   useEffect(() => {
     AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
+        AsyncStorage.getItem('token', function (error, token) {
+          if (token) {
+            dispatch({ type: 'addToken', token: token })
+          }
+        }); 
         props.navigation.navigate('StackNavigation')
       }
     });
-    AsyncStorage.getItem('token', function (error, token) {
-      if (token) {
-        dispatch({ type: 'addToken', token: token }) 
-        props.navigation.navigate('StackNavigation')
-      }
-    });
+
   }, []);
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });

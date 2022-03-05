@@ -37,7 +37,6 @@ export default function signIn(props) {
 
         if (body.result == true) {
             dispatch({ type: 'addToken', token: body.user.token })
-            AsyncStorage.clear()
             AsyncStorage.setItem("token", body.user.token)
             props.navigation.navigate('StackNavigation', { screen: 'Map' });
         } else {

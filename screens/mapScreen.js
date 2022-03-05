@@ -390,22 +390,26 @@ export default function mapScreen() {
 
   }, []);
 
+  
 
   useEffect(()=>{
     async function bestUser(){
       
-      axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => {
-        var userData = res.data.bestUserName;
-        userData.sort((a, b) => {
-          return b.score - a.score
-        })
-        userData = userData.slice(0,3)
-        setBestList(userData);
-      });
+        axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => {
+          var userData = res.data.bestUserName;
+          userData.sort((a, b) => {
+            return b.score - a.score
+          })
+          userData = userData.slice(0,3)
+          setBestList(userData);
+        });
+      
 
     }
-    bestUser();
-  },[isFocused])
+
+      bestUser();
+
+  },[isFocused]) //Changer la facteur d'update
 
   var launchNavigation = () => {
     //ADD NAVIGATION

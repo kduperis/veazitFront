@@ -38,7 +38,6 @@ export default function signupScreen(props) {
         const body = await data.json()
         if (body.result == true) {
             dispatch({ type: 'addToken', token: body.saveUser.token })
-            AsyncStorage.clear()
             AsyncStorage.setItem("token", body.saveUser.token)
             props.navigation.navigate('StackNavigation', { screen: 'Map' });
         } else {
