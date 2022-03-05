@@ -1,13 +1,11 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Input } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import {
-    PressStart2P_400Regular
-} from '@expo-google-fonts/press-start-2p';
+import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
@@ -74,13 +72,13 @@ export default function SignupScreen(props) {
 
             {/*Titre*/}
             <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome new</Text>
-            <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
+            <Text h2 style={{ marginBottom: 15, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
 
             {/*Input pour l'USERNAME'*/}
             <Input
                 onChangeText={(e) => setSignUpUsername(e)}
                 value={signUpUsername}
-                containerStyle={{ marginBottom: 25, width: '70%' }}
+                containerStyle={{ marginBottom: 15, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Username'
                 leftIcon={
@@ -96,7 +94,7 @@ export default function SignupScreen(props) {
             <Input
                 onChangeText={(e) => setSignUpEmail(e)}
                 value={signUpEmail}
-                containerStyle={{ marginBottom: 25, width: '70%' }}
+                containerStyle={{ marginBottom: 15, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Email'
                 leftIcon={
@@ -112,7 +110,7 @@ export default function SignupScreen(props) {
             <Input
                 onChangeText={(e) => setSignUpPassword(e)}
                 value={signUpPassword}
-                containerStyle={{ width: '70%' }}
+                containerStyle={{ marginBottom: 15, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Mot de passe'
                 secureTextEntry={true}
@@ -128,11 +126,26 @@ export default function SignupScreen(props) {
             {tabErrorsSignup}
 
             {/*Bouton qui redirige vers le 'JEU'*/}
-            <TouchableOpacity onPress={() => handleSubmitSignup()}>
-                <View style={styles.button}>
-                    <Text style={styles.buttonText}>Start</Text>
-                </View>
-            </TouchableOpacity>
+            <Button
+                title={`Start`}
+                containerStyle={{
+                  width: '70%',
+                  marginHorizontal: 50,
+                  borderRadius: 30,
+                  borderWidth: 1,
+                  borderColor: '#06D4B6',
+                }}
+                buttonStyle={{
+                    backgroundColor:"#2C3A47",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 20,
+                    color: "#06D4B6",
+                }}
+                onPress={() => handleSubmitSignup()}
+              />
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
             <Text style={styles.text}>Vous avez un compte ?</Text>
@@ -150,22 +163,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    button: {
-        backgroundColor: "#2C3A47",
-        borderWidth: 1,
-        borderColor: "#06D4B6",
-        padding: 15,
-        paddingTop: 25,
-        marginTop: 25,
-        borderRadius: 30
-    },
-    buttonText: {
-        color: "#06D4B6",
-        fontSize: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: "PressStart2P_400Regular"
-    },
     text: {
         marginTop: 30,
         color: '#fff',
@@ -181,7 +178,8 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline'
     },
     error: {
-        color: 'red'
+        color: 'red',
+        marginBottom: 15,
     },
     buttonPrevious: {
         backgroundColor: "#2C3A47",

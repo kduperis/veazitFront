@@ -1,15 +1,14 @@
-import { StyleSheet, View } from 'react-native';
-import { Text, CheckBox } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native';
 import { useState } from 'react';
-import {
-  PressStart2P_400Regular
-} from '@expo-google-fonts/press-start-2p';
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 
+import { StyleSheet, View } from 'react-native';
+import { Text, CheckBox, Button } from 'react-native-elements';
+
+import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomefilterScreen(props) {
 
@@ -48,6 +47,7 @@ export default function HomefilterScreen(props) {
   if (!fontLoaded) {
     return <AppLoading />
   }
+  
   return (
 
     <View style={styles.container}>
@@ -86,11 +86,28 @@ export default function HomefilterScreen(props) {
         onPress={() => setCheck4(!check4)}
       />
 
-      <TouchableOpacity onPress={() => checkBox()}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>GO!</Text>
-        </View>
-      </TouchableOpacity>
+        <Button
+                title={`GO!`}
+                containerStyle={{
+                  width: '50%',
+                  marginHorizontal: 50,
+                  borderRadius: 30,
+                  borderWidth: 1,
+                  borderColor: '#06D4B6',
+                  marginTop:20,
+                }}
+                buttonStyle={{
+                    backgroundColor:"#2C3A47",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 20,
+                    color: "#06D4B6",
+                }}
+                onPress={() => checkBox()}
+              />
+
     </View>
   );
 }

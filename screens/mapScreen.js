@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
-import { Avatar, Button, Overlay } from 'react-native-elements'
-import { StyleSheet, View, Text, Image } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import * as Location from 'expo-location';
+import { useIsFocused } from '@react-navigation/native';
 
+import { StyleSheet, View, Text, Image } from 'react-native';
+import { Avatar, Button, Overlay } from 'react-native-elements'
+import ProgressBar from "react-native-animated-progress";
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faMapPin, faDroplet, faGopuram, faTree } from '@fortawesome/free-solid-svg-icons'
-import ProgressBar from "react-native-animated-progress";
+
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import * as Location from 'expo-location';
+
+import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import {
-  PressStart2P_400Regular
-} from '@expo-google-fonts/press-start-2p';
-import axios from 'axios';
-import { IP_URL } from '@env'
 
-import { useIsFocused } from '@react-navigation/native';
+import axios from 'axios';
+
+import { IP_URL } from '@env'
 
 var mapStyle = [
   {
@@ -482,8 +483,26 @@ export default function MapScreen() {
           <Text>{title}</Text>
           <Text>{description}</Text>
           <Button
-            title='Go veazit'
-            onPress={() => launchNavigation()} />
+                title={`Go veazit`}
+                containerStyle={{
+                  width: '65%',
+                  marginHorizontal: 50,
+                  borderRadius: 30,
+                  borderWidth: 1,
+                  borderColor: '#06D4B6',
+                  marginTop:20,
+                }}
+                buttonStyle={{
+                    backgroundColor:"#2C3A47",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 18,
+                    color: "#06D4B6",
+                }}
+                onPress={() => launchNavigation()}
+              />
         </View>
 
       </Overlay>
@@ -500,8 +519,26 @@ export default function MapScreen() {
           <Text>Félicitations tu remportes:</Text>
           <Text>100 pts</Text>
           <Button
-            title='Veazited'
-            onPress={() => addScore()} />
+                title={'Veazited'}
+                containerStyle={{
+                  width: '65%',
+                  marginHorizontal: 50,
+                  borderRadius: 30,
+                  borderWidth: 1,
+                  borderColor: '#06D4B6',
+                  marginTop:20,
+                }}
+                buttonStyle={{
+                    backgroundColor:"#2C3A47",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 18,
+                    color: "#06D4B6",
+                }}
+                onPress={() => addScore()}
+              />
         </View>
 
       </Overlay>

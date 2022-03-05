@@ -1,18 +1,15 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Input } from 'react-native-elements';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import {
-    PressStart2P_400Regular
-} from '@expo-google-fonts/press-start-2p';
+import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import { useState } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import { useDispatch } from 'react-redux';
 
 import { IP_URL } from '@env'
 
@@ -61,7 +58,7 @@ export default function SignIn(props) {
             <Input
                 onChangeText={(e) => setSignInEmail(e)}
                 value={signInEmail}
-                containerStyle={{ marginBottom: 25, width: '70%' }}
+                containerStyle={{ marginBottom: 15, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Email'
                 leftIcon={
@@ -75,7 +72,7 @@ export default function SignIn(props) {
             <Input
                 onChangeText={(e) => setSignInPassword(e)}
                 value={signInPassword}
-                containerStyle={{ marginBottom: 25, width: '70%' }}
+                containerStyle={{ marginBottom: 15, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Mot de passe'
                 secureTextEntry={true}
@@ -90,11 +87,29 @@ export default function SignIn(props) {
 
             {tabErrorsSignin}
 
-            <TouchableOpacity onPress={() => handleSubmitSignin()}>
-                <View style={styles.button}>
-                    <Text style={styles.buttonText}>Let's Veazit</Text>
-                </View>
-            </TouchableOpacity>
+        
+            <Button
+                title={`Let's Veazit`}
+                containerStyle={{
+                  width: '70%',
+                  marginHorizontal: 50, 
+                  borderRadius: 30,
+                  borderWidth: 1,
+                  borderColor: '#06D4B6',
+                }}
+                buttonStyle={{
+                    backgroundColor:"#2C3A47",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 20,
+                    color: "#06D4B6",
+                }}
+                onPress={() => handleSubmitSignin()}
+              />
+
+            
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
             <Text style={styles.text}>Vous n’avez pas de compte ?</Text>
@@ -111,23 +126,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    button: {
-        backgroundColor: "#2C3A47",
-        borderWidth: 1,
-        borderColor: "#06D4B6",
-        padding: 15,
-        paddingTop: 25,
-        borderRadius: 30
-    },
-    buttonText: {
-        color: "#06D4B6",
-        fontSize: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: "PressStart2P_400Regular"
-    },
     error: {
-        color: 'red'
+        color: 'red',
+        marginBottom:15
     },
     text: {
         marginTop: 30,
