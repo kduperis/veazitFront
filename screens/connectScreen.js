@@ -19,7 +19,6 @@ export default function ConnectScreen(props) {
     verifyUser()
   },[isFocused])
 
-
   return (
     <View style={styles.container}>
       <Text>Connection Screen</Text>

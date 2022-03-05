@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import { Input, Button, Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
@@ -74,6 +74,40 @@ export default function SignupScreen(props) {
             <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome new</Text>
             <Text h2 style={{ marginBottom: 15, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
 
+            <Button
+                    title={`Sign up`}
+                    icon={{
+                        name: 'google',
+                        type: 'font-awesome',
+                        size: 22,
+                        color: 'white',
+                        marginRight: 20,
+                    }}
+                    containerStyle={{
+                        width:'70%',
+                        marginTop:20,
+                        borderRadius: 30,
+                        borderWidth: 1,
+                        borderColor: '#EA4335',
+                    }}
+                    buttonStyle={{
+                        backgroundColor:"#EA4335",
+                        height:50,
+                    }}
+                    titleStyle={{
+                        fontFamily: "PressStart2P_400Regular",
+                        fontSize: 20,
+                        color: "#FFF",
+                    }}
+                    
+                />
+
+            <View style={{flexDirection: 'row', width: '70%', marginVertical:20}}>
+                <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1,alignSelf: 'center' }} />
+                <Text style={{ alignSelf:'center', paddingHorizontal:10, fontSize: 20, color:'#06D4B6' }}>OU</Text>
+                <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1, alignSelf: 'center' }} />
+            </View>
+        
             {/*Input pour l'USERNAME'*/}
             <Input
                 onChangeText={(e) => setSignUpUsername(e)}

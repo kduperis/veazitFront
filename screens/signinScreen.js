@@ -109,6 +109,42 @@ export default function SignIn(props) {
                 onPress={() => handleSubmitSignin()}
               />
 
+            <View style={{flexDirection: 'row', width: '70%', marginVertical:20}}>
+                <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1,alignSelf: 'center' }} />
+                <Text style={{ alignSelf:'center', paddingHorizontal:10, fontSize: 20, color:'#06D4B6' }}>OU</Text>
+                <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1, alignSelf: 'center' }} />
+            </View>
+
+            <Button
+                title={`Sign in`}
+                icon={{
+                    name: 'google',
+                    type: 'font-awesome',
+                    size: 22,
+                    color: 'white',
+                    marginRight: 20,
+                }}
+                containerStyle={{
+                    width:'70%',
+                    
+                    borderRadius: 30,
+                    borderWidth: 1,
+                    borderColor: '#EA4335',
+                }}
+                buttonStyle={{
+                    backgroundColor:"#EA4335",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 20,
+                    color: "#FFF",
+                }}
+                
+            />
+
+            
+
             
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
