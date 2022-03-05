@@ -414,9 +414,7 @@ export default function MapScreen() {
   var launchNavigation = async () => {
     //ADD NAVIGATION
     setVisible(false)
-    await new Promise(resolve => setTimeout(resolve, 5000)); //DEMODAY simuler la marche
-    setVisibleWin(true)
-
+    setTimeout(()=>setVisibleWin(true), 5000); //DEMODAY simuler la marche
   }
 
   var addScore = () => {

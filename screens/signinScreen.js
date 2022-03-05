@@ -11,6 +11,8 @@ import AppLoading from 'expo-app-loading';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import * as Google from 'expo-google-app-auth';
+
 import { IP_URL } from '@env'
 
 export default function SignIn(props) {
@@ -40,6 +42,21 @@ export default function SignIn(props) {
             setErrorsSignin(body.error)
         }
     }
+
+    var handleGoogleSignin = async () => {
+        const config = {
+            iosClientId:'847688372567-4kjumpe2p0itpt10dbp0a3fpo8uvp6ru.apps.googleusercontent.com',
+            androidClientId: '847688372567-t2vo8pfml6bthegn1hd7r7hto8b3g2hv.apps.googleusercontent.com',
+            scopes: ['profile','email']};
+
+            const { type, accessToken, user } = await Google.logInAsync(config)
+            if(type ==='success'){
+                const {email,name,photoUrl} = user;
+                setTimeout(()=>props.navigation.navigate('StackNavigation', { screen: 'Map' },1000))
+            }else{
+                console.log('Google signin was cancelled');
+            }
+    }        
 
     var tabErrorsSignin = listErrorsSignin.map((error, i) => {
         return (<Text key={i} style={styles.error}>{error}</Text>)
@@ -140,12 +157,8 @@ export default function SignIn(props) {
                     fontSize: 20,
                     color: "#FFF",
                 }}
-                
+                onPress={()=>handleGoogleSignin()}
             />
-
-            
-
-            
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
             <Text style={styles.text}>Vous n’avez pas de compte ?</Text>

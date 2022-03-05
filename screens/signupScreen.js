@@ -43,6 +43,21 @@ export default function SignupScreen(props) {
         }
     };
 
+    var handleGoogleSignup = async () => {
+        const config = {
+            iosClientId:'847688372567-4kjumpe2p0itpt10dbp0a3fpo8uvp6ru.apps.googleusercontent.com',
+            androidClientId: '847688372567-t2vo8pfml6bthegn1hd7r7hto8b3g2hv.apps.googleusercontent.com',
+            scopes: ['profile','email']};
+
+            const { type, accessToken, user } = await Google.logInAsync(config)
+            if(type ==='success'){
+                const {email,name,photoUrl} = user;
+                setTimeout(()=>props.navigation.navigate('StackNavigation', { screen: 'Map' },1000))
+            }else{
+                console.log('Google signin was cancelled');
+        }
+    }
+
     var tabErrorsSignup = listErrorsSignup.map((error, i) => {
         return (<Text key={i} style={styles.error}>{error}</Text>)
     })
@@ -99,7 +114,7 @@ export default function SignupScreen(props) {
                         fontSize: 20,
                         color: "#FFF",
                     }}
-                    
+                    onPress={()=>handleGoogleSignup()}
                 />
 
             <View style={{flexDirection: 'row', width: '70%', marginVertical:20}}>
