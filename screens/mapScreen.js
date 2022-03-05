@@ -307,7 +307,7 @@ var mapStyle = [
   }
 ]
 
-export default function mapScreen() {
+export default function MapScreen() {
 
   const [currentLatitude, setCurrentLatitude] = useState(0);
   const [currentLongitude, setCurrentLongitude] = useState(0);

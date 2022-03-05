@@ -15,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { IP_URL } from '@env'
 
-export default function signupScreen(props) {
+export default function SignupScreen(props) {
 
     //Déclaration des constantes nécessaires pour création d'un nouveau User
     const [signUpPassword, setSignUpPassword] = useState('');

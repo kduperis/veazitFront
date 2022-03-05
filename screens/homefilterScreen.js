@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 
 
-export default function homefilterScreen(props) {
+export default function HomefilterScreen(props) {
 
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
@@ -35,10 +35,10 @@ export default function homefilterScreen(props) {
     if (check4) {
       category.push("category 4")
     }
-    AsyncStorage.setItem("category", JSON.stringify(category))
-    props.navigation.navigate('StackNavigation')
-    dispatch({ type: "addchecked", category: category })
 
+    AsyncStorage.setItem("category", JSON.stringify(category))
+    dispatch({ type: "addchecked", category: category })
+    props.navigation.navigate('TutoScreen')
 
   }
 

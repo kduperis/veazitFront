@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux';
 
 import { IP_URL } from '@env'
 
-export default function signIn(props) {
+export default function SignIn(props) {
 
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');

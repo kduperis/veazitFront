@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { useIsFocused } from '@react-navigation/native';
 
-export default function connectScreen(props) {
+export default function ConnectScreen(props) {
 
   const tokenUser = useSelector(state => state.token);
 
