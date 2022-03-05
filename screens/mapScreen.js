@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCircleDot, faMapPin, faDroplet, faGopuram, faTree } from '@fortawesome/free-solid-svg-icons'
+import { faMapPin, faDroplet, faGopuram, faTree } from '@fortawesome/free-solid-svg-icons'
 import ProgressBar from "react-native-animated-progress";
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -17,7 +17,6 @@ import axios from 'axios';
 import { IP_URL } from '@env'
 
 import { useIsFocused } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
 
 var mapStyle = [
   {
@@ -411,10 +410,12 @@ export default function MapScreen() {
 
   },[isFocused]) //Changer la facteur d'update
 
-  var launchNavigation = () => {
+  var launchNavigation = async () => {
     //ADD NAVIGATION
-    setVisibleWin(true)
     setVisible(false)
+    await new Promise(resolve => setTimeout(resolve, 5000)); //DEMODAY simuler la marche
+    setVisibleWin(true)
+
   }
 
   var addScore = () => {
