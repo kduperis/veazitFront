@@ -21,289 +21,289 @@ import { useSelector } from 'react-redux';
 
 var mapStyle = [
   {
-      "featureType": "all",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "all",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "administrative.country",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "administrative.country",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "administrative.locality",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "administrative.locality",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "administrative.locality",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "administrative.locality",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "administrative.locality",
-      "elementType": "labels.icon",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "administrative.locality",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "administrative.neighborhood",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "administrative.neighborhood",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "landscape",
-      "elementType": "all",
-      "stylers": [
-          {
-              "color": "#AFFFA0"
-          }
-      ]
+    "featureType": "landscape",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#AFFFA0"
+      }
+    ]
   },
   {
-      "featureType": "poi",
-      "elementType": "all",
-      "stylers": [
-          {
-              "color": "#EAFFE5"
-          }
-      ]
+    "featureType": "poi",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#EAFFE5"
+      }
+    ]
   },
   {
-      "featureType": "poi.business",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.business",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "poi.government",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.government",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "poi.park",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "color": "#f9f8c7"
-          }
-      ]
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f9f8c7"
+      }
+    ]
   },
   {
-      "featureType": "poi.park",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.park",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "poi.park",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.park",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "poi.park",
-      "elementType": "labels.icon",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.park",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "road",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "color": "#59A499"
-          }
-      ]
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#59A499"
+      }
+    ]
   },
   {
-      "featureType": "road",
-      "elementType": "geometry.stroke",
-      "stylers": [
-          {
-              "color": "#F0FF8D"
-          },
-          {
-              "weight": 2.2
-          }
-      ]
+    "featureType": "road",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#F0FF8D"
+      },
+      {
+        "weight": 2.2
+      }
+    ]
   },
   {
-      "featureType": "road.highway",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "road.highway",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "road.arterial",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "road.arterial",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "road.local",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "road.local",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "transit.line",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "transit.line",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "transit.line",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "transit.line",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "transit.line",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.airport",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "transit.station.airport",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.airport",
-      "elementType": "geometry.fill",
-      "stylers": [
-          {
-              "color": "#fdfabf"
-          }
-      ]
+    "featureType": "transit.station.airport",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#fdfabf"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.bus",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "transit.station.bus",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.bus",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "transit.station.bus",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.rail",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "transit.station.rail",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "water",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "on"
-          },
-          {
-              "color": "#1A87D6"
-          }
-      ]
+    "featureType": "water",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "on"
+      },
+      {
+        "color": "#1A87D6"
+      }
+    ]
   },
   {
-      "featureType": "water",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "water",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "water",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "water",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "water",
-      "elementType": "labels.icon",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "water",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   }
 ]
 
@@ -312,13 +312,13 @@ export default function mapScreen() {
   const [currentLatitude, setCurrentLatitude] = useState(0);
   const [currentLongitude, setCurrentLongitude] = useState(0);
   const [visible, setVisible] = useState(false);
-  const [bestList,setBestList] = useState([])
+  const [bestList, setBestList] = useState([])
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [location, setLocation] = useState(false)
   const [visibleWin, setVisibleWin] = useState(false)
 
-  const [userScore,setUserScore] = useState(0) //For presentation
+  const [userScore, setUserScore] = useState(0) //For presentation
 
   const isFocused = useIsFocused();
 
@@ -379,33 +379,33 @@ export default function mapScreen() {
             setCurrentLatitude(location.coords.latitude);
             setCurrentLongitude(location.coords.longitude);
           }
-        ); 
+        );
       }
 
     }
-    
+
 
     askPermissions();
-   
+
 
   }, []);
 
 
-  useEffect(()=>{
-    async function bestUser(){
-      
+  useEffect(() => {
+    async function bestUser() {
+
       axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => {
         var userData = res.data.bestUserName;
         userData.sort((a, b) => {
           return b.score - a.score
         })
-        userData = userData.slice(0,3)
+        userData = userData.slice(0, 3)
         setBestList(userData);
       });
 
     }
     bestUser();
-  },[isFocused])
+  }, [isFocused])
 
   var launchNavigation = () => {
     //ADD NAVIGATION
@@ -416,7 +416,7 @@ export default function mapScreen() {
   var addScore = () => {
     //ADD ROUTE FETCH UPDATE SCORE
     setVisibleWin(false)
-    var count = userScore + (100)/10 //For presentation
+    var count = userScore + (100) / 10 //For presentation
     setUserScore(count)              //For presentation
   }
 
@@ -427,27 +427,27 @@ export default function mapScreen() {
 
   var bestUserCard = bestList.map((user, i) => {
 
-      return (
-        <View key={i} style={styles.cardPlayer} >
+    return (
+      <View key={i} style={styles.cardPlayer} >
 
-          <Avatar
-            size={55}
-            rounded
-            source={{ uri: user.avatar }}
-            containerStyle={{
-              borderColor: '#c0c0c0',
-              borderStyle: 'solid',
-              borderWidth: 3,
-            }}
-          />
+        <Avatar
+          size={55}
+          rounded
+          source={{ uri: user.avatar }}
+          containerStyle={{
+            borderColor: '#c0c0c0',
+            borderStyle: 'solid',
+            borderWidth: 3,
+          }}
+        />
 
-          <View style={styles.detailPlayer}>
-            <Text style={styles.nameScorePlayer}>{user.username}</Text>
-            <Text style={styles.nameScorePlayer}>{user.score}</Text>
-          </View>
-
+        <View style={styles.detailPlayer}>
+          <Text style={styles.nameScorePlayer}>{user.username}</Text>
+          <Text style={styles.nameScorePlayer}>{user.score}</Text>
         </View>
-      )
+
+      </View>
+    )
 
   })
 
@@ -508,9 +508,9 @@ export default function mapScreen() {
         showsUserLocation={location}
         showsCompass={true}
         showsMyLocationButton={location}>
-        
+
         {listPointOfInterest}
-      
+
       </MapView>
 
       <View style={styles.progressContainer}>

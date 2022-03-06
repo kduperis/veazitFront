@@ -18,6 +18,8 @@ export default function homepageScreen(props) {
 
   const dispatch = useDispatch();
 
+
+
   useEffect(() => {
     AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
@@ -26,7 +28,7 @@ export default function homepageScreen(props) {
     });
     AsyncStorage.getItem('token', function (error, token) {
       if (token) {
-        dispatch({ type: 'addToken', token: token }) 
+        dispatch({ type: 'addToken', token: token })
         props.navigation.navigate('StackNavigation')
       }
     });
@@ -44,20 +46,20 @@ export default function homepageScreen(props) {
       <Text style={{ color: "#06D4B6", fontSize: 50, marginBottom: 50, fontFamily: "PressStart2P_400Regular" }}>Play</Text>
 
       <SafeAreaView>
-      <Input
-                onChangeText={(val) => setPseudo(val)}
-                value={pseudo}
-                containerStyle={{ marginBottom: 25, width: 275 }}
-                inputStyle={{ marginLeft: 10, color: '#fff' }}
-                placeholder='Entrez votre nom'
-                leftIcon={
-                    <Icon
-                        name='user-astronaut'
-                        size={24}
-                        color='#06D4B6'
-                    />
-                }
+        <Input
+          onChangeText={(val) => setPseudo(val)}
+          value={pseudo}
+          containerStyle={{ marginBottom: 25, width: 275 }}
+          inputStyle={{ marginLeft: 10, color: '#fff' }}
+          placeholder='Entrez votre nom'
+          leftIcon={
+            <Icon
+              name='user-astronaut'
+              size={24}
+              color='#06D4B6'
             />
+          }
+        />
       </SafeAreaView>
 
 
