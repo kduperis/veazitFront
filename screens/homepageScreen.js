@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
+import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
@@ -17,19 +17,20 @@ export default function HomepageScreen(props) {
 
   const dispatch = useDispatch();
 
-  /* useEffect(() => {
-    AsyncStorage.getItem('pseudo', function (error, pseudo) {
+
+
+  useEffect(() => {
+    /* AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
         AsyncStorage.getItem('token', function (error, token) {
           if (token) {
             dispatch({ type: 'addToken', token: token })
           }
-        }); 
+        });
         props.navigation.navigate('StackNavigation')
       }
-    });
-
-  }, []); */
+    }); */
+  }, []);
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
@@ -43,43 +44,43 @@ export default function HomepageScreen(props) {
       <Text style={{ color: "#06D4B6", fontSize: 50, marginBottom: 50, fontFamily: "PressStart2P_400Regular" }}>Play</Text>
 
       <SafeAreaView>
-      <Input
-                onChangeText={(val) => setPseudo(val)}
-                value={pseudo}
-                containerStyle={{ marginBottom: 25, width: 275 }}
-                inputStyle={{ marginLeft: 10, color: '#fff' }}
-                placeholder='Entrez votre nom'
-                leftIcon={
-                    <Icon
-                        name='user-astronaut'
-                        size={24}
-                        color='#06D4B6'
-                    />
-                }
+        <Input
+          onChangeText={(val) => setPseudo(val)}
+          value={pseudo}
+          containerStyle={{ marginBottom: 25, width: 275 }}
+          inputStyle={{ marginLeft: 10, color: '#fff' }}
+          placeholder='Entrez votre nom'
+          leftIcon={
+            <Icon
+              name='user-astronaut'
+              size={24}
+              color='#06D4B6'
             />
+          }
+        />
       </SafeAreaView>
 
 
       <Button
-                title={`Start`}
-                containerStyle={{
-                  width: '50%',
-                  marginHorizontal: 50,
-                  borderRadius: 30,
-                  borderWidth: 1,
-                  borderColor: '#06D4B6',
-                }}
-                buttonStyle={{
-                    backgroundColor:"#2C3A47",
-                    height:50,
-                }}
-                titleStyle={{
-                    fontFamily: "PressStart2P_400Regular",
-                    fontSize: 20,
-                    color: "#06D4B6",
-                }}
-                onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }}
-              />
+        title={`Start`}
+        containerStyle={{
+          width: '50%',
+          marginHorizontal: 50,
+          borderRadius: 30,
+          borderWidth: 1,
+          borderColor: '#06D4B6',
+        }}
+        buttonStyle={{
+          backgroundColor: "#2C3A47",
+          height: 50,
+        }}
+        titleStyle={{
+          fontFamily: "PressStart2P_400Regular",
+          fontSize: 20,
+          color: "#06D4B6",
+        }}
+        onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }}
+      />
 
     </View>
 

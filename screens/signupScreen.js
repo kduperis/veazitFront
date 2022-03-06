@@ -11,6 +11,8 @@ import AppLoading from 'expo-app-loading';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import * as Google from 'expo-google-app-auth';
+
 import { IP_URL } from '@env'
 
 export default function SignupScreen(props) {

@@ -11,7 +11,7 @@ import { faMapPin, faDroplet, faGopuram, faTree } from '@fortawesome/free-solid-
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
 
-import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
+import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
@@ -21,289 +21,289 @@ import { IP_URL } from '@env'
 
 var mapStyle = [
   {
-      "featureType": "all",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "all",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "administrative.country",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "administrative.country",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "administrative.locality",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "administrative.locality",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "administrative.locality",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "administrative.locality",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "administrative.locality",
-      "elementType": "labels.icon",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "administrative.locality",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "administrative.neighborhood",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "administrative.neighborhood",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "landscape",
-      "elementType": "all",
-      "stylers": [
-          {
-              "color": "#AFFFA0"
-          }
-      ]
+    "featureType": "landscape",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#AFFFA0"
+      }
+    ]
   },
   {
-      "featureType": "poi",
-      "elementType": "all",
-      "stylers": [
-          {
-              "color": "#EAFFE5"
-          }
-      ]
+    "featureType": "poi",
+    "elementType": "all",
+    "stylers": [
+      {
+        "color": "#EAFFE5"
+      }
+    ]
   },
   {
-      "featureType": "poi.business",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.business",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "poi.government",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.government",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "poi.park",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "color": "#f9f8c7"
-          }
-      ]
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f9f8c7"
+      }
+    ]
   },
   {
-      "featureType": "poi.park",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.park",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "poi.park",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.park",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "poi.park",
-      "elementType": "labels.icon",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "poi.park",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "road",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "color": "#59A499"
-          }
-      ]
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#59A499"
+      }
+    ]
   },
   {
-      "featureType": "road",
-      "elementType": "geometry.stroke",
-      "stylers": [
-          {
-              "color": "#F0FF8D"
-          },
-          {
-              "weight": 2.2
-          }
-      ]
+    "featureType": "road",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#F0FF8D"
+      },
+      {
+        "weight": 2.2
+      }
+    ]
   },
   {
-      "featureType": "road.highway",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "road.highway",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "road.arterial",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "road.arterial",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "road.local",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "road.local",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "transit.line",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "transit.line",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "transit.line",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "transit.line",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "transit.line",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.airport",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "transit.station.airport",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.airport",
-      "elementType": "geometry.fill",
-      "stylers": [
-          {
-              "color": "#fdfabf"
-          }
-      ]
+    "featureType": "transit.station.airport",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#fdfabf"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.bus",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "transit.station.bus",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.bus",
-      "elementType": "geometry",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "transit.station.bus",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "transit.station.rail",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "transit.station.rail",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "water",
-      "elementType": "all",
-      "stylers": [
-          {
-              "visibility": "on"
-          },
-          {
-              "color": "#1A87D6"
-          }
-      ]
+    "featureType": "water",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "on"
+      },
+      {
+        "color": "#1A87D6"
+      }
+    ]
   },
   {
-      "featureType": "water",
-      "elementType": "labels",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "water",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "water",
-      "elementType": "labels.text",
-      "stylers": [
-          {
-              "visibility": "on"
-          }
-      ]
+    "featureType": "water",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
   },
   {
-      "featureType": "water",
-      "elementType": "labels.icon",
-      "stylers": [
-          {
-              "visibility": "off"
-          }
-      ]
+    "featureType": "water",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
   }
 ]
 
@@ -312,13 +312,13 @@ export default function MapScreen() {
   const [currentLatitude, setCurrentLatitude] = useState(0);
   const [currentLongitude, setCurrentLongitude] = useState(0);
   const [visible, setVisible] = useState(false);
-  const [bestList,setBestList] = useState([])
+  const [bestList, setBestList] = useState([])
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [location, setLocation] = useState(false)
   const [visibleWin, setVisibleWin] = useState(false)
 
-  const [userScore,setUserScore] = useState(0) //For presentation
+  const [userScore, setUserScore] = useState(0) //For presentation
 
   const isFocused = useIsFocused();
 
@@ -379,48 +379,47 @@ export default function MapScreen() {
             setCurrentLatitude(location.coords.latitude);
             setCurrentLongitude(location.coords.longitude);
           }
-        ); 
+        );
       }
 
     }
-    
+
 
     askPermissions();
-   
+
 
   }, []);
 
-  
 
-  useEffect(()=>{
-    async function bestUser(){
-      
-        axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => {
-          var userData = res.data.bestUserName;
-          userData.sort((a, b) => {
-            return b.score - a.score
-          })
-          userData = userData.slice(0,3)
-          setBestList(userData);
-        });
-      
+
+  useEffect(() => {
+    async function bestUser() {
+
+      axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => {
+        var userData = res.data.bestUserName;
+        userData.sort((a, b) => {
+          return b.score - a.score
+        })
+        userData = userData.slice(0, 3)
+        setBestList(userData);
+      });
 
     }
+    bestUser();
+  }, [isFocused])
 
-      bestUser();
-
-  },[isFocused]) //Changer la facteur d'update
+  //Changer la facteur d'update
 
   var launchNavigation = async () => {
     //ADD NAVIGATION
     setVisible(false)
-    setTimeout(()=>setVisibleWin(true), 5000); //DEMODAY simuler la marche
+    setTimeout(() => setVisibleWin(true), 5000); //DEMODAY simuler la marche
   }
 
   var addScore = () => {
     //ADD ROUTE FETCH UPDATE SCORE
     setVisibleWin(false)
-    var count = userScore + (100)/10 //For presentation
+    var count = userScore + (100) / 10 //For presentation
     setUserScore(count)              //For presentation
   }
 
@@ -431,27 +430,27 @@ export default function MapScreen() {
 
   var bestUserCard = bestList.map((user, i) => {
 
-      return (
-        <View key={i} style={styles.cardPlayer} >
+    return (
+      <View key={i} style={styles.cardPlayer} >
 
-          <Avatar
-            size={55}
-            rounded
-            source={{ uri: user.avatar }}
-            containerStyle={{
-              borderColor: '#c0c0c0',
-              borderStyle: 'solid',
-              borderWidth: 3,
-            }}
-          />
+        <Avatar
+          size={55}
+          rounded
+          source={{ uri: user.avatar }}
+          containerStyle={{
+            borderColor: '#c0c0c0',
+            borderStyle: 'solid',
+            borderWidth: 3,
+          }}
+        />
 
-          <View style={styles.detailPlayer}>
-            <Text style={styles.nameScorePlayer}>{user.username}</Text>
-            <Text style={styles.nameScorePlayer}>{user.score}</Text>
-          </View>
-
+        <View style={styles.detailPlayer}>
+          <Text style={styles.nameScorePlayer}>{user.username}</Text>
+          <Text style={styles.nameScorePlayer}>{user.score}</Text>
         </View>
-      )
+
+      </View>
+    )
 
   })
 
@@ -481,26 +480,26 @@ export default function MapScreen() {
           <Text>{title}</Text>
           <Text>{description}</Text>
           <Button
-                title={`Go veazit`}
-                containerStyle={{
-                  width: '65%',
-                  marginHorizontal: 50,
-                  borderRadius: 30,
-                  borderWidth: 1,
-                  borderColor: '#06D4B6',
-                  marginTop:20,
-                }}
-                buttonStyle={{
-                    backgroundColor:"#2C3A47",
-                    height:50,
-                }}
-                titleStyle={{
-                    fontFamily: "PressStart2P_400Regular",
-                    fontSize: 18,
-                    color: "#06D4B6",
-                }}
-                onPress={() => launchNavigation()}
-              />
+            title={`Go veazit`}
+            containerStyle={{
+              width: '65%',
+              marginHorizontal: 50,
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: '#06D4B6',
+              marginTop: 20,
+            }}
+            buttonStyle={{
+              backgroundColor: "#2C3A47",
+              height: 50,
+            }}
+            titleStyle={{
+              fontFamily: "PressStart2P_400Regular",
+              fontSize: 18,
+              color: "#06D4B6",
+            }}
+            onPress={() => launchNavigation()}
+          />
         </View>
 
       </Overlay>
@@ -517,26 +516,26 @@ export default function MapScreen() {
           <Text>Félicitations tu remportes:</Text>
           <Text>100 pts</Text>
           <Button
-                title={'Veazited'}
-                containerStyle={{
-                  width: '65%',
-                  marginHorizontal: 50,
-                  borderRadius: 30,
-                  borderWidth: 1,
-                  borderColor: '#06D4B6',
-                  marginTop:20,
-                }}
-                buttonStyle={{
-                    backgroundColor:"#2C3A47",
-                    height:50,
-                }}
-                titleStyle={{
-                    fontFamily: "PressStart2P_400Regular",
-                    fontSize: 18,
-                    color: "#06D4B6",
-                }}
-                onPress={() => addScore()}
-              />
+            title={'Veazited'}
+            containerStyle={{
+              width: '65%',
+              marginHorizontal: 50,
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: '#06D4B6',
+              marginTop: 20,
+            }}
+            buttonStyle={{
+              backgroundColor: "#2C3A47",
+              height: 50,
+            }}
+            titleStyle={{
+              fontFamily: "PressStart2P_400Regular",
+              fontSize: 18,
+              color: "#06D4B6",
+            }}
+            onPress={() => addScore()}
+          />
         </View>
 
       </Overlay>
@@ -548,9 +547,9 @@ export default function MapScreen() {
         showsUserLocation={location}
         showsCompass={true}
         showsMyLocationButton={location}>
-        
+
         {listPointOfInterest}
-      
+
       </MapView>
 
       <View style={styles.progressContainer}>
