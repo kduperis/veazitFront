@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
@@ -20,7 +20,7 @@ export default function HomepageScreen(props) {
 
 
   useEffect(() => {
-    AsyncStorage.getItem('pseudo', function (error, pseudo) {
+    /* AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
         AsyncStorage.getItem('token', function (error, token) {
           if (token) {
@@ -29,13 +29,7 @@ export default function HomepageScreen(props) {
         });
         props.navigation.navigate('StackNavigation')
       }
-    });
-    AsyncStorage.getItem('token', function (error, token) {
-      if (token) {
-        dispatch({ type: 'addToken', token: token })
-        props.navigation.navigate('StackNavigation')
-      }
-    });
+    }); */
   }, []);
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });

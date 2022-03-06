@@ -17,7 +17,7 @@ export default function TrophyScreen() {
 
   useEffect(() => {
     async function loadData() {
-      var rawResponse = await fetch(`http://${IP_URL}/users/badgesData`);
+      var rawResponse = await fetch(`http://${IP_URL}:3000/users/badgesData`);
       var response = await rawResponse.json();
       console.log(response);
     }
