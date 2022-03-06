@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
 import { useIsFocused } from '@react-navigation/native';
 
-export default function connectScreen(props) {
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function ConnectScreen(props) {
 
   const tokenUser = useSelector(state => state.token);
 
@@ -18,7 +18,6 @@ export default function connectScreen(props) {
     }
     verifyUser()
   },[isFocused])
-
 
   return (
     <View style={styles.container}>

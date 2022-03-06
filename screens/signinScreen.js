@@ -1,22 +1,21 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Input } from 'react-native-elements';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import {
-    PressStart2P_400Regular
-} from '@expo-google-fonts/press-start-2p';
+import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import { useState } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { useDispatch } from 'react-redux';
+import * as Google from 'expo-google-app-auth';
 
 import { IP_URL } from '@env'
 
-export default function signIn(props) {
+export default function SignIn(props) {
 
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
@@ -37,13 +36,27 @@ export default function signIn(props) {
 
         if (body.result == true) {
             dispatch({ type: 'addToken', token: body.user.token })
-            AsyncStorage.clear()
             AsyncStorage.setItem("token", body.user.token)
             props.navigation.navigate('StackNavigation', { screen: 'Map' });
         } else {
             setErrorsSignin(body.error)
         }
     }
+
+    var handleGoogleSignin = async () => {
+        const config = {
+            iosClientId:'847688372567-4kjumpe2p0itpt10dbp0a3fpo8uvp6ru.apps.googleusercontent.com',
+            androidClientId: '847688372567-t2vo8pfml6bthegn1hd7r7hto8b3g2hv.apps.googleusercontent.com',
+            scopes: ['profile','email']};
+
+            const { type, accessToken, user } = await Google.logInAsync(config)
+            if(type ==='success'){
+                const {email,name,photoUrl} = user;
+                setTimeout(()=>props.navigation.navigate('StackNavigation', { screen: 'Map' },1000))
+            }else{
+                console.log('Google signin was cancelled');
+            }
+    }        
 
     var tabErrorsSignin = listErrorsSignin.map((error, i) => {
         return (<Text key={i} style={styles.error}>{error}</Text>)
@@ -62,7 +75,7 @@ export default function signIn(props) {
             <Input
                 onChangeText={(e) => setSignInEmail(e)}
                 value={signInEmail}
-                containerStyle={{ marginBottom: 25, width: '70%' }}
+                containerStyle={{ marginBottom: 15, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Email'
                 leftIcon={
@@ -76,7 +89,7 @@ export default function signIn(props) {
             <Input
                 onChangeText={(e) => setSignInPassword(e)}
                 value={signInPassword}
-                containerStyle={{ marginBottom: 25, width: '70%' }}
+                containerStyle={{ marginBottom: 15, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
                 placeholder='Mot de passe'
                 secureTextEntry={true}
@@ -91,11 +104,61 @@ export default function signIn(props) {
 
             {tabErrorsSignin}
 
-            <TouchableOpacity onPress={() => handleSubmitSignin()}>
-                <View style={styles.button}>
-                    <Text style={styles.buttonText}>Let's Veazit</Text>
-                </View>
-            </TouchableOpacity>
+        
+            <Button
+                title={`Let's Veazit`}
+                containerStyle={{
+                  width: '70%',
+                  marginHorizontal: 50, 
+                  borderRadius: 30,
+                  borderWidth: 1,
+                  borderColor: '#06D4B6',
+                }}
+                buttonStyle={{
+                    backgroundColor:"#2C3A47",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 20,
+                    color: "#06D4B6",
+                }}
+                onPress={() => handleSubmitSignin()}
+              />
+
+            <View style={{flexDirection: 'row', width: '70%', marginVertical:20}}>
+                <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1,alignSelf: 'center' }} />
+                <Text style={{ alignSelf:'center', paddingHorizontal:10, fontSize: 20, color:'#06D4B6' }}>OU</Text>
+                <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1, alignSelf: 'center' }} />
+            </View>
+
+            <Button
+                title={`Sign in`}
+                icon={{
+                    name: 'google',
+                    type: 'font-awesome',
+                    size: 22,
+                    color: 'white',
+                    marginRight: 20,
+                }}
+                containerStyle={{
+                    width:'70%',
+                    
+                    borderRadius: 30,
+                    borderWidth: 1,
+                    borderColor: '#EA4335',
+                }}
+                buttonStyle={{
+                    backgroundColor:"#EA4335",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 20,
+                    color: "#FFF",
+                }}
+                onPress={()=>handleGoogleSignin()}
+            />
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
             <Text style={styles.text}>Vous n’avez pas de compte ?</Text>
@@ -112,23 +175,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    button: {
-        backgroundColor: "#2C3A47",
-        borderWidth: 1,
-        borderColor: "#06D4B6",
-        padding: 15,
-        paddingTop: 25,
-        borderRadius: 30
-    },
-    buttonText: {
-        color: "#06D4B6",
-        fontSize: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: "PressStart2P_400Regular"
-    },
     error: {
-        color: 'red'
+        color: 'red',
+        marginBottom:15
     },
     text: {
         marginTop: 30,

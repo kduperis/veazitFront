@@ -1,17 +1,16 @@
-import { StyleSheet, View } from 'react-native';
-import { Text, CheckBox } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native';
 import { useState } from 'react';
-import {
-  PressStart2P_400Regular
-} from '@expo-google-fonts/press-start-2p';
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 
+import { StyleSheet, View } from 'react-native';
+import { Text, CheckBox, Button } from 'react-native-elements';
 
-export default function homefilterScreen(props) {
+import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export default function HomefilterScreen(props) {
 
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
@@ -35,10 +34,10 @@ export default function homefilterScreen(props) {
     if (check4) {
       category.push("category 4")
     }
-    AsyncStorage.setItem("category", JSON.stringify(category))
-    props.navigation.navigate('StackNavigation')
-    dispatch({ type: "addchecked", category: category })
 
+    AsyncStorage.setItem("category", JSON.stringify(category))
+    dispatch({ type: "addchecked", category: category })
+    props.navigation.navigate('TutoScreen')
 
   }
 
@@ -48,6 +47,7 @@ export default function homefilterScreen(props) {
   if (!fontLoaded) {
     return <AppLoading />
   }
+  
   return (
 
     <View style={styles.container}>
@@ -86,11 +86,28 @@ export default function homefilterScreen(props) {
         onPress={() => setCheck4(!check4)}
       />
 
-      <TouchableOpacity onPress={() => checkBox()}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>GO!</Text>
-        </View>
-      </TouchableOpacity>
+        <Button
+                title={`GO!`}
+                containerStyle={{
+                  width: '50%',
+                  marginHorizontal: 50,
+                  borderRadius: 30,
+                  borderWidth: 1,
+                  borderColor: '#06D4B6',
+                  marginTop:20,
+                }}
+                buttonStyle={{
+                    backgroundColor:"#2C3A47",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 20,
+                    color: "#06D4B6",
+                }}
+                onPress={() => checkBox()}
+              />
+
     </View>
   );
 }

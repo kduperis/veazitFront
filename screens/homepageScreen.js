@@ -1,18 +1,17 @@
-import { StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
-import {
-  PressStart2P_400Regular
-} from '@expo-google-fonts/press-start-2p';
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
-import { useState, useEffect } from 'react';
-import { Input } from 'react-native-elements';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-export default function homepageScreen(props) {
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Input, Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
+import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export default function HomepageScreen(props) {
 
   const [pseudo, setPseudo] = useState('');
 
@@ -23,6 +22,11 @@ export default function homepageScreen(props) {
   useEffect(() => {
     AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
+        AsyncStorage.getItem('token', function (error, token) {
+          if (token) {
+            dispatch({ type: 'addToken', token: token })
+          }
+        });
         props.navigation.navigate('StackNavigation')
       }
     });
@@ -63,11 +67,27 @@ export default function homepageScreen(props) {
       </SafeAreaView>
 
 
-      <TouchableOpacity onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }} >
-        <View style={styles.button}>
-          <Text style={styles.buttonText} >START</Text>
-        </View>
-      </TouchableOpacity>
+      <Button
+        title={`Start`}
+        containerStyle={{
+          width: '50%',
+          marginHorizontal: 50,
+          borderRadius: 30,
+          borderWidth: 1,
+          borderColor: '#06D4B6',
+        }}
+        buttonStyle={{
+          backgroundColor: "#2C3A47",
+          height: 50,
+        }}
+        titleStyle={{
+          fontFamily: "PressStart2P_400Regular",
+          fontSize: 20,
+          color: "#06D4B6",
+        }}
+        onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }}
+      />
+
     </View>
 
   );

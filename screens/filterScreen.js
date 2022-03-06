@@ -1,12 +1,13 @@
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import { StyleSheet, View } from 'react-native';
 import { Text, CheckBox, Button } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native';
-import { useEffect, useState } from 'react';
+import Modal from 'react-native-modal';
+
 import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import { useSelector } from 'react-redux';
-import Modal from 'react-native-modal';
 
 export default function FilterScreen(props) {
 
@@ -109,12 +110,28 @@ export default function FilterScreen(props) {
               checkedColor="#06D4B6"
               onPress={() => setCheck4(!check4)}
             />
-
-            <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>GO!</Text>
-              </View>
-            </TouchableOpacity>
+            
+            <Button
+                title={`Go !`}
+                containerStyle={{
+                  width: '50%',
+                  marginHorizontal: 50,
+                  borderRadius: 30,
+                  borderWidth: 1,
+                  borderColor: '#06D4B6',
+                  marginTop:20,
+                }}
+                buttonStyle={{
+                    backgroundColor:"#2C3A47",
+                    height:50,
+                }}
+                titleStyle={{
+                    fontFamily: "PressStart2P_400Regular",
+                    fontSize: 20,
+                    color: "#06D4B6",
+                }}
+                onPress={() => setModalVisible(false)}
+              />
 
           </View>
 
