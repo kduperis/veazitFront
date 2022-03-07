@@ -36,26 +36,31 @@ export default function TrophyScreen() {
   var badgeCard = badgeData.map((badge, i) => {
 
     return (
-      <ScrollView>
-        <View key={i} style={{ flexDirection: "row" }}>
 
-          <Avatar
-            size={50}
-            source={{ uri: badge.img }}
-            containerStyle={{
-              borderColor: '#c0c0c0',
-              borderWidth: 3,
-              borderRadius: 50,
-              marginLeft: 0
-            }}
-          />
-          <View style={{ marginLeft: 40, marginTop: 10 }}>
-            <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 12 }} >{badge.title}</Text>
-            <Text style={{ fontFamily: "PressStart2P_400Regular" }} >{badge.description}</Text>
+      <View key={i} style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "column", width: '50%' }}>
+          <View style={{ alignItems: "center", marginBottom: 15 }} >
+
+            <Avatar
+              size={50}
+              source={{ uri: badge.img }}
+              containerStyle={{
+                borderColor: '#c0c0c0',
+                borderWidth: 3,
+                borderRadius: 50,
+                marginLeft: 0
+              }}
+            />
+            <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 12, marginTop: 10, color: "#fff" }} >{badge.title}</Text>
           </View>
 
         </View>
-      </ScrollView>
+
+        <View style={{ marginTop: 15, width: "50%" }}>
+          <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10, color: "#06D4B6" }} >{badge.description}</Text>
+        </View>
+
+      </View>
 
     )
   })
@@ -86,9 +91,10 @@ export default function TrophyScreen() {
           <View style={{ alignItems: 'center', marginBottom: 20 }}>
             <Text style={{ fontFamily: "PressStart2P_400Regular", color: "#06D4B6" }}> Liste des trophées</Text>
           </View>
+          <ScrollView >
 
-
-          {badgeCard}
+            {badgeCard}
+          </ScrollView >
 
         </View>
 
