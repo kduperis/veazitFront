@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
@@ -15,7 +15,11 @@ import * as Google from 'expo-google-app-auth';
 
 import { IP_URL } from '@env'
 
+import themeContext from '../config/themeContext';
+
 export default function SignupScreen(props) {
+
+    const theme = useContext(themeContext);
 
     //Déclaration des constantes nécessaires pour création d'un nouveau User
     const [signUpPassword, setSignUpPassword] = useState('');
@@ -71,13 +75,13 @@ export default function SignupScreen(props) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,{backgroundColor: theme.background}]}>
 
             {/*Bouton previous*/}
             <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.touchable} onPress={() => props.navigation.navigate('StackNavigation', { screen: 'Map' })}>
-                <View style={styles.buttonPrevious}>
-                    <Icon name='arrow-left' size={24} color='#06D4B6'/>
+                <View style={[styles.buttonPrevious,{borderColor: theme.color}]}>
+                    <Icon name='arrow-left' size={24} color={theme.color}/>
                 </View>
             </TouchableOpacity>
             </View>
@@ -85,7 +89,7 @@ export default function SignupScreen(props) {
 
             {/*Titre*/}
             <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome new</Text>
-            <Text h2 style={{ marginBottom: 15, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
+            <Text h2 style={{ marginBottom: 15, color: theme.color, fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
 
             <TouchableOpacity 
                 style={styles.buttonGoogle}
@@ -98,7 +102,7 @@ export default function SignupScreen(props) {
 
             <View style={{flexDirection: 'row', width: '70%', marginVertical:20}}>
                 <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1,alignSelf: 'center' }} />
-                <Text style={{ alignSelf:'center', paddingHorizontal:10, fontSize: 20, color:'#06D4B6' }}>OU</Text>
+                <Text style={{ alignSelf:'center', paddingHorizontal:10, fontSize: 20, color:theme.color }}>OU</Text>
                 <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1, alignSelf: 'center' }} />
             </View>
         
@@ -113,7 +117,7 @@ export default function SignupScreen(props) {
                     <Icon
                         name='user-astronaut'
                         size={24}
-                        color='#06D4B6'
+                        color={theme.background}
                     />
                 }
             />
@@ -129,7 +133,7 @@ export default function SignupScreen(props) {
                     <Icon
                         name='at'
                         size={24}
-                        color='#06D4B6'
+                        color={theme.background}
                     />
                 }
             />
@@ -146,7 +150,7 @@ export default function SignupScreen(props) {
                     <Icon
                         name='key'
                         size={24}
-                        color='#06D4B6'
+                        color={theme.background}
                     />
                 }
             />
@@ -155,15 +159,15 @@ export default function SignupScreen(props) {
 
             {/*Bouton qui redirige vers le 'JEU'*/}
             <TouchableOpacity 
-                style={styles.button}
+                style={[styles.button,{borderColor: theme.color}]}
                 onPress={() => handleSubmitSignup()}>
                 <Text
-                    style={styles.buttonText}>Start</Text>
+                    style={[styles.buttonText,{color: "#06D4B6"}]}>Start</Text>
             </TouchableOpacity>
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
             <Text style={styles.text}>Vous avez un compte ?</Text>
-            <Text style={styles.textConnect} onPress={() => props.navigation.navigate('SignIn')}>Connectez-vous</Text>
+            <Text style={[styles.textConnect,{color: theme.color}]} onPress={() => props.navigation.navigate('SignIn')}>Connectez-vous</Text>
         </View >
     );
 
@@ -173,7 +177,6 @@ export default function SignupScreen(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2C3A47',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -184,7 +187,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textConnect: {
-        color: '#06D4B6',
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: "PressStart2P_400Regular",
@@ -196,12 +198,9 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     buttonPrevious: {
-        backgroundColor: "#2C3A47",
         borderWidth: 1,
-        borderColor: "#06D4B6",
         borderRadius: 10,
         padding:10,
-
     },
     buttonContainer:{
         position:'absolute',
@@ -214,14 +213,12 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 30,
         borderWidth: 1,
-        borderColor: '#06D4B6',
         justifyContent:'center',
         alignItems:'center',
     },
     buttonText: {
         fontFamily: "PressStart2P_400Regular",
         fontSize: 20,
-        color: "#06D4B6",
     },
     buttonGoogle: {
         backgroundColor:'#EA4335',

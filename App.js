@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { EventRegister } from 'react-native-event-listeners';
 
 import HomepageScreen from './screens/homepageScreen';
 import HomefilterScreen from './screens/homefilterScreen';
@@ -13,6 +14,9 @@ import TrophyScreen from './screens/trophyScreen';
 import SignupScreen from './screens/signupScreen';
 import SigninScreen from './screens/signinScreen';
 import TutoScreen from './screens/tutoScreen';
+
+import theme from './config/theme';
+import themeContext from './config/themeContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUserAstronaut, faTrophy, faMapLocationDot, faFilter } from '@fortawesome/free-solid-svg-icons'
@@ -31,6 +35,9 @@ var fakeComponent = () => {
 }
 
 var StackNavigation = () => {
+
+  const theme = useContext(themeContext);
+
   return (
     <Tab.Navigator screenOptions={({ route }) => ({
       tabBarIcon: ({ color }) => {
@@ -45,10 +52,10 @@ var StackNavigation = () => {
     })}
 
       tabBarOptions={{
-        activeTintColor: '#06D4B6',
+        activeTintColor: theme.color,
         inactiveTintColor: '#4b667f',
         style: {
-          backgroundColor: '#2C3A47',
+          backgroundColor: theme.background,
         }
       }}
 
@@ -64,18 +71,30 @@ var StackNavigation = () => {
 
 
 export default function App() {
+
+  const [light,setLight] =useState(true);
+
+  useEffect(()=>{
+    EventRegister.addEventListener('myCustomEvent',(data)=>{
+      setLight(data);
+      console.log(data)
+    })
+  })
+
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Home" component={HomepageScreen} />
-          <Stack.Screen name="HomeFilter" component={HomefilterScreen} />
-          <Stack.Screen name="TutoScreen" component={TutoScreen} />
-          <Stack.Screen name="StackNavigation" component={StackNavigation} />
-          <Stack.Screen name="SignUp" component={SignupScreen} />
-          <Stack.Screen name="SignIn" component={SigninScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+    <themeContext.Provider value={light ? theme.dark : theme.light }>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Home" component={HomepageScreen} />
+            <Stack.Screen name="HomeFilter" component={HomefilterScreen} />
+            <Stack.Screen name="TutoScreen" component={TutoScreen} />
+            <Stack.Screen name="StackNavigation" component={StackNavigation} />
+            <Stack.Screen name="SignUp" component={SignupScreen} />
+            <Stack.Screen name="SignIn" component={SigninScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    </themeContext.Provider>
   );
 }

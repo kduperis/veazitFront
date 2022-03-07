@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import { StyleSheet, View, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import { Text, Overlay } from 'react-native-elements';
@@ -13,7 +13,11 @@ import AppLoading from 'expo-app-loading';
 
 import imageFond from '../assets/tuto.jpg'
 
+import themeContext from '../config/themeContext';
+
 export default function TutoScreen(props) {
+
+    const theme = useContext(themeContext);
 
     const [isVisible1, setIsVisible1] = useState(true)
     const [isVisible2, setIsVisible2] = useState(false)
@@ -33,13 +37,13 @@ export default function TutoScreen(props) {
             <ImageBackground source={imageFond} style={styles.image} />
 
             <Overlay
-                overlayStyle={styles.overlayStyle}
+                overlayStyle={[styles.overlayStyle,{borderColor:theme.color}]}
                 isVisible={isVisible1}>
 
-                <View style={styles.overlayTuto}>
+                <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial </Text>
-                        <Text style={styles.titleGreen}>Veazit & Play </Text>
+                        <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
                     <FontAwesomeIcon
@@ -49,34 +53,34 @@ export default function TutoScreen(props) {
                         textAlign={'center'} />
                     <View>
                         <Text style={styles.textWhite}>Cette icône te montrera ta </Text>
-                        <Text style={styles.textGreen}>Carte de Veazit</Text>
+                        <Text style={[styles.textGreen,{color: theme.color}]}>Carte de Veazit</Text>
                     </View>
 
                     <TouchableOpacity 
-                        style={styles.button}
+                        style={[styles.button,{borderColor: theme.color}]}
                         onPress={() => { setIsVisible1(false); setIsVisible2(true) }}>
                         <Text
-                            style={styles.buttonText}>1/5</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>1/5</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity 
-                        style={styles.button}
+                        style={[styles.button,{borderColor: theme.color}]}
                         onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }}>
                         <Text
-                            style={styles.buttonText}>Skip</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>Skip</Text>
                     </TouchableOpacity>
 
                 </View>
             </Overlay>
 
             <Overlay
-                overlayStyle={styles.overlayStyle}
+                overlayStyle={[styles.overlayStyle,{borderColor:theme.color}]}
                 isVisible={isVisible2}>
 
-                <View style={styles.overlayTuto}>
+                <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
-                        <Text style={styles.titleGreen}>Veazit & Play </Text>
+                        <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
                     <FontAwesomeIcon
@@ -86,34 +90,34 @@ export default function TutoScreen(props) {
                         textAlign={'center'} />
                     <View>
                         <Text style={styles.textWhite}>Cette icône te montrera tes </Text>
-                        <Text style={styles.textGreen}>Filtres de Veazit</Text>
+                        <Text style={[styles.textGreen,{color: theme.color}]}>Filtres de Veazit</Text>
                     </View>
 
                     <TouchableOpacity 
-                        style={styles.button}
+                        style={[styles.button,{borderColor: theme.color}]}
                         onPress={() => { setIsVisible2(false); setIsVisible3(true) }}>
                         <Text
-                            style={styles.buttonText}>2/5</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>2/5</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity 
-                        style={styles.button}
+                        style={[styles.button,{borderColor: theme.color}]}
                         onPress={() => { setIsVisible2(false); props.navigation.navigate('StackNavigation') }}>
                         <Text
-                            style={styles.buttonText}>Skip</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>Skip</Text>
                     </TouchableOpacity>
 
                 </View>
             </Overlay>
 
             <Overlay
-                overlayStyle={styles.overlayStyle}
+                overlayStyle={[styles.overlayStyle,{borderColor:theme.color}]}
                 isVisible={isVisible3}>
 
-                <View style={styles.overlayTuto}>
+                <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
-                        <Text style={styles.titleGreen}>Veazit & Play </Text>
+                        <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
                     <FontAwesomeIcon
@@ -123,34 +127,34 @@ export default function TutoScreen(props) {
                         textAlign={'center'} />
                     <View>
                         <Text style={styles.textWhite}>Cette icône te montrera des </Text>
-                        <Text style={styles.textGreen}>Quetes de Veazit</Text>
+                        <Text style={[styles.textGreen,{color: theme.color}]}>Quetes de Veazit</Text>
                     </View>
 
                     <TouchableOpacity 
-                        style={styles.button}
+                        style={[styles.button,{borderColor: theme.color}]}
                         onPress={() => { setIsVisible3(false); setIsVisible4(true) }}>
                         <Text
-                            style={styles.buttonText}>3/5</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>3/5</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity 
-                        style={styles.button}
+                        style={[styles.button,{borderColor: theme.color}]}
                         onPress={() => { setIsVisible3(false); props.navigation.navigate('StackNavigation') }}>
                         <Text
-                            style={styles.buttonText}>Skip</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>Skip</Text>
                     </TouchableOpacity>
 
                 </View>
             </Overlay>
 
             <Overlay
-                overlayStyle={styles.overlayStyle}
+                overlayStyle={[styles.overlayStyle,{borderColor:theme.color}]}
                 isVisible={isVisible4}>
 
-                <View style={styles.overlayTuto}>
+                <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
-                        <Text style={styles.titleGreen}>Veazit & Play </Text>
+                        <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
                     <FontAwesomeIcon
@@ -160,34 +164,34 @@ export default function TutoScreen(props) {
                         textAlign={'center'} />
                     <View>
                         <Text style={styles.textWhite}>Cette icône te montrera tes </Text>
-                        <Text style={styles.textGreen}>Trophées</Text>
+                        <Text style={[styles.textGreen,{color: theme.color}]}>Trophées</Text>
                     </View>
 
                     <TouchableOpacity 
-                        style={styles.button}
+                        style={[styles.button,{borderColor: theme.color}]}
                         onPress={() => { setIsVisible4(false); setIsVisible5(true) }}>
                         <Text
-                            style={styles.buttonText}>4/5</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>4/5</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity 
-                        style={styles.button}
+                        style={[styles.button,{borderColor: theme.color}]}
                         onPress={() => { setIsVisible4(false); props.navigation.navigate('StackNavigation') }}>
                         <Text
-                            style={styles.buttonText}>Skip</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>Skip</Text>
                     </TouchableOpacity>
 
                 </View>
             </Overlay>
 
             <Overlay
-                overlayStyle={styles.overlayStyle}
+                overlayStyle={[styles.overlayStyle,{borderColor:theme.color}]}
                 isVisible={isVisible5}>
 
-                <View style={styles.overlayTuto}>
+                <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
-                        <Text style={styles.titleGreen}>Veazit & Play </Text>
+                        <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
                     <View>
@@ -200,16 +204,16 @@ export default function TutoScreen(props) {
 
                     <View>
                         <Text style={styles.textWhite}>Cette icône te montrera ton </Text>
-                        <Text style={styles.textGreen}>Profil Veaziter</Text>
+                        <Text style={[styles.textGreen,{color: theme.color}]}>Profil Veaziter</Text>
                     </View>
 
                     <TouchableOpacity 
-                        style={styles.button}
+                        style={[styles.button,{borderColor: theme.color}]}
                         onPress={() => { setIsVisible5(false); props.navigation.navigate('StackNavigation') }}>
                         <Text
-                            style={styles.buttonText}>Start</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>Start</Text>
                         <Text
-                            style={styles.buttonText}>Veazit</Text>
+                            style={[styles.buttonText,{color: theme.color}]}>Veazit</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -233,7 +237,6 @@ const styles = StyleSheet.create({
         height: 500,
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: '#2C3A47',
         opacity: 1,
     },
     titleContainer: {
@@ -246,7 +249,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
     },
     titleGreen: {
-        color: '#06D4B6',
         fontSize: 18,
         textAlign: 'center',
         paddingHorizontal: 5,
@@ -260,7 +262,6 @@ const styles = StyleSheet.create({
         paddingBottom: 10
     },
     textGreen: {
-        color: '#06D4B6',
         fontSize: 16,
         textAlign: 'center',
         fontFamily: "PressStart2P_400Regular"
@@ -272,20 +273,17 @@ const styles = StyleSheet.create({
     overlayStyle:{
         padding:0, 
         borderWidth:2,
-        borderColor:"#06D4B6"
     },
     button: {
         width: '50%',
         height: 50,
         borderRadius: 30,
         borderWidth: 1,
-        borderColor: '#06D4B6',
         justifyContent:'center',
         alignItems:'center',
       },
       buttonText: {
         fontFamily: "PressStart2P_400Regular",
         fontSize: 20,
-        color: "#06D4B6",
       },
 });

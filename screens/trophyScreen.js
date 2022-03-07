@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext  } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Button, Avatar } from 'react-native-elements';
 import Modal from 'react-native-modal';
@@ -9,14 +9,14 @@ import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
+import themeContext from '../config/themeContext';
 
 export default function TrophyScreen() {
 
+  const theme = useContext(themeContext);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [badgeData, setBadgeData] = useState([])
-
-
-
 
   useEffect(() => {
     async function loadData() {
@@ -57,7 +57,7 @@ export default function TrophyScreen() {
         </View>
 
         <View style={{ marginTop: 15, width: "50%" }}>
-          <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10, color: "#06D4B6" }} >{badge.description}</Text>
+          <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10, color: theme.color }} >{badge.description}</Text>
         </View>
 
       </View>
@@ -69,7 +69,7 @@ export default function TrophyScreen() {
     <View>
 
       <Button onPress={() => setModalVisible(true)}
-        buttonStyle={styles.buttonStyle}
+        buttonStyle={[styles.buttonStyle,{backgroundColor:theme.background}]}
         icon={{
           name: 'trophy',
           type: 'font-awesome',
@@ -86,10 +86,10 @@ export default function TrophyScreen() {
         onBackdropPress={() => { setModalVisible(false) }}
         style={styles.contentView}
       >
-        <View style={styles.content}>
+        <View style={[styles.content,{backgroundColor:theme.background}]}>
 
           <View style={{ alignItems: 'center', marginBottom: 20 }}>
-            <Text style={styles.contentTitle}> Liste des trophées</Text>
+            <Text style={[styles.contentTitle,{color: theme.color}]}> Liste des trophées</Text>
           </View>
           <ScrollView >
 
@@ -105,7 +105,6 @@ export default function TrophyScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor:'#2C3A47',
     padding: 22,
     borderTopRightRadius: 17,
     borderTopLeftRadius: 17,
@@ -114,7 +113,6 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 20,
     marginBottom: 12,
-    color: "#06D4B6",
   },
   contentView: {
     justifyContent: 'flex-end',
@@ -123,6 +121,5 @@ const styles = StyleSheet.create({
   buttonStyle: {
     height: 60,
     width: 60,
-    backgroundColor:'#2C3A47'
   },
 });

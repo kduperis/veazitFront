@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
@@ -15,7 +15,11 @@ import * as Google from 'expo-google-app-auth';
 
 import { IP_URL } from '@env'
 
+import themeContext from '../config/themeContext';
+
 export default function SignIn(props) {
+
+    const theme = useContext(themeContext);
 
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
@@ -69,9 +73,9 @@ export default function SignIn(props) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,{backgroundColor: theme.background}]}>
             <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome back</Text>
-            <Text h2 style={{ marginBottom: 25, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
+            <Text h2 style={{ marginBottom: 25, color: theme.color, fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
             <Input
                 onChangeText={(e) => setSignInEmail(e)}
                 value={signInEmail}
@@ -82,7 +86,7 @@ export default function SignIn(props) {
                     <Icon
                         name='at'
                         size={24}
-                        color='#06D4B6'
+                        color={theme.color}
                     />
                 }
             />
@@ -97,7 +101,7 @@ export default function SignIn(props) {
                     <Icon
                         name='key'
                         size={24}
-                        color='#06D4B6'
+                        color={theme.color}
                     />
                 }
             />
@@ -106,15 +110,15 @@ export default function SignIn(props) {
 
             
             <TouchableOpacity 
-                style={styles.button}
+                style={[styles.button,{borderColor: theme.color}]}
                 onPress={() => handleSubmitSignin()}>
                 <Text
-                    style={styles.buttonText}>Let's Veazit</Text>
+                    style={[styles.buttonText,{color: theme.color}]}>Let's Veazit</Text>
             </TouchableOpacity>
 
             <View style={{flexDirection: 'row', width: '70%', marginVertical:20}}>
                 <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1,alignSelf: 'center' }} />
-                <Text style={{ alignSelf:'center', paddingHorizontal:10, fontSize: 20, color:'#06D4B6' }}>OU</Text>
+                <Text style={{ alignSelf:'center', paddingHorizontal:10, fontSize: 20, color:theme.color }}>OU</Text>
                 <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1, alignSelf: 'center' }} />
             </View>
 
@@ -129,7 +133,7 @@ export default function SignIn(props) {
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
             <Text style={styles.text}>Vous n’avez pas de compte ?</Text>
-            <Text style={styles.textConnect} onPress={() => props.navigation.navigate('SignUp')}>Inscrivez-vous</Text>
+            <Text style={[styles.textConnect,{color: theme.color}]} onPress={() => props.navigation.navigate('SignUp')}>Inscrivez-vous</Text>
         </View >
     );
 }
@@ -138,7 +142,6 @@ export default function SignIn(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2C3A47',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -153,7 +156,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textConnect: {
-        color: '#06D4B6',
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: "PressStart2P_400Regular",
@@ -165,14 +167,12 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 30,
         borderWidth: 1,
-        borderColor: '#06D4B6',
         justifyContent:'center',
         alignItems:'center',
     },
     buttonText: {
         fontFamily: "PressStart2P_400Regular",
         fontSize: 20,
-        color: "#06D4B6",
     },
     buttonGoogle: {
         backgroundColor:'#EA4335',

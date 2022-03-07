@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
 import { StyleSheet, View, Text, Image } from 'react-native';
@@ -18,6 +18,8 @@ import AppLoading from 'expo-app-loading';
 import axios from 'axios';
 
 import { IP_URL } from '@env'
+
+import themeContext from '../config/themeContext';
 
 var mapStyle = [
   {
@@ -309,6 +311,8 @@ var mapStyle = [
 
 export default function MapScreen() {
 
+  const theme = useContext(themeContext);
+
   const [currentLatitude, setCurrentLatitude] = useState(0);
   const [currentLongitude, setCurrentLongitude] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -456,13 +460,13 @@ export default function MapScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.subtitle}>
-        <Text style={styles.desc}>
+      <View style={[styles.subtitle,{backgroundColor: theme.background}]}>
+        <Text style={[styles.desc, {color: theme.color}]}>
           Nos meilleurs Veaziteurs:
         </Text>
       </View>
 
-      <View style={styles.best}>
+      <View style={[styles.best,{backgroundColor: theme.background}]}>
 
         {bestUserCard}
 
@@ -486,17 +490,17 @@ export default function MapScreen() {
               marginHorizontal: 50,
               borderRadius: 30,
               borderWidth: 1,
-              borderColor: '#06D4B6',
+              borderColor: theme.color,
               marginTop: 20,
             }}
             buttonStyle={{
-              backgroundColor: "#2C3A47",
+              backgroundColor: theme.background,
               height: 50,
             }}
             titleStyle={{
               fontFamily: "PressStart2P_400Regular",
               fontSize: 18,
-              color: "#06D4B6",
+              color: theme.color,
             }}
             onPress={() => launchNavigation()}
           />
@@ -522,17 +526,17 @@ export default function MapScreen() {
               marginHorizontal: 50,
               borderRadius: 30,
               borderWidth: 1,
-              borderColor: '#06D4B6',
+              borderColor: theme.color,
               marginTop: 20,
             }}
             buttonStyle={{
-              backgroundColor: "#2C3A47",
+              backgroundColor: theme.background,
               height: 50,
             }}
             titleStyle={{
               fontFamily: "PressStart2P_400Regular",
               fontSize: 18,
-              color: "#06D4B6",
+              color: theme.color,
             }}
             onPress={() => addScore()}
           />
@@ -552,11 +556,11 @@ export default function MapScreen() {
 
       </MapView>
 
-      <View style={styles.progressContainer}>
+      <View style={[styles.progressContainer,{backgroundColor: theme.background}]}>
         <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Ta progression avant le prochain niveau </Text>
       </View>
 
-      <ProgressBar progress={userScore} height={20} backgroundColor="#06D4B6" />
+      <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
 
     </View>
 
@@ -582,7 +586,6 @@ const styles = StyleSheet.create({
   best: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#2C3A47',
     padding: 5
   },
   cardPlayer: {
@@ -591,11 +594,9 @@ const styles = StyleSheet.create({
   subtitle: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2C3A47',
     paddingTop: '10%',
   },
   desc: {
-    color: '#06D4B6',
     fontSize: 13,
     fontFamily: "PressStart2P_400Regular",
     justifyContent: 'center'
@@ -610,7 +611,6 @@ const styles = StyleSheet.create({
   progressContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "#2C3A47",
     height: 20
 
   },

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
@@ -11,7 +11,11 @@ import AppLoading from 'expo-app-loading';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import themeContext from '../config/themeContext';
+
 export default function HomepageScreen(props) {
+
+  const theme = useContext(themeContext);
 
   const [pseudo, setPseudo] = useState('');
 
@@ -38,10 +42,10 @@ export default function HomepageScreen(props) {
     return <AppLoading />
   }
   return (
-    <View style={styles.container}>
-      <Text style={{ color: "#06D4B6", fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>Veazit</Text>
+    <View style={[styles.container,{backgroundColor: theme.background}]}>
+      <Text style={{ color: theme.color, fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>Veazit</Text>
       <Text style={{ color: "#D1D8E0", fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>&</Text>
-      <Text style={{ color: "#06D4B6", fontSize: 50, marginBottom: 50, fontFamily: "PressStart2P_400Regular" }}>Play</Text>
+      <Text style={{ color: theme.color, fontSize: 50, marginBottom: 50, fontFamily: "PressStart2P_400Regular" }}>Play</Text>
 
       <SafeAreaView>
         <Input
@@ -54,17 +58,17 @@ export default function HomepageScreen(props) {
             <Icon
               name='user-astronaut'
               size={24}
-              color='#06D4B6'
+              color={theme.color}
             />
           }
         />
       </SafeAreaView>
 
       <TouchableOpacity 
-        style={styles.button}
+        style={[styles.button,{borderColor: theme.color}]}
         onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }}>
           <Text
-            style={styles.buttonText}>Start</Text>
+            style={[styles.buttonText,{color: theme.color}]}>Start</Text>
       </TouchableOpacity>
 
     </View>
@@ -75,7 +79,6 @@ export default function HomepageScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2C3A47',
     alignItems: 'center',
     justifyContent: 'center',
 
@@ -85,7 +88,6 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: '#06D4B6',
     justifyContent:'center',
     alignItems:'center',
     marginVertical:25,
@@ -93,7 +95,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: "PressStart2P_400Regular",
     fontSize: 20,
-    color: "#06D4B6",
   },
 
 });

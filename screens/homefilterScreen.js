@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
@@ -10,7 +10,11 @@ import AppLoading from 'expo-app-loading';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import themeContext from '../config/themeContext';
+
 export default function HomefilterScreen(props) {
+
+  const theme = useContext(themeContext);
 
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
@@ -50,14 +54,14 @@ export default function HomefilterScreen(props) {
   
   return (
 
-    <View style={styles.container}>
-      <Text style={{ color: "#06D4B6", fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 80 }}>Quel(s) genre(s) de lieu souhaitez-vous Veaziter ?</Text>
+    <View style={[styles.container,{backgroundColor: theme.background}]}>
+      <Text style={{ color: theme.color, fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 80 }}>Quel(s) genre(s) de lieu souhaitez-vous Veaziter ?</Text>
 
       <CheckBox
         center
         title="Aquatique"
         checked={check1}
-        checkedColor="#06D4B6"
+        checkedColor={theme.color}
         onPress={() => setCheck1(!check1)}
 
       />
@@ -66,7 +70,7 @@ export default function HomefilterScreen(props) {
         center
         title="Domaine"
         checked={check2}
-        checkedColor="#06D4B6"
+        checkedColor={theme.color}
         onPress={() => setCheck2(!check2)}
       />
 
@@ -74,7 +78,7 @@ export default function HomefilterScreen(props) {
         center
         title="Parc"
         checked={check3}
-        checkedColor="#06D4B6"
+        checkedColor={theme.color}
         onPress={() => setCheck3(!check3)}
       />
 
@@ -82,15 +86,15 @@ export default function HomefilterScreen(props) {
         center
         title="category 4"
         checked={check4}
-        checkedColor="#06D4B6"
+        checkedColor={theme.color}
         onPress={() => setCheck4(!check4)}
       />
 
       <TouchableOpacity 
-        style={styles.button}
+        style={[styles.button,{borderColor: theme.color}]}
         onPress={() => checkBox()}>
           <Text
-            style={styles.buttonText}>GO!</Text>
+            style={[styles.buttonText,{color: theme.color}]}>GO!</Text>
       </TouchableOpacity>
 
     </View>
@@ -100,7 +104,6 @@ export default function HomefilterScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2C3A47',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -109,7 +112,6 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: '#06D4B6',
     justifyContent:'center',
     alignItems:'center',
     marginVertical:25,
@@ -117,6 +119,5 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: "PressStart2P_400Regular",
     fontSize: 20,
-    color: "#06D4B6",
   },
 });

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
@@ -9,7 +9,11 @@ import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
+import themeContext from '../config/themeContext';
+
 export default function FilterScreen(props) {
+
+  const theme = useContext(themeContext);
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -55,7 +59,7 @@ export default function FilterScreen(props) {
     <View>
 
       <Button onPress={() => setModalVisible(true)}
-                                  buttonStyle={styles.buttonStyle}
+                                  buttonStyle={[styles.buttonStyle,{backgroundColor:theme.background}]}
                                   icon={{
                                     name: 'filter',
                                     type: 'font-awesome',
@@ -74,16 +78,16 @@ export default function FilterScreen(props) {
           style={styles.contentView}
         >
 
-          <View style={styles.content}>
-            <Text style={styles.contentTitle}>Filter Screen !</Text>
+          <View style={[styles.content,{backgroundColor:theme.background}]}>
+            <Text style={[styles.contentTitle,{color: theme.color}]}>Filter Screen !</Text>
 
-            <Text style={{ color: "#06D4B6", fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20}}>Modifiez vos genres de lieu ici : </Text>
+            <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20}}>Modifiez vos genres de lieu ici : </Text>
 
             <CheckBox
               center
               title="Aquatique"
               checked={check1}
-              checkedColor="#06D4B6"
+              checkedColor={theme.color}
               onPress={() => setCheck1(!check1)}
             />
 
@@ -91,7 +95,7 @@ export default function FilterScreen(props) {
               center
               title="Domaine"
               checked={check2}
-              checkedColor="#06D4B6"
+              checkedColor={theme.color}
               onPress={() => setCheck2(!check2)}
             />
 
@@ -99,7 +103,7 @@ export default function FilterScreen(props) {
               center
               title="Parc"
               checked={check3}
-              checkedColor="#06D4B6"
+              checkedColor={theme.color}
               onPress={() => setCheck3(!check3)}
             />
 
@@ -107,15 +111,15 @@ export default function FilterScreen(props) {
               center
               title="category 4"
               checked={check4}
-              checkedColor="#06D4B6"
+              checkedColor={theme.color}
               onPress={() => setCheck4(!check4)}
             />
             
             <TouchableOpacity 
-                style={styles.button}
+                style={[styles.button,{borderColor: theme.color}]}
                 onPress={() => setModalVisible(false)}>
                 <Text
-                    style={styles.buttonText}>Go !</Text>
+                    style={[styles.buttonText,{color: theme.color}]}>Go !</Text>
 
             </TouchableOpacity>
 
@@ -130,7 +134,6 @@ export default function FilterScreen(props) {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor:'#2C3A47',
     padding: 22,
     justifyContent: 'center',
     alignItems: 'center',
@@ -142,14 +145,12 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 20,
     marginBottom:20,
-    color: "#06D4B6",
   },
   button: {
     width: '50%',
     height: 50,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: '#06D4B6',
     justifyContent:'center',
     alignItems:'center',
     marginVertical:25,
@@ -157,12 +158,10 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: "PressStart2P_400Regular",
     fontSize: 20,
-    color: "#06D4B6",
   },
   buttonStyle: {
     height: 60,
     width: 60,
-    backgroundColor:'#2C3A47'
   },
   contentView: {
     justifyContent: 'flex-end',

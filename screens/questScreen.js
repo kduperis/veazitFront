@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import { StyleSheet,  View } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import Modal from 'react-native-modal';
 
+import themeContext from '../config/themeContext';
+
 export default function QuestScreen() {
+
+  const theme = useContext(themeContext);
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -12,7 +16,7 @@ export default function QuestScreen() {
     <View>
 
       <Button onPress={() => setModalVisible(true)}
-                      buttonStyle={styles.buttonStyle}
+                      buttonStyle={[styles.buttonStyle,{backgroundColor:theme.background}]}
                       icon={{
                         name: 'fort-awesome',
                         type: 'font-awesome',
@@ -31,8 +35,8 @@ export default function QuestScreen() {
           style={styles.contentView}
         >
 
-          <View style={styles.content}>
-            <Text style={styles.contentTitle}>Quest Screen !</Text>
+          <View style={[styles.content,{backgroundColor:theme.background}]}>
+            <Text style={[styles.contentTitle,{color: theme.color}]}>Quest Screen !</Text>
           </View>
 
         </Modal>
@@ -42,7 +46,6 @@ export default function QuestScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor:'#2C3A47',
     padding: 22,
     justifyContent: 'center',
     alignItems: 'center',
@@ -53,14 +56,12 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 20,
     marginBottom: 12,
-    color: "#06D4B6",
   },
   buttonStyle: {
     height: 60,
     width: 60,
     marginLeft:20,
     marginRight:20,
-    backgroundColor:'#2C3A47'
   },
   contentView: {
     justifyContent: 'flex-end',
