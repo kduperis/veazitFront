@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text, Button, Avatar } from 'react-native-elements';
+import { Text, Button, Avatar, Tooltip, colors } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { IP_URL } from '@env'
 
@@ -14,6 +14,7 @@ export default function TrophyScreen() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [badgeData, setBadgeData] = useState([])
+  const [visibleDesc, setVisilbleText] = useState("Click sur le trophée pour voir les conditions de déblocage")
 
 
 
@@ -51,6 +52,7 @@ export default function TrophyScreen() {
                 marginLeft: 0
               }}
             />
+
             <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 12, marginTop: 10, color: "#fff" }} >{badge.title}</Text>
           </View>
 
@@ -58,6 +60,17 @@ export default function TrophyScreen() {
 
         <View style={{ marginTop: 15, width: "50%" }}>
           <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10, color: "#06D4B6" }} >{badge.description}</Text>
+          <Tooltip
+            containerStyle={{ width: 145, height: 130 }}
+            popover={
+              <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>
+                {
+                  `Il faut que tu veazits ${badge.condition} lieux pour débloquer ce badge`}
+              </Text>
+            }
+          >
+            <Text style={{ color: "#fff", fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>More info</Text>
+          </Tooltip>
         </View>
 
       </View>
@@ -105,16 +118,17 @@ export default function TrophyScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor:'#2C3A47',
+    backgroundColor: '#2C3A47',
     padding: 22,
     borderTopRightRadius: 17,
     borderTopLeftRadius: 17,
     height: 500,
   },
   contentTitle: {
-    fontSize: 20,
+    fontSize: 15,
     marginBottom: 12,
     color: "#06D4B6",
+    fontFamily: "PressStart2P_400Regular"
   },
   contentView: {
     justifyContent: 'flex-end',
@@ -123,6 +137,6 @@ const styles = StyleSheet.create({
   buttonStyle: {
     height: 60,
     width: 60,
-    backgroundColor:'#2C3A47'
+    backgroundColor: '#2C3A47'
   },
 });

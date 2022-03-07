@@ -5,7 +5,7 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text, CheckBox, Button } from 'react-native-elements';
 import Modal from 'react-native-modal';
 
-import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
+import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
@@ -55,32 +55,32 @@ export default function FilterScreen(props) {
     <View>
 
       <Button onPress={() => setModalVisible(true)}
-                                  buttonStyle={styles.buttonStyle}
-                                  icon={{
-                                    name: 'filter',
-                                    type: 'font-awesome',
-                                    size: 18,
-                                    color: '#4b667f',
-                                  }}
-                                  iconPosition='top'
-                                  title={<Text style={{ fontSize: 10, color:'#4b667f', marginTop:7 }}>Filter</Text>}
+        buttonStyle={styles.buttonStyle}
+        icon={{
+          name: 'filter',
+          type: 'font-awesome',
+          size: 18,
+          color: '#4b667f',
+        }}
+        iconPosition='top'
+        title={<Text style={{ fontSize: 10, color: '#4b667f', marginTop: 7 }}>Filter</Text>}
       />
 
 
-        <Modal
-          backdropOpacity={0.3}
-          isVisible={modalVisible}
-          onBackdropPress={() => {setModalVisible(false)}}
-          style={styles.contentView}
-        >
+      <Modal
+        backdropOpacity={0.3}
+        isVisible={modalVisible}
+        onBackdropPress={() => { setModalVisible(false) }}
+        style={styles.contentView}
+      >
 
-          <View style={styles.content}>
-            <Text style={styles.contentTitle}>Filter Screen !</Text>
+        <View style={styles.content}>
 
-            <Text style={{ color: "#06D4B6", fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20}}>Modifiez vos genres de lieu ici : </Text>
 
+          <Text style={{ color: "#06D4B6", fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20 }}>Modifiez vos genres de lieu ici : </Text>
+          <View>
             <CheckBox
-              center
+
               title="Aquatique"
               checked={check1}
               checkedColor="#06D4B6"
@@ -88,7 +88,7 @@ export default function FilterScreen(props) {
             />
 
             <CheckBox
-              center
+
               title="Domaine"
               checked={check2}
               checkedColor="#06D4B6"
@@ -96,7 +96,7 @@ export default function FilterScreen(props) {
             />
 
             <CheckBox
-              center
+
               title="Parc"
               checked={check3}
               checkedColor="#06D4B6"
@@ -104,44 +104,47 @@ export default function FilterScreen(props) {
             />
 
             <CheckBox
-              center
+
               title="category 4"
               checked={check4}
               checkedColor="#06D4B6"
               onPress={() => setCheck4(!check4)}
             />
-            
-            <TouchableOpacity 
-                style={styles.button}
-                onPress={() => setModalVisible(false)}>
-                <Text
-                    style={styles.buttonText}>Go !</Text>
-
-            </TouchableOpacity>
 
           </View>
 
-        </Modal>
 
-      
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setModalVisible(false)}>
+            <Text
+              style={styles.buttonText}>Go !</Text>
+
+          </TouchableOpacity>
+
+        </View>
+
+      </Modal>
+
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor:'#2C3A47',
+    backgroundColor: '#2C3A47',
     padding: 22,
     justifyContent: 'center',
     alignItems: 'center',
     borderTopRightRadius: 17,
     borderTopLeftRadius: 17,
-    height:500,
-    
+    height: 500,
+
   },
   contentTitle: {
     fontSize: 20,
-    marginBottom:20,
+    marginBottom: 20,
     color: "#06D4B6",
   },
   button: {
@@ -150,9 +153,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 1,
     borderColor: '#06D4B6',
-    justifyContent:'center',
-    alignItems:'center',
-    marginVertical:25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 25,
   },
   buttonText: {
     fontFamily: "PressStart2P_400Regular",
@@ -162,7 +165,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     height: 60,
     width: 60,
-    backgroundColor:'#2C3A47'
+    backgroundColor: '#2C3A47'
   },
   contentView: {
     justifyContent: 'flex-end',

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text, CheckBox } from 'react-native-elements';
 
-import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
+import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
@@ -47,50 +47,54 @@ export default function HomefilterScreen(props) {
   if (!fontLoaded) {
     return <AppLoading />
   }
-  
+
   return (
 
     <View style={styles.container}>
       <Text style={{ color: "#06D4B6", fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 80 }}>Quel(s) genre(s) de lieu souhaitez-vous Veaziter ?</Text>
+      <View >
+        <CheckBox
 
-      <CheckBox
-        center
-        title="Aquatique"
-        checked={check1}
-        checkedColor="#06D4B6"
-        onPress={() => setCheck1(!check1)}
+          title="Aquatique"
+          checked={check1}
+          checkedColor="#06D4B6"
+          onPress={() => setCheck1(!check1)}
 
-      />
 
-      <CheckBox
-        center
-        title="Domaine"
-        checked={check2}
-        checkedColor="#06D4B6"
-        onPress={() => setCheck2(!check2)}
-      />
+        />
 
-      <CheckBox
-        center
-        title="Parc"
-        checked={check3}
-        checkedColor="#06D4B6"
-        onPress={() => setCheck3(!check3)}
-      />
+        <CheckBox
 
-      <CheckBox
-        center
-        title="category 4"
-        checked={check4}
-        checkedColor="#06D4B6"
-        onPress={() => setCheck4(!check4)}
-      />
+          title="Domaine"
+          checked={check2}
+          checkedColor="#06D4B6"
+          onPress={() => setCheck2(!check2)}
+        />
 
-      <TouchableOpacity 
+        <CheckBox
+
+          title="Parc"
+          checked={check3}
+          checkedColor="#06D4B6"
+          onPress={() => setCheck3(!check3)}
+        />
+
+        <CheckBox
+
+          title="category 4"
+          checked={check4}
+          checkedColor="#06D4B6"
+          onPress={() => setCheck4(!check4)}
+        />
+
+      </View>
+
+
+      <TouchableOpacity
         style={styles.button}
         onPress={() => checkBox()}>
-          <Text
-            style={styles.buttonText}>GO!</Text>
+        <Text
+          style={styles.buttonText}>GO!</Text>
       </TouchableOpacity>
 
     </View>
@@ -110,9 +114,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 1,
     borderColor: '#06D4B6',
-    justifyContent:'center',
-    alignItems:'center',
-    marginVertical:25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 25,
   },
   buttonText: {
     fontFamily: "PressStart2P_400Regular",
