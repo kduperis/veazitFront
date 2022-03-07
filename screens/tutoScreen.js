@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { StyleSheet, View, ImageBackground, Dimensions } from 'react-native';
+import { StyleSheet, View, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import { Text, Button, Overlay } from 'react-native-elements';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -52,48 +52,20 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Carte de Veazit</Text>
                     </View>
 
-                    <Button
-                        title={`1/5`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 20,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible1(false); setIsVisible2(true) }}
-                    />
-                    <Button
-                        title={`Skip`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 20,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }}
-                    />
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={() => { setIsVisible1(false); setIsVisible2(true) }}>
+                        <Text
+                            style={styles.buttonText}>1/5</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }}>
+                        <Text
+                            style={styles.buttonText}>Skip</Text>
+                    </TouchableOpacity>
+
                 </View>
             </Overlay>
 
@@ -117,48 +89,20 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Filtres de Veazit</Text>
                     </View>
 
-                    <Button
-                        title={`2/5`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 20,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible2(false); setIsVisible3(true) }}
-                    />
-                    <Button
-                        title={`Skip`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 20,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible2(false); props.navigation.navigate('StackNavigation') }}
-                    />
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={() => { setIsVisible2(false); setIsVisible3(true) }}>
+                        <Text
+                            style={styles.buttonText}>2/5</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={() => { setIsVisible2(false); props.navigation.navigate('StackNavigation') }}>
+                        <Text
+                            style={styles.buttonText}>Skip</Text>
+                    </TouchableOpacity>
+
                 </View>
             </Overlay>
 
@@ -182,48 +126,20 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Quetes de Veazit</Text>
                     </View>
 
-                    <Button
-                        title={`3/5`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 20,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible3(false); setIsVisible4(true) }}
-                    />
-                    <Button
-                        title={`Skip`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 20,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible3(false); props.navigation.navigate('StackNavigation') }}
-                    />
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={() => { setIsVisible3(false); setIsVisible4(true) }}>
+                        <Text
+                            style={styles.buttonText}>3/5</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={() => { setIsVisible3(false); props.navigation.navigate('StackNavigation') }}>
+                        <Text
+                            style={styles.buttonText}>Skip</Text>
+                    </TouchableOpacity>
+
                 </View>
             </Overlay>
 
@@ -247,48 +163,20 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Trophées</Text>
                     </View>
 
-                    <Button
-                        title={`4/5`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 20,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible4(false); setIsVisible5(true) }}
-                    />
-                    <Button
-                        title={`Skip`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 20,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible4(false); props.navigation.navigate('StackNavigation') }}
-                    />
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={() => { setIsVisible4(false); setIsVisible5(true) }}>
+                        <Text
+                            style={styles.buttonText}>4/5</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={() => { setIsVisible4(false); props.navigation.navigate('StackNavigation') }}>
+                        <Text
+                            style={styles.buttonText}>Skip</Text>
+                    </TouchableOpacity>
+
                 </View>
             </Overlay>
 
@@ -315,48 +203,15 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Profil Veaziter</Text>
                     </View>
 
-                    <Button
-                        title={`Start Veazit`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 15,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible5(false); props.navigation.navigate('StackNavigation') }}
-                    />
-                    <Button
-                        title={`Skip`}
-                        containerStyle={{
-                            width: '50%',
-                            marginHorizontal: 50,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            borderColor: '#06D4B6',
-                            marginTop: 20,
-                        }}
-                        buttonStyle={{
-                            backgroundColor: "#2C3A47",
-                            height: 50,
-                        }}
-                        titleStyle={{
-                            fontFamily: "PressStart2P_400Regular",
-                            fontSize: 20,
-                            color: "#06D4B6",
-                        }}
-                        onPress={() => { setIsVisible5(false); props.navigation.navigate('StackNavigation') }}
-                    />
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={() => { setIsVisible5(false); props.navigation.navigate('StackNavigation') }}>
+                        <Text
+                            style={styles.buttonText}>Start</Text>
+                        <Text
+                            style={styles.buttonText}>Veazit</Text>
+                    </TouchableOpacity>
+
                 </View>
             </Overlay>
         </View>
@@ -418,5 +273,19 @@ const styles = StyleSheet.create({
         padding:0, 
         borderWidth:2,
         borderColor:"#06D4B6"
-    }
+    },
+    button: {
+        width: '50%',
+        height: 50,
+        borderRadius: 30,
+        borderWidth: 1,
+        borderColor: '#06D4B6',
+        justifyContent:'center',
+        alignItems:'center',
+      },
+      buttonText: {
+        fontFamily: "PressStart2P_400Regular",
+        fontSize: 20,
+        color: "#06D4B6",
+      },
 });

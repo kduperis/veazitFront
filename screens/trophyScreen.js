@@ -84,7 +84,7 @@ export default function TrophyScreen() {
         <View style={styles.content}>
 
           <View style={{ alignItems: 'center', marginBottom: 20 }}>
-            <Text style={{ fontFamily: "PressStart2P_400Regular", color: "#06D4B6" }}> Liste des trophées</Text>
+            <Text style={styles.contentTitle}> Liste des trophées</Text>
           </View>
 
 
@@ -99,26 +99,24 @@ export default function TrophyScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: 'white',
+    backgroundColor:'#2C3A47',
     padding: 22,
     borderTopRightRadius: 17,
     borderTopLeftRadius: 17,
     height: 500,
-
-
   },
   contentTitle: {
     fontSize: 20,
     marginBottom: 12,
-  },
-  buttonStyle: {
-    height: 60,
-    width: 60,
-    backgroundColor: '#2C3A47'
+    color: "#06D4B6",
   },
   contentView: {
     justifyContent: 'flex-end',
     margin: 0,
   },
-
+  buttonStyle: {
+    height: 60,
+    width: 60,
+    backgroundColor:'#2C3A47'
+  },
 });

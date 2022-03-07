@@ -77,11 +77,7 @@ export default function SignupScreen(props) {
             <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.touchable} onPress={() => props.navigation.navigate('StackNavigation', { screen: 'Map' })}>
                 <View style={styles.buttonPrevious}>
-                <Icon
-                        name='arrow-left'
-                        size={24}
-                        color='#06D4B6'
-                    />
+                    <Icon name='arrow-left' size={24} color='#06D4B6'/>
                 </View>
             </TouchableOpacity>
             </View>
@@ -91,33 +87,14 @@ export default function SignupScreen(props) {
             <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome new</Text>
             <Text h2 style={{ marginBottom: 15, color: '#06D4B6', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
 
-            <Button
-                    title={`Sign up`}
-                    icon={{
-                        name: 'google',
-                        type: 'font-awesome',
-                        size: 22,
-                        color: 'white',
-                        marginRight: 20,
-                    }}
-                    containerStyle={{
-                        width:'70%',
-                        marginTop:20,
-                        borderRadius: 30,
-                        borderWidth: 1,
-                        borderColor: '#EA4335',
-                    }}
-                    buttonStyle={{
-                        backgroundColor:"#EA4335",
-                        height:50,
-                    }}
-                    titleStyle={{
-                        fontFamily: "PressStart2P_400Regular",
-                        fontSize: 20,
-                        color: "#FFF",
-                    }}
-                    onPress={()=>handleGoogleSignup()}
-                />
+            <TouchableOpacity 
+                style={styles.buttonGoogle}
+                onPress={()=>handleGoogleSignup()}>
+                    <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                        <Icon name='google' size={22} color='white'/>
+                        <Text style={styles.buttonTextGoogle}>Sign up</Text>
+                    </View>
+            </TouchableOpacity>
 
             <View style={{flexDirection: 'row', width: '70%', marginVertical:20}}>
                 <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1,alignSelf: 'center' }} />
@@ -177,26 +154,12 @@ export default function SignupScreen(props) {
             {tabErrorsSignup}
 
             {/*Bouton qui redirige vers le 'JEU'*/}
-            <Button
-                title={`Start`}
-                containerStyle={{
-                  width: '70%',
-                  marginHorizontal: 50,
-                  borderRadius: 30,
-                  borderWidth: 1,
-                  borderColor: '#06D4B6',
-                }}
-                buttonStyle={{
-                    backgroundColor:"#2C3A47",
-                    height:50,
-                }}
-                titleStyle={{
-                    fontFamily: "PressStart2P_400Regular",
-                    fontSize: 20,
-                    color: "#06D4B6",
-                }}
-                onPress={() => handleSubmitSignup()}
-              />
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => handleSubmitSignup()}>
+                <Text
+                    style={styles.buttonText}>Start</Text>
+            </TouchableOpacity>
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
             <Text style={styles.text}>Vous avez un compte ?</Text>
@@ -245,5 +208,35 @@ const styles = StyleSheet.create({
         bottom:50,
         left:30,
         flexDirection:'row'
+    },
+    button: {
+        width: '70%',
+        height: 50,
+        borderRadius: 30,
+        borderWidth: 1,
+        borderColor: '#06D4B6',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    buttonText: {
+        fontFamily: "PressStart2P_400Regular",
+        fontSize: 20,
+        color: "#06D4B6",
+    },
+    buttonGoogle: {
+        backgroundColor:'#EA4335',
+        width: '70%',
+        height: 50,
+        borderRadius: 30,
+        borderWidth: 1,
+        borderColor: '#EA4335',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    buttonTextGoogle: {
+        marginLeft:15,
+        fontFamily: "PressStart2P_400Regular",
+        fontSize: 20,
+        color: "white",
     },
 });

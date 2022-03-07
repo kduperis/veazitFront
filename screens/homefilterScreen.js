@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { StyleSheet, View } from 'react-native';
-import { Text, CheckBox, Button } from 'react-native-elements';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, CheckBox } from 'react-native-elements';
 
 import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
@@ -86,27 +86,12 @@ export default function HomefilterScreen(props) {
         onPress={() => setCheck4(!check4)}
       />
 
-        <Button
-                title={`GO!`}
-                containerStyle={{
-                  width: '50%',
-                  marginHorizontal: 50,
-                  borderRadius: 30,
-                  borderWidth: 1,
-                  borderColor: '#06D4B6',
-                  marginTop:20,
-                }}
-                buttonStyle={{
-                    backgroundColor:"#2C3A47",
-                    height:50,
-                }}
-                titleStyle={{
-                    fontFamily: "PressStart2P_400Regular",
-                    fontSize: 20,
-                    color: "#06D4B6",
-                }}
-                onPress={() => checkBox()}
-              />
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={() => checkBox()}>
+          <Text
+            style={styles.buttonText}>GO!</Text>
+      </TouchableOpacity>
 
     </View>
   );
@@ -120,18 +105,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    backgroundColor: "#2C3A47",
-    borderWidth: 1,
-    borderColor: "#06D4B6",
-    padding: 15,
-    paddingTop: 25,
+    width: '50%',
+    height: 50,
     borderRadius: 30,
-    marginTop: 60
-
+    borderWidth: 1,
+    borderColor: '#06D4B6',
+    justifyContent:'center',
+    alignItems:'center',
+    marginVertical:25,
   },
   buttonText: {
-    color: "#06D4B6",
+    fontFamily: "PressStart2P_400Regular",
     fontSize: 20,
-    fontFamily: "PressStart2P_400Regular"
+    color: "#06D4B6",
   },
 });

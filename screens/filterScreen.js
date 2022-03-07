@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text, CheckBox, Button } from 'react-native-elements';
 import Modal from 'react-native-modal';
 
@@ -111,27 +111,13 @@ export default function FilterScreen(props) {
               onPress={() => setCheck4(!check4)}
             />
             
-            <Button
-                title={`Go !`}
-                containerStyle={{
-                  width: '50%',
-                  marginHorizontal: 50,
-                  borderRadius: 30,
-                  borderWidth: 1,
-                  borderColor: '#06D4B6',
-                  marginTop:20,
-                }}
-                buttonStyle={{
-                    backgroundColor:"#2C3A47",
-                    height:50,
-                }}
-                titleStyle={{
-                    fontFamily: "PressStart2P_400Regular",
-                    fontSize: 20,
-                    color: "#06D4B6",
-                }}
-                onPress={() => setModalVisible(false)}
-              />
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => setModalVisible(false)}>
+                <Text
+                    style={styles.buttonText}>Go !</Text>
+
+            </TouchableOpacity>
 
           </View>
 
@@ -144,31 +130,34 @@ export default function FilterScreen(props) {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: 'white',
+    backgroundColor:'#2C3A47',
     padding: 22,
     justifyContent: 'center',
     alignItems: 'center',
     borderTopRightRadius: 17,
     borderTopLeftRadius: 17,
     height:500,
+    
   },
   contentTitle: {
     fontSize: 20,
     marginBottom:20,
+    color: "#06D4B6",
   },
   button: {
-    backgroundColor: "#2C3A47",
-    borderWidth: 1,
-    borderColor: "#06D4B6",
-    padding: 15,
-    paddingTop: 25,
+    width: '50%',
+    height: 50,
     borderRadius: 30,
-    marginTop:20,
+    borderWidth: 1,
+    borderColor: '#06D4B6',
+    justifyContent:'center',
+    alignItems:'center',
+    marginVertical:25,
   },
   buttonText: {
-    color: "#06D4B6",
+    fontFamily: "PressStart2P_400Regular",
     fontSize: 20,
-    fontFamily: "PressStart2P_400Regular"
+    color: "#06D4B6",
   },
   buttonStyle: {
     height: 60,

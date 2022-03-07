@@ -42,7 +42,7 @@ export default function QuestScreen() {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: 'white',
+    backgroundColor:'#2C3A47',
     padding: 22,
     justifyContent: 'center',
     alignItems: 'center',
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 20,
     marginBottom: 12,
+    color: "#06D4B6",
   },
   buttonStyle: {
     height: 60,
