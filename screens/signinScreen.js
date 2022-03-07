@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
@@ -104,27 +104,13 @@ export default function SignIn(props) {
 
             {tabErrorsSignin}
 
-        
-            <Button
-                title={`Let's Veazit`}
-                containerStyle={{
-                  width: '70%',
-                  marginHorizontal: 50, 
-                  borderRadius: 30,
-                  borderWidth: 1,
-                  borderColor: '#06D4B6',
-                }}
-                buttonStyle={{
-                    backgroundColor:"#2C3A47",
-                    height:50,
-                }}
-                titleStyle={{
-                    fontFamily: "PressStart2P_400Regular",
-                    fontSize: 20,
-                    color: "#06D4B6",
-                }}
-                onPress={() => handleSubmitSignin()}
-              />
+            
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => handleSubmitSignin()}>
+                <Text
+                    style={styles.buttonText}>Let's Veazit</Text>
+            </TouchableOpacity>
 
             <View style={{flexDirection: 'row', width: '70%', marginVertical:20}}>
                 <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1,alignSelf: 'center' }} />
@@ -132,33 +118,14 @@ export default function SignIn(props) {
                 <View style={{backgroundColor: '#A1A1A1', height: 1,flex:1, alignSelf: 'center' }} />
             </View>
 
-            <Button
-                title={`Sign in`}
-                icon={{
-                    name: 'google',
-                    type: 'font-awesome',
-                    size: 22,
-                    color: 'white',
-                    marginRight: 20,
-                }}
-                containerStyle={{
-                    width:'70%',
-                    
-                    borderRadius: 30,
-                    borderWidth: 1,
-                    borderColor: '#EA4335',
-                }}
-                buttonStyle={{
-                    backgroundColor:"#EA4335",
-                    height:50,
-                }}
-                titleStyle={{
-                    fontFamily: "PressStart2P_400Regular",
-                    fontSize: 20,
-                    color: "#FFF",
-                }}
-                onPress={()=>handleGoogleSignin()}
-            />
+            <TouchableOpacity 
+                style={styles.buttonGoogle}
+                onPress={()=>handleGoogleSignin()}>
+                    <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                        <Icon name='google' size={22} color='white'/>
+                        <Text style={styles.buttonTextGoogle}>Sign in</Text>
+                    </View>
+            </TouchableOpacity>
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
             <Text style={styles.text}>Vous n’avez pas de compte ?</Text>
@@ -192,6 +159,36 @@ const styles = StyleSheet.create({
         fontFamily: "PressStart2P_400Regular",
         marginTop: 10,
         textDecorationLine: 'underline'
+    },
+    button: {
+        width: '70%',
+        height: 50,
+        borderRadius: 30,
+        borderWidth: 1,
+        borderColor: '#06D4B6',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    buttonText: {
+        fontFamily: "PressStart2P_400Regular",
+        fontSize: 20,
+        color: "#06D4B6",
+    },
+    buttonGoogle: {
+        backgroundColor:'#EA4335',
+        width: '70%',
+        height: 50,
+        borderRadius: 30,
+        borderWidth: 1,
+        borderColor: '#EA4335',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    buttonTextGoogle: {
+        marginLeft:15,
+        fontFamily: "PressStart2P_400Regular",
+        fontSize: 20,
+        color: "white",
     },
 
 })

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
@@ -47,7 +47,7 @@ export default function HomepageScreen(props) {
         <Input
           onChangeText={(val) => setPseudo(val)}
           value={pseudo}
-          containerStyle={{ marginBottom: 25, width: 275 }}
+          containerStyle={{ width: 275 }}
           inputStyle={{ marginLeft: 10, color: '#fff' }}
           placeholder='Entrez votre nom'
           leftIcon={
@@ -60,27 +60,12 @@ export default function HomepageScreen(props) {
         />
       </SafeAreaView>
 
-
-      <Button
-        title={`Start`}
-        containerStyle={{
-          width: '50%',
-          marginHorizontal: 50,
-          borderRadius: 30,
-          borderWidth: 1,
-          borderColor: '#06D4B6',
-        }}
-        buttonStyle={{
-          backgroundColor: "#2C3A47",
-          height: 50,
-        }}
-        titleStyle={{
-          fontFamily: "PressStart2P_400Regular",
-          fontSize: 20,
-          color: "#06D4B6",
-        }}
-        onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }}
-      />
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }}>
+          <Text
+            style={styles.buttonText}>Start</Text>
+      </TouchableOpacity>
 
     </View>
 
@@ -95,28 +80,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    borderColor: "#06D4B6",
-    padding: 10,
-    backgroundColor: "#D1D8E0",
-    marginBottom: 50,
-    width: 200
-  },
   button: {
-    backgroundColor: "#2C3A47",
+    width: '50%',
+    height: 50,
+    borderRadius: 30,
     borderWidth: 1,
-    borderColor: "#06D4B6",
-    padding: 15,
-    paddingTop: 25,
-    borderRadius: 30
+    borderColor: '#06D4B6',
+    justifyContent:'center',
+    alignItems:'center',
+    marginVertical:25,
   },
   buttonText: {
-    color: "#06D4B6",
+    fontFamily: "PressStart2P_400Regular",
     fontSize: 20,
-    fontFamily: "PressStart2P_400Regular"
+    color: "#06D4B6",
   },
 
 });
