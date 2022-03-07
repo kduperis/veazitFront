@@ -161,7 +161,6 @@ export default function TutoScreen(props) {
                 isVisible={isVisible4}>
 
                 <View style={styles.overlayTuto}>
-                    <View style={styles.titleContainer}>
                         <View style={styles.closeButton}>
                             <FontAwesomeIcon
                                 icon={faXmark}
@@ -169,6 +168,7 @@ export default function TutoScreen(props) {
                                 size={25}
                                 onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }} />
                         </View>
+                    <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
                         <Text style={styles.titleGreen}>Veazit & Play </Text>
                     </View>
