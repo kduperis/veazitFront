@@ -59,15 +59,15 @@ export default function FilterScreen(props) {
     <View>
 
       <Button onPress={() => setModalVisible(true)}
-                                  buttonStyle={[styles.buttonStyle,{backgroundColor:theme.background}]}
-                                  icon={{
-                                    name: 'filter',
-                                    type: 'font-awesome',
-                                    size: 18,
-                                    color: '#4b667f',
-                                  }}
-                                  iconPosition='top'
-                                  title={<Text style={{ fontSize: 10, color:'#4b667f', marginTop:7 }}>Filter</Text>}
+        buttonStyle={[styles.buttonStyle, { backgroundColor: theme.background }]}
+        icon={{
+          name: 'filter',
+          type: 'font-awesome',
+          size: 18,
+          color: '#4b667f',
+        }}
+        iconPosition='top'
+        title={<Text style={{ fontSize: 10, color: '#4b667f', marginTop: 7 }}>Filter</Text>}
       />
 
 
@@ -78,10 +78,9 @@ export default function FilterScreen(props) {
         style={styles.contentView}
       >
 
-          <View style={[styles.content,{backgroundColor:theme.background}]}>
-            <Text style={[styles.contentTitle,{color: theme.color}]}>Filter Screen !</Text>
-
-            <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20}}>Modifiez vos genres de lieu ici : </Text>
+        <View style={[styles.content, { backgroundColor: theme.background }]}>
+          <Text style={[styles.contentTitle, { color: theme.color }]}>Filter Screen !</Text>
+          <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20 }}>Modifiez vos genres de lieu ici : </Text>
           <View>
             <CheckBox
 
@@ -114,16 +113,17 @@ export default function FilterScreen(props) {
               checkedColor={theme.color}
               onPress={() => setCheck4(!check4)}
             />
-            
-            <TouchableOpacity 
-                style={[styles.button,{borderColor: theme.color}]}
-                onPress={() => setModalVisible(false)}>
-                <Text
-                    style={[styles.buttonText,{color: theme.color}]}>Go !</Text>
+
+            <TouchableOpacity
+              style={[styles.button, { borderColor: theme.color }]}
+              onPress={() => setModalVisible(false)}>
+              <Text
+                style={[styles.buttonText, { color: theme.color }]}>Go !</Text>
 
             </TouchableOpacity>
 
           </View>
+        </View>
       </Modal>
 
 
@@ -143,16 +143,16 @@ const styles = StyleSheet.create({
   },
   contentTitle: {
     fontSize: 20,
-    marginBottom:20,
+    marginBottom: 20,
   },
   button: {
     width: '50%',
     height: 50,
     borderRadius: 30,
     borderWidth: 1,
-    justifyContent:'center',
-    alignItems:'center',
-    marginVertical:25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 25,
   },
   buttonText: {
     fontFamily: "PressStart2P_400Regular",
