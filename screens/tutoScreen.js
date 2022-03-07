@@ -4,8 +4,8 @@ import { StyleSheet, View, ImageBackground, Dimensions, TouchableOpacity } from 
 import { Text, Overlay } from 'react-native-elements';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faUserAstronaut, faTrophy, faMapLocationDot, faFilter } from '@fortawesome/free-solid-svg-icons'
-import {faFortAwesome} from '@fortawesome/free-brands-svg-icons'
+import { faUserAstronaut, faTrophy, faMapLocationDot, faFilter, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faFortAwesome } from '@fortawesome/free-brands-svg-icons'
 
 import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
@@ -37,6 +37,15 @@ export default function TutoScreen(props) {
                 isVisible={isVisible1}>
 
                 <View style={styles.overlayTuto}>
+
+                    <View style={styles.closeButton}>
+                        <FontAwesomeIcon
+                            icon={faXmark}
+                            color='white'
+                            size={25}
+                            onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }} />
+                    </View>
+
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial </Text>
                         <Text style={styles.titleGreen}>Veazit & Play </Text>
@@ -52,19 +61,19 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Carte de Veazit</Text>
                     </View>
 
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.button}
                         onPress={() => { setIsVisible1(false); setIsVisible2(true) }}>
                         <Text
                             style={styles.buttonText}>1/5</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity 
-                        style={styles.button}
+                    <TouchableOpacity
+                        style={styles.skipButton}
                         onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }}>
-                        <Text
-                            style={styles.buttonText}>Skip</Text>
                     </TouchableOpacity>
+
+
 
                 </View>
             </Overlay>
@@ -74,6 +83,15 @@ export default function TutoScreen(props) {
                 isVisible={isVisible2}>
 
                 <View style={styles.overlayTuto}>
+
+                    <View style={styles.closeButton}>
+                        <FontAwesomeIcon
+                            icon={faXmark}
+                            color='white'
+                            size={25}
+                            onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }} />
+                    </View>
+
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
                         <Text style={styles.titleGreen}>Veazit & Play </Text>
@@ -89,18 +107,11 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Filtres de Veazit</Text>
                     </View>
 
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.button}
                         onPress={() => { setIsVisible2(false); setIsVisible3(true) }}>
                         <Text
                             style={styles.buttonText}>2/5</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity 
-                        style={styles.button}
-                        onPress={() => { setIsVisible2(false); props.navigation.navigate('StackNavigation') }}>
-                        <Text
-                            style={styles.buttonText}>Skip</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -111,6 +122,14 @@ export default function TutoScreen(props) {
                 isVisible={isVisible3}>
 
                 <View style={styles.overlayTuto}>
+                    <View style={styles.closeButton}>
+                        <FontAwesomeIcon
+                            icon={faXmark}
+                            color='white'
+                            size={25}
+                            onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }} />
+                    </View>
+
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
                         <Text style={styles.titleGreen}>Veazit & Play </Text>
@@ -126,19 +145,13 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Quetes de Veazit</Text>
                     </View>
 
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.button}
                         onPress={() => { setIsVisible3(false); setIsVisible4(true) }}>
                         <Text
                             style={styles.buttonText}>3/5</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity 
-                        style={styles.button}
-                        onPress={() => { setIsVisible3(false); props.navigation.navigate('StackNavigation') }}>
-                        <Text
-                            style={styles.buttonText}>Skip</Text>
-                    </TouchableOpacity>
 
                 </View>
             </Overlay>
@@ -148,6 +161,13 @@ export default function TutoScreen(props) {
                 isVisible={isVisible4}>
 
                 <View style={styles.overlayTuto}>
+                        <View style={styles.closeButton}>
+                            <FontAwesomeIcon
+                                icon={faXmark}
+                                color='white'
+                                size={25}
+                                onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }} />
+                        </View>
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
                         <Text style={styles.titleGreen}>Veazit & Play </Text>
@@ -163,18 +183,11 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Trophées</Text>
                     </View>
 
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.button}
                         onPress={() => { setIsVisible4(false); setIsVisible5(true) }}>
                         <Text
                             style={styles.buttonText}>4/5</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity 
-                        style={styles.button}
-                        onPress={() => { setIsVisible4(false); props.navigation.navigate('StackNavigation') }}>
-                        <Text
-                            style={styles.buttonText}>Skip</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -203,7 +216,7 @@ export default function TutoScreen(props) {
                         <Text style={styles.textGreen}>Profil Veaziter</Text>
                     </View>
 
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.button}
                         onPress={() => { setIsVisible5(false); props.navigation.navigate('StackNavigation') }}>
                         <Text
@@ -269,10 +282,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center'
     },
-    overlayStyle:{
-        padding:0, 
-        borderWidth:2,
-        borderColor:"#06D4B6"
+    overlayStyle: {
+        padding: 0,
+        borderWidth: 2,
+        borderColor: "#06D4B6"
     },
     button: {
         width: '50%',
@@ -280,12 +293,16 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         borderWidth: 1,
         borderColor: '#06D4B6',
-        justifyContent:'center',
-        alignItems:'center',
-      },
-      buttonText: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonText: {
         fontFamily: "PressStart2P_400Regular",
-        fontSize: 20,
+        fontSize: 14,
         color: "#06D4B6",
-      },
+    },
+    closeButton: {
+        alignSelf: 'flex-end',
+        marginRight: 10,
+    },
 });

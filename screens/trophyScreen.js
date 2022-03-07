@@ -43,14 +43,8 @@ export default function TrophyScreen() {
           <View style={{ alignItems: "center", marginBottom: 15 }} >
 
             <Avatar
-              size={50}
+              size={80}
               source={{ uri: badge.img }}
-              containerStyle={{
-                borderColor: '#c0c0c0',
-                borderWidth: 3,
-                borderRadius: 50,
-                marginLeft: 0
-              }}
             />
 
             <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 12, marginTop: 10, color: "#fff" }} >{badge.title}</Text>
