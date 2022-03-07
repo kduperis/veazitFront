@@ -321,17 +321,19 @@ export default function MapScreen() {
   const [description, setDescription] = useState('')
   const [location, setLocation] = useState(false)
   const [visibleWin, setVisibleWin] = useState(false)
+  const [poiScore, setPoiScore] = useState(0)
+  const [poiSelected, setPoiSelected] = useState(0)
 
   const [userScore, setUserScore] = useState(0) //For presentation
 
   const isFocused = useIsFocused();
 
-  var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique' },
-  { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, alreadyView: false, categorie: 'Aquatique' },
-  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711, alreadyView: false, categorie: 'Domaine' },
-  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, alreadyView: true, categorie: 'Domaine' },
-  { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, alreadyView: false, categorie: 'Domaine' },
-  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, alreadyView: false, categorie: 'Parc' }]
+  var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique', score: 100 },
+  { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, alreadyView: false, categorie: 'Aquatique', score: 100 },
+  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711, alreadyView: false, categorie: 'Domaine', score: 100 },
+  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, alreadyView: true, categorie: 'Domaine', score: 100 },
+  { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, alreadyView: false, categorie: 'Domaine', score: 400 },
+  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, alreadyView: false, categorie: 'Parc', score: 100 }]
 
 
   var showOverlay = (title, description) => {
@@ -365,7 +367,7 @@ export default function MapScreen() {
       <Marker
         key={i}
         coordinate={{ latitude: lieu.latitude, longitude: lieu.longitude }}
-        onPress={() => showOverlay(lieu.title, lieu.description)}>
+        onPress={() => {showOverlay(lieu.title, lieu.description); setPoiSelected(i)}}>
         <FontAwesomeIcon icon={iconCustom} color={colorCustom} />
       </Marker>
     )
@@ -385,13 +387,8 @@ export default function MapScreen() {
           }
         );
       }
-
     }
-
-
     askPermissions();
-
-
   }, []);
 
 
@@ -421,6 +418,8 @@ export default function MapScreen() {
   }
 
   var addScore = () => {
+    
+
     //ADD ROUTE FETCH UPDATE SCORE
     setVisibleWin(false)
     var count = userScore + (100) / 10 //For presentation
@@ -433,10 +432,8 @@ export default function MapScreen() {
   }
 
   var bestUserCard = bestList.map((user, i) => {
-
     return (
       <View key={i} style={styles.cardPlayer} >
-
         <Avatar
           size={55}
           rounded
@@ -452,10 +449,8 @@ export default function MapScreen() {
           <Text style={styles.nameScorePlayer}>{user.username}</Text>
           <Text style={styles.nameScorePlayer}>{user.score}</Text>
         </View>
-
       </View>
     )
-
   })
 
   return (
@@ -469,7 +464,6 @@ export default function MapScreen() {
       <View style={[styles.best,{backgroundColor: theme.background}]}>
 
         {bestUserCard}
-
       </View>
 
       <Overlay
@@ -502,7 +496,8 @@ export default function MapScreen() {
               fontSize: 18,
               color: theme.color,
             }}
-            onPress={() => launchNavigation()}
+            onPress={() => {launchNavigation(); setPoiScore(poi[poiSelected].score)
+            }}
           />
         </View>
 
@@ -518,7 +513,8 @@ export default function MapScreen() {
             style={styles.item}
           />
           <Text>Félicitations tu remportes:</Text>
-          <Text>100 pts</Text>
+          <Text>{poiScore}</Text>
+
           <Button
             title={'Veazited'}
             containerStyle={{
