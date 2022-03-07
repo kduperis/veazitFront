@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { StyleSheet, View, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
-import { Text, Button, Overlay } from 'react-native-elements';
+import { Text, Overlay } from 'react-native-elements';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUserAstronaut, faTrophy, faMapLocationDot, faFilter } from '@fortawesome/free-solid-svg-icons'

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Input, Button, Divider } from 'react-native-elements';
+import { Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
