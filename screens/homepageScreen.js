@@ -60,6 +60,12 @@ export default function HomepageScreen(props) {
         />
       </SafeAreaView>
 
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }}>
+          <Text
+            style={styles.buttonText}>Start</Text>
+      </TouchableOpacity>
 
       <Button
         title={`Start`}
@@ -106,17 +112,18 @@ const styles = StyleSheet.create({
     width: 200
   },
   button: {
-    backgroundColor: "#2C3A47",
+    width: '50%',
+    height: 50,
+    borderRadius: 30,
     borderWidth: 1,
-    borderColor: "#06D4B6",
-    padding: 15,
-    paddingTop: 25,
-    borderRadius: 30
+    borderColor: '#06D4B6',
+    justifyContent:'center',
+    alignItems:'center',
   },
   buttonText: {
-    color: "#06D4B6",
+    fontFamily: "PressStart2P_400Regular",
     fontSize: 20,
-    fontFamily: "PressStart2P_400Regular"
+    color: "#06D4B6",
   },
 
 });
