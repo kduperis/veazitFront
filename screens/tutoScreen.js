@@ -5,6 +5,7 @@ import { Text, Button, Overlay } from 'react-native-elements';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUserAstronaut, faTrophy, faMapLocationDot, faFilter } from '@fortawesome/free-solid-svg-icons'
+import {faFortAwesome} from '@fortawesome/free-brands-svg-icons'
 
 import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
@@ -20,8 +21,6 @@ export default function TutoScreen(props) {
     const [isVisible4, setIsVisible4] = useState(false)
     const [isVisible5, setIsVisible5] = useState(false)
 
-
-
     let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
     if (!fontLoaded) {
@@ -34,6 +33,7 @@ export default function TutoScreen(props) {
             <ImageBackground source={imageFond} style={styles.image} />
 
             <Overlay
+                overlayStyle={styles.overlayStyle}
                 isVisible={isVisible1}>
 
                 <View style={styles.overlayTuto}>
@@ -73,10 +73,32 @@ export default function TutoScreen(props) {
                         }}
                         onPress={() => { setIsVisible1(false); setIsVisible2(true) }}
                     />
+                    <Button
+                        title={`Skip`}
+                        containerStyle={{
+                            width: '50%',
+                            marginHorizontal: 50,
+                            borderRadius: 30,
+                            borderWidth: 1,
+                            borderColor: '#06D4B6',
+                            marginTop: 20,
+                        }}
+                        buttonStyle={{
+                            backgroundColor: "#2C3A47",
+                            height: 50,
+                        }}
+                        titleStyle={{
+                            fontFamily: "PressStart2P_400Regular",
+                            fontSize: 20,
+                            color: "#06D4B6",
+                        }}
+                        onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }}
+                    />
                 </View>
             </Overlay>
 
             <Overlay
+                overlayStyle={styles.overlayStyle}
                 isVisible={isVisible2}>
 
                 <View style={styles.overlayTuto}>
@@ -116,10 +138,32 @@ export default function TutoScreen(props) {
                         }}
                         onPress={() => { setIsVisible2(false); setIsVisible3(true) }}
                     />
+                    <Button
+                        title={`Skip`}
+                        containerStyle={{
+                            width: '50%',
+                            marginHorizontal: 50,
+                            borderRadius: 30,
+                            borderWidth: 1,
+                            borderColor: '#06D4B6',
+                            marginTop: 20,
+                        }}
+                        buttonStyle={{
+                            backgroundColor: "#2C3A47",
+                            height: 50,
+                        }}
+                        titleStyle={{
+                            fontFamily: "PressStart2P_400Regular",
+                            fontSize: 20,
+                            color: "#06D4B6",
+                        }}
+                        onPress={() => { setIsVisible2(false); props.navigation.navigate('StackNavigation') }}
+                    />
                 </View>
             </Overlay>
 
             <Overlay
+                overlayStyle={styles.overlayStyle}
                 isVisible={isVisible3}>
 
                 <View style={styles.overlayTuto}>
@@ -129,13 +173,13 @@ export default function TutoScreen(props) {
                     </View>
 
                     <FontAwesomeIcon
-                        icon={faFilter}
+                        icon={faFortAwesome}
                         color='white'
                         size={75}
                         textAlign={'center'} />
                     <View>
                         <Text style={styles.textWhite}>Cette icône te montrera des </Text>
-                        <Text style={styles.textGreen}>Lieux à Veaziter</Text>
+                        <Text style={styles.textGreen}>Quetes de Veazit</Text>
                     </View>
 
                     <Button
@@ -159,10 +203,32 @@ export default function TutoScreen(props) {
                         }}
                         onPress={() => { setIsVisible3(false); setIsVisible4(true) }}
                     />
+                    <Button
+                        title={`Skip`}
+                        containerStyle={{
+                            width: '50%',
+                            marginHorizontal: 50,
+                            borderRadius: 30,
+                            borderWidth: 1,
+                            borderColor: '#06D4B6',
+                            marginTop: 20,
+                        }}
+                        buttonStyle={{
+                            backgroundColor: "#2C3A47",
+                            height: 50,
+                        }}
+                        titleStyle={{
+                            fontFamily: "PressStart2P_400Regular",
+                            fontSize: 20,
+                            color: "#06D4B6",
+                        }}
+                        onPress={() => { setIsVisible3(false); props.navigation.navigate('StackNavigation') }}
+                    />
                 </View>
             </Overlay>
 
             <Overlay
+                overlayStyle={styles.overlayStyle}
                 isVisible={isVisible4}>
 
                 <View style={styles.overlayTuto}>
@@ -202,10 +268,32 @@ export default function TutoScreen(props) {
                         }}
                         onPress={() => { setIsVisible4(false); setIsVisible5(true) }}
                     />
+                    <Button
+                        title={`Skip`}
+                        containerStyle={{
+                            width: '50%',
+                            marginHorizontal: 50,
+                            borderRadius: 30,
+                            borderWidth: 1,
+                            borderColor: '#06D4B6',
+                            marginTop: 20,
+                        }}
+                        buttonStyle={{
+                            backgroundColor: "#2C3A47",
+                            height: 50,
+                        }}
+                        titleStyle={{
+                            fontFamily: "PressStart2P_400Regular",
+                            fontSize: 20,
+                            color: "#06D4B6",
+                        }}
+                        onPress={() => { setIsVisible4(false); props.navigation.navigate('StackNavigation') }}
+                    />
                 </View>
             </Overlay>
 
             <Overlay
+                overlayStyle={styles.overlayStyle}
                 isVisible={isVisible5}>
 
                 <View style={styles.overlayTuto}>
@@ -248,6 +336,27 @@ export default function TutoScreen(props) {
                         }}
                         onPress={() => { setIsVisible5(false); props.navigation.navigate('StackNavigation') }}
                     />
+                    <Button
+                        title={`Skip`}
+                        containerStyle={{
+                            width: '50%',
+                            marginHorizontal: 50,
+                            borderRadius: 30,
+                            borderWidth: 1,
+                            borderColor: '#06D4B6',
+                            marginTop: 20,
+                        }}
+                        buttonStyle={{
+                            backgroundColor: "#2C3A47",
+                            height: 50,
+                        }}
+                        titleStyle={{
+                            fontFamily: "PressStart2P_400Regular",
+                            fontSize: 20,
+                            color: "#06D4B6",
+                        }}
+                        onPress={() => { setIsVisible5(false); props.navigation.navigate('StackNavigation') }}
+                    />
                 </View>
             </Overlay>
         </View>
@@ -271,7 +380,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#2C3A47',
         opacity: 1,
-
     },
     titleContainer: {
         marginTop: 20,
@@ -306,4 +414,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center'
     },
+    overlayStyle:{
+        padding:0, 
+        borderWidth:2,
+        borderColor:"#06D4B6"
+    }
 });
