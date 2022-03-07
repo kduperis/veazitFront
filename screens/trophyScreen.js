@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useContext  } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text, Button, Avatar } from 'react-native-elements';
+import { Text, Button, Avatar, Tooltip, colors } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { IP_URL } from '@env'
 
@@ -17,6 +17,7 @@ export default function TrophyScreen() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [badgeData, setBadgeData] = useState([])
+  const [visibleDesc, setVisilbleText] = useState("Click sur le trophée pour voir les conditions de déblocage")
 
   useEffect(() => {
     async function loadData() {
@@ -42,15 +43,10 @@ export default function TrophyScreen() {
           <View style={{ alignItems: "center", marginBottom: 15 }} >
 
             <Avatar
-              size={50}
+              size={80}
               source={{ uri: badge.img }}
-              containerStyle={{
-                borderColor: '#c0c0c0',
-                borderWidth: 3,
-                borderRadius: 50,
-                marginLeft: 0
-              }}
             />
+
             <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 12, marginTop: 10, color: "#fff" }} >{badge.title}</Text>
           </View>
 
@@ -58,6 +54,17 @@ export default function TrophyScreen() {
 
         <View style={{ marginTop: 15, width: "50%" }}>
           <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10, color: theme.color }} >{badge.description}</Text>
+          <Tooltip
+            containerStyle={{ width: 145, height: 130 }}
+            popover={
+              <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>
+                {
+                  `Il faut que tu veazits ${badge.condition} lieux pour débloquer ce badge`}
+              </Text>
+            }
+          >
+            <Text style={{ color: "#fff", fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>More info</Text>
+          </Tooltip>
         </View>
 
       </View>
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
     height: 500,
   },
   contentTitle: {
-    fontSize: 20,
+    fontSize: 15,
     marginBottom: 12,
   },
   contentView: {

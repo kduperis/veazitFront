@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text, CheckBox } from 'react-native-elements';
 
-import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
+import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
@@ -51,7 +51,7 @@ export default function HomefilterScreen(props) {
   if (!fontLoaded) {
     return <AppLoading />
   }
-  
+
   return (
 
     <View style={[styles.container,{backgroundColor: theme.background}]}>
@@ -63,7 +63,6 @@ export default function HomefilterScreen(props) {
         checked={check1}
         checkedColor={theme.color}
         onPress={() => setCheck1(!check1)}
-
       />
 
       <CheckBox

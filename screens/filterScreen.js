@@ -5,7 +5,7 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text, CheckBox, Button } from 'react-native-elements';
 import Modal from 'react-native-modal';
 
-import {PressStart2P_400Regular} from '@expo-google-fonts/press-start-2p';
+import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
@@ -71,20 +71,20 @@ export default function FilterScreen(props) {
       />
 
 
-        <Modal
-          backdropOpacity={0.3}
-          isVisible={modalVisible}
-          onBackdropPress={() => {setModalVisible(false)}}
-          style={styles.contentView}
-        >
+      <Modal
+        backdropOpacity={0.3}
+        isVisible={modalVisible}
+        onBackdropPress={() => { setModalVisible(false) }}
+        style={styles.contentView}
+      >
 
           <View style={[styles.content,{backgroundColor:theme.background}]}>
             <Text style={[styles.contentTitle,{color: theme.color}]}>Filter Screen !</Text>
 
             <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20}}>Modifiez vos genres de lieu ici : </Text>
-
+          <View>
             <CheckBox
-              center
+
               title="Aquatique"
               checked={check1}
               checkedColor={theme.color}
@@ -92,7 +92,7 @@ export default function FilterScreen(props) {
             />
 
             <CheckBox
-              center
+
               title="Domaine"
               checked={check2}
               checkedColor={theme.color}
@@ -100,7 +100,7 @@ export default function FilterScreen(props) {
             />
 
             <CheckBox
-              center
+
               title="Parc"
               checked={check3}
               checkedColor={theme.color}
@@ -108,7 +108,7 @@ export default function FilterScreen(props) {
             />
 
             <CheckBox
-              center
+
               title="category 4"
               checked={check4}
               checkedColor={theme.color}
@@ -124,10 +124,9 @@ export default function FilterScreen(props) {
             </TouchableOpacity>
 
           </View>
+      </Modal>
 
-        </Modal>
 
-      
     </View>
   );
 }
@@ -139,8 +138,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopRightRadius: 17,
     borderTopLeftRadius: 17,
-    height:500,
-    
+    height: 500,
+
   },
   contentTitle: {
     fontSize: 20,
