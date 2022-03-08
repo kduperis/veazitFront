@@ -41,13 +41,14 @@ export default function TutoScreen(props) {
                 isVisible={isVisible1}>
 
                 <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
-                    <View style={styles.closeButton}>
+                    <TouchableOpacity 
+                        style={styles.closeButton}
+                        onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }}>
                         <FontAwesomeIcon
                             icon={faXmark}
                             color='white'
-                            size={25}
-                            onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }} />
-                    </View>
+                            size={25}/>
+                    </TouchableOpacity>
 
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial </Text>
@@ -80,13 +81,14 @@ export default function TutoScreen(props) {
 
                 <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
 
-                    <View style={styles.closeButton}>
+                    <TouchableOpacity 
+                        style={styles.closeButton}
+                        onPress={() => { setIsVisible2(false); props.navigation.navigate('StackNavigation') }}>
                         <FontAwesomeIcon
                             icon={faXmark}
                             color='white'
-                            size={25}
-                            onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }} />
-                    </View>
+                            size={25}/>
+                    </TouchableOpacity>
 
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
@@ -118,13 +120,15 @@ export default function TutoScreen(props) {
                 isVisible={isVisible3}>
 
                 <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
-                    <View style={styles.closeButton}>
+                    <TouchableOpacity 
+                        style={styles.closeButton}
+                        onPress={() => { setIsVisible3(false); props.navigation.navigate('StackNavigation') }}>
                         <FontAwesomeIcon
                             icon={faXmark}
                             color='white'
-                            size={25}
-                            onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }} />
-                    </View>
+                            size={25}/>
+                    </TouchableOpacity>
+
 
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
@@ -156,13 +160,16 @@ export default function TutoScreen(props) {
                 isVisible={isVisible4}>
 
                 <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
-                        <View style={styles.closeButton}>
-                            <FontAwesomeIcon
-                                icon={faXmark}
-                                color='white'
-                                size={25}
-                                onPress={() => { setIsVisible1(false); props.navigation.navigate('StackNavigation') }} />
-                        </View>
+                    
+                    <TouchableOpacity 
+                        style={styles.closeButton}
+                        onPress={() => { setIsVisible4(false); props.navigation.navigate('StackNavigation') }}>
+                        <FontAwesomeIcon
+                            icon={faXmark}
+                            color='white'
+                            size={25}/>
+                    </TouchableOpacity>
+
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleWhite}>Tutorial</Text>
                         <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
@@ -291,7 +298,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
       },
       closeButton: {
-        alignSelf: 'flex-end',
-        marginRight: 10,
+        position:'absolute',
+        right:20,
+        top:20,
     },
 });

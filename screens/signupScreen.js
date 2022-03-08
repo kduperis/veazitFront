@@ -117,7 +117,7 @@ export default function SignupScreen(props) {
                     <Icon
                         name='user-astronaut'
                         size={24}
-                        color={theme.background}
+                        color={theme.color}
                     />
                 }
             />
@@ -133,7 +133,7 @@ export default function SignupScreen(props) {
                     <Icon
                         name='at'
                         size={24}
-                        color={theme.background}
+                        color={theme.color}
                     />
                 }
             />
@@ -150,7 +150,7 @@ export default function SignupScreen(props) {
                     <Icon
                         name='key'
                         size={24}
-                        color={theme.background}
+                        color={theme.color}
                     />
                 }
             />

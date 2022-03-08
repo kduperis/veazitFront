@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 20,
     marginBottom: 12,
+    fontFamily: "PressStart2P_400Regular",
   },
   buttonStyle: {
     height: 60,
