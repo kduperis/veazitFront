@@ -21,10 +21,8 @@ export default function HomepageScreen(props) {
 
   const dispatch = useDispatch();
 
-
-
   useEffect(() => {
-    /* AsyncStorage.getItem('pseudo', function (error, pseudo) {
+    AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
         AsyncStorage.getItem('token', function (error, token) {
           if (token) {
@@ -33,7 +31,7 @@ export default function HomepageScreen(props) {
         });
         props.navigation.navigate('StackNavigation')
       }
-    }); */
+    });
   }, []);
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });

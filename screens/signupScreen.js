@@ -79,7 +79,7 @@ export default function SignupScreen(props) {
 
             {/*Bouton previous*/}
             <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.touchable} onPress={() => props.navigation.navigate('StackNavigation', { screen: 'Map' })}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('StackNavigation', { screen: 'Map' })}>
                 <View style={[styles.buttonPrevious,{borderColor: theme.color}]}>
                     <Icon name='arrow-left' size={24} color={theme.color}/>
                 </View>
