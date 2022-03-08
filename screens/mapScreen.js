@@ -330,7 +330,6 @@ export default function MapScreen() {
   const [userScore, setUserScore] = useState(0)
   const [userLevel, setUserLevel] = useState(0)
 
-
   const isFocused = useIsFocused();
 
   var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique', score: 100 },
@@ -393,32 +392,35 @@ export default function MapScreen() {
       }
     }
 
-    async function bestUser() {
-      axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
-        var userData = res.data.bestUserName;
-        var userDataToken = res.data.user;
-        userData.sort((a, b) => {
-          return b.score - a.score
-        })
-        userData = userData.slice(0, 3)
-        setBestList(userData);
-        if (res.data.result) {
-          var calculScore = (userDataToken.score % 1000) / 10
-          var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
-
-          setUserLevel(calculLevel)
-          setUserScore(calculScore)
-        } else {
-          setUserScore(0)
-          setUserLevel(1)
-        }
-      });
-    }
+    
     askPermissions();
-    bestUser();
   }, []);
 
+useEffect(() => {
+  async function bestUser() {
+    axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
+      var userData = res.data.bestUserName;
+      var userDataToken = res.data.user;
+      userData.sort((a, b) => {
+        return b.score - a.score
+      })
+      userData = userData.slice(0, 3)
+      setBestList(userData);
+      if (res.data.result) {
+        var calculScore = (userDataToken.score % 1000) / 10
+        var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
 
+        setUserLevel(calculLevel)
+        setUserScore(calculScore)
+      } else {
+        setUserScore(0)
+        setUserLevel(1)
+      }
+    });
+  }
+  
+  bestUser();
+}, [isFocused])
 
   useEffect(() => {
 
@@ -426,7 +428,6 @@ export default function MapScreen() {
 
       axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
         var userData = res.data.bestUserName;
-
         userData.sort((a, b) => {
           return b.score - a.score
         })
@@ -438,6 +439,7 @@ export default function MapScreen() {
     bestUser();
 
   }, [userScore])
+  console.log(bestList);
 
   //Changer la facteur d'update
 
@@ -455,11 +457,14 @@ export default function MapScreen() {
   });
 
   var response = await rawResponse.json();
-
+  var userDataToken = response.userSaved
   //ADD ROUTE FETCH UPDATE SCORE
   setVisibleWin(false)
-  var count = response.score + { poiScore } / 10 //For presentation
-  setUserScore(count)              //For presentation
+  var calculScore = (userDataToken.score % 1000) / 10
+  var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
+
+  setUserLevel(calculLevel)
+  setUserScore(calculScore)
 }
 
 let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
