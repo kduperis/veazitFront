@@ -14,6 +14,11 @@ import TrophyScreen from './screens/trophyScreen';
 import SignupScreen from './screens/signupScreen';
 import SigninScreen from './screens/signinScreen';
 import TutoScreen from './screens/tutoScreen';
+import ParameterScreen from './screens/parameterScreen';
+import FavoriteScreen from './screens/favoriteScreen';
+import ArchiveScreen from './screens/archiveScreen';
+import HowtoScreen from './screens/howtoScreen';
+import WhoScreen from './screens/whoScreen';
 
 import theme from './config/theme';
 import themeContext from './config/themeContext';
@@ -92,6 +97,11 @@ export default function App() {
             <Stack.Screen name="StackNavigation" component={StackNavigation} />
             <Stack.Screen name="SignUp" component={SignupScreen} />
             <Stack.Screen name="SignIn" component={SigninScreen} />
+            <Stack.Screen name="Parameter" component={ParameterScreen} />
+            <Stack.Screen name="Favorite" component={FavoriteScreen} />
+            <Stack.Screen name="Archive" component={ArchiveScreen} />
+            <Stack.Screen name="Howto" component={HowtoScreen} />
+            <Stack.Screen name="Who" component={WhoScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
