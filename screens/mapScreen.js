@@ -396,7 +396,7 @@ export default function MapScreen() {
   useEffect(() => {
     async function bestUser() {
 
-      axios.get(`http://${IP_URL}:3000/users/best-users`).then((res) => {
+      axios.get(`http://${IP_URL}:3000/best-users`).then((res) => {
         var userData = res.data.bestUserName;
         userData.sort((a, b) => {
           return b.score - a.score
