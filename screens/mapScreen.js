@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 
 import { StyleSheet, View, Text, Image } from 'react-native';
@@ -324,7 +325,11 @@ export default function MapScreen() {
   const [poiScore, setPoiScore] = useState(0)
   const [poiSelected, setPoiSelected] = useState(0)
 
-  const [userScore, setUserScore] = useState(0) //For presentation
+  const token = useSelector((state) => state.token)
+
+  const [userScore, setUserScore] = useState(0)
+  const [userLevel, setUserLevel] = useState(0)
+
 
   const isFocused = useIsFocused();
 
@@ -367,7 +372,7 @@ export default function MapScreen() {
       <Marker
         key={i}
         coordinate={{ latitude: lieu.latitude, longitude: lieu.longitude }}
-        onPress={() => {showOverlay(lieu.title, lieu.description); setPoiSelected(i)}}>
+        onPress={() => { showOverlay(lieu.title, lieu.description); setPoiSelected(i) }}>
         <FontAwesomeIcon icon={iconCustom} color={colorCustom} />
       </Marker>
     )
@@ -375,6 +380,8 @@ export default function MapScreen() {
   })
 
   useEffect(() => {
+
+
     async function askPermissions() {
 
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -388,26 +395,55 @@ export default function MapScreen() {
         );
       }
     }
+    async function bestUser() {
+
+      axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
+        var userData = res.data.bestUserName;
+        var userDataToken = res.data.user;
+        userData.sort((a, b) => {
+          return b.score - a.score
+        })
+        userData = userData.slice(0, 3)
+        setBestList(userData);
+        if (res.data.result) {
+          var calculScore = (userDataToken.score % 1000) / 10
+          var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
+
+
+          setUserLevel(calculLevel)
+          setUserScore(calculScore)
+        } else {
+          setUserScore(0)
+          setUserLevel(1)
+
+        }
+      });
+    }
+    bestUser();
+
     askPermissions();
   }, []);
 
 
 
   useEffect(() => {
+
     async function bestUser() {
 
-      axios.get(`http://${IP_URL}:3000/best-users`).then((res) => {
+      axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
         var userData = res.data.bestUserName;
+
         userData.sort((a, b) => {
           return b.score - a.score
         })
         userData = userData.slice(0, 3)
         setBestList(userData);
-      });
 
+      });
     }
     bestUser();
-  }, [isFocused])
+
+  }, [userScore])
 
   //Changer la facteur d'update
 
@@ -418,7 +454,7 @@ export default function MapScreen() {
   }
 
   var addScore = () => {
-    
+
 
     //ADD ROUTE FETCH UPDATE SCORE
     setVisibleWin(false)
@@ -455,13 +491,13 @@ export default function MapScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.subtitle,{backgroundColor: theme.background}]}>
-        <Text style={[styles.desc, {color: theme.color}]}>
+      <View style={[styles.subtitle, { backgroundColor: theme.background }]}>
+        <Text style={[styles.desc, { color: theme.color }]}>
           Nos meilleurs Veaziteurs:
         </Text>
       </View>
 
-      <View style={[styles.best,{backgroundColor: theme.background}]}>
+      <View style={[styles.best, { backgroundColor: theme.background }]}>
 
         {bestUserCard}
       </View>
@@ -496,7 +532,8 @@ export default function MapScreen() {
               fontSize: 18,
               color: theme.color,
             }}
-            onPress={() => {launchNavigation(); setPoiScore(poi[poiSelected].score)
+            onPress={() => {
+              launchNavigation(); setPoiScore(poi[poiSelected].score)
             }}
           />
         </View>
@@ -552,8 +589,8 @@ export default function MapScreen() {
 
       </MapView>
 
-      <View style={[styles.progressContainer,{backgroundColor: theme.background}]}>
-        <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Ta progression avant le prochain niveau </Text>
+      <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
+        <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Ton niveau: {userLevel} </Text>
       </View>
 
       <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
