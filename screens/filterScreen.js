@@ -114,15 +114,14 @@ export default function FilterScreen(props) {
               onPress={() => setCheck4(!check4)}
             />
 
-            <TouchableOpacity
+          </View>
+          <TouchableOpacity
               style={[styles.button, { borderColor: theme.color }]}
               onPress={() => setModalVisible(false)}>
               <Text
                 style={[styles.buttonText, { color: theme.color }]}>Go !</Text>
 
             </TouchableOpacity>
-
-          </View>
         </View>
       </Modal>
 
@@ -144,6 +143,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 20,
     marginBottom: 20,
+    fontFamily: "PressStart2P_400Regular",
   },
   button: {
     width: '50%',

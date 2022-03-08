@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 15,
     marginBottom: 12,
+    fontFamily: "PressStart2P_400Regular",
   },
   contentView: {
     justifyContent: 'flex-end',
