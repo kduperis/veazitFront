@@ -324,6 +324,8 @@ export default function MapScreen() {
   const [visibleWin, setVisibleWin] = useState(false)
   const [poiScore, setPoiScore] = useState(0)
   const [poiSelected, setPoiSelected] = useState(0)
+  const [updateScore, setUpdateScore] = useState(false)
+
 
   const token = useSelector((state) => state.token)
   const checked = useSelector((state) => state.category)
@@ -416,7 +418,6 @@ export default function MapScreen() {
         if (res.data.result) {
           var calculScore = (userDataToken.score % 1000) / 10
           var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
-
           setUserLevel(calculLevel)
           setUserScore(calculScore)
         } else {
@@ -427,31 +428,7 @@ export default function MapScreen() {
     }
 
     bestUser();
-  }, [isFocused])
-
-  useEffect(() => {
-
-    async function bestUser() {
-
-      axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
-        var userData = res.data.bestUserName;
-        userData.sort((a, b) => {
-          return b.score - a.score
-        })
-        if (userData.length <= 3) {
-          userData = userData.slice(0, 1)
-        } else {
-          userData = userData.slice(0, 3)
-        }
-        setBestList(userData);
-
-      });
-    }
-    bestUser();
-
-  }, [userScore])
-
-  //Changer la facteur d'update
+  }, [isFocused, token, updateScore])
 
   var launchNavigation = async () => {
     //ADD NAVIGATION
@@ -460,22 +437,19 @@ export default function MapScreen() {
   }
 
   var addScore = async () => {
-    let rawResponse = await fetch(`http://${IP_URL}:3000/best-users?`, {
+    await fetch(`http://${IP_URL}:3000/best-users?`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `score=${poiScore}&&token=${token}`,
     });
 
-    var response = await rawResponse.json();
-    var userDataToken = response.userSaved
-    //ADD ROUTE FETCH UPDATE SCORE
     setVisibleWin(false)
-    var calculScore = (userDataToken.score % 1000) / 10
-    var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
+    setUpdateScore(!updateScore)
 
-    setUserLevel(calculLevel)
-    setUserScore(calculScore)
   }
+
+
+
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
   if (!fontLoaded) {
