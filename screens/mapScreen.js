@@ -368,8 +368,8 @@ export default function MapScreen() {
         break;
     }
 
-    for (var j=0;j<checked.length;j++){
-      if(lieu.categorie==checked[j]){
+    for (var j = 0; j < checked.length; j++) {
+      if (lieu.categorie == checked[j]) {
         return (
           <Marker
             key={i}
@@ -399,35 +399,35 @@ export default function MapScreen() {
     askPermissions();
   }, []);
 
-useEffect(() => {
-  async function bestUser() {
-    axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
-      var userData = res.data.bestUserName;
-      var userDataToken = res.data.user;
-      userData.sort((a, b) => {
-        return b.score - a.score
-      })
-      if (userData.length<=3){
-        userData = userData.slice(0, 1)
-      }else{
-        userData = userData.slice(0, 3)
-      }
-      setBestList(userData);
-      if (res.data.result) {
-        var calculScore = (userDataToken.score % 1000) / 10
-        var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
+  useEffect(() => {
+    async function bestUser() {
+      axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
+        var userData = res.data.bestUserName;
+        var userDataToken = res.data.user;
+        userData.sort((a, b) => {
+          return b.score - a.score
+        })
+        if (userData.length <= 3) {
+          userData = userData.slice(0, 1)
+        } else {
+          userData = userData.slice(0, 3)
+        }
+        setBestList(userData);
+        if (res.data.result) {
+          var calculScore = (userDataToken.score % 1000) / 10
+          var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
 
-        setUserLevel(calculLevel)
-        setUserScore(calculScore)
-      } else {
-        setUserScore(0)
-        setUserLevel(1)
-      }
-    });
-  }
-  
-  bestUser();
-}, [isFocused])
+          setUserLevel(calculLevel)
+          setUserScore(calculScore)
+        } else {
+          setUserScore(0)
+          setUserLevel(1)
+        }
+      });
+    }
+
+    bestUser();
+  }, [isFocused])
 
   useEffect(() => {
 
@@ -438,9 +438,9 @@ useEffect(() => {
         userData.sort((a, b) => {
           return b.score - a.score
         })
-        if (userData.length<=3){
+        if (userData.length <= 3) {
           userData = userData.slice(0, 1)
-        }else{
+        } else {
           userData = userData.slice(0, 3)
         }
         setBestList(userData);
@@ -462,157 +462,157 @@ useEffect(() => {
   var addScore = async () => {
     let rawResponse = await fetch(`http://${IP_URL}:3000/best-users?`, {
       method: 'PUT',
-      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `score=${poiScore}&&token=${token}`, 
-  });
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `score=${poiScore}&&token=${token}`,
+    });
 
-  var response = await rawResponse.json();
-  var userDataToken = response.userSaved
-  //ADD ROUTE FETCH UPDATE SCORE
-  setVisibleWin(false)
-  var calculScore = (userDataToken.score % 1000) / 10
-  var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
+    var response = await rawResponse.json();
+    var userDataToken = response.userSaved
+    //ADD ROUTE FETCH UPDATE SCORE
+    setVisibleWin(false)
+    var calculScore = (userDataToken.score % 1000) / 10
+    var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
 
-  setUserLevel(calculLevel)
-  setUserScore(calculScore)
-}
+    setUserLevel(calculLevel)
+    setUserScore(calculScore)
+  }
 
-let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
-if (!fontLoaded) {
-  return <AppLoading />
-}
+  let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
+  if (!fontLoaded) {
+    return <AppLoading />
+  }
 
-var bestUserCard = bestList.map((user, i) => {
+  var bestUserCard = bestList.map((user, i) => {
+    return (
+      <View key={i} style={styles.cardPlayer} >
+        <Avatar
+          size={55}
+          rounded
+          source={{ uri: user.avatar }}
+          containerStyle={{
+            borderColor: '#c0c0c0',
+            borderStyle: 'solid',
+            borderWidth: 3,
+          }}
+        />
+
+        <View style={styles.detailPlayer}>
+          <Text style={styles.nameScorePlayer}>{user.username}</Text>
+          <Text style={styles.nameScorePlayer}>{user.score}</Text>
+        </View>
+      </View>
+    )
+  })
+
   return (
-    <View key={i} style={styles.cardPlayer} >
-      <Avatar
-        size={55}
-        rounded
-        source={{ uri: user.avatar }}
-        containerStyle={{
-          borderColor: '#c0c0c0',
-          borderStyle: 'solid',
-          borderWidth: 3,
-        }}
-      />
-
-      <View style={styles.detailPlayer}>
-        <Text style={styles.nameScorePlayer}>{user.username}</Text>
-        <Text style={styles.nameScorePlayer}>{user.score}</Text>
-      </View>
-    </View>
-  )
-})
-
-return (
-  <View style={styles.container}>
-    <View style={[styles.subtitle, { backgroundColor: theme.background }]}>
-      <Text style={[styles.desc, { color: theme.color }]}>
-        Nos meilleurs Veaziteurs:
-      </Text>
-    </View>
-
-    <View style={[styles.best, { backgroundColor: theme.background }]}>
-
-      {bestUserCard}
-    </View>
-
-    <Overlay
-      isVisible={visible}
-      onBackdropPress={() => { setVisible(false) }}
-    >
-      <View style={styles.overlayPoi}>
-        <Image
-          source={require('../assets/noImg.jpg')}
-          style={styles.item}
-        />
-        <Text>{title}</Text>
-        <Text>{description}</Text>
-        <Button
-          title={`Go veazit`}
-          containerStyle={{
-            width: '65%',
-            marginHorizontal: 50,
-            borderRadius: 30,
-            borderWidth: 1,
-            borderColor: theme.color,
-            marginTop: 20,
-          }}
-          buttonStyle={{
-            backgroundColor: theme.background,
-            height: 50,
-          }}
-          titleStyle={{
-            fontFamily: "PressStart2P_400Regular",
-            fontSize: 18,
-            color: theme.color,
-          }}
-          onPress={() => {
-            launchNavigation(); setPoiScore(poi[poiSelected].score)
-          }}
-        />
+    <View style={styles.container}>
+      <View style={[styles.subtitle, { backgroundColor: theme.background }]}>
+        <Text style={[styles.desc, { color: theme.color }]}>
+          Nos meilleurs Veaziteurs:
+        </Text>
       </View>
 
-    </Overlay>
+      <View style={[styles.best, { backgroundColor: theme.background }]}>
 
-    <Overlay
-      isVisible={visibleWin}
-      onBackdropPress={() => { setVisibleWin(false) }}
-    >
-      <View style={styles.overlayPoi}>
-        <Image
-          source={require('../assets/clap.jpg')}
-          style={styles.item}
-        />
-        <Text>Félicitations tu remportes:</Text>
-        <Text>{poiScore}</Text>
-
-        <Button
-          title={'Veazited'}
-          containerStyle={{
-            width: '65%',
-            marginHorizontal: 50,
-            borderRadius: 30,
-            borderWidth: 1,
-            borderColor: theme.color,
-            marginTop: 20,
-          }}
-          buttonStyle={{
-            backgroundColor: theme.background,
-            height: 50,
-          }}
-          titleStyle={{
-            fontFamily: "PressStart2P_400Regular",
-            fontSize: 18,
-            color: theme.color,
-          }}
-          onPress={() => addScore()}
-        />
+        {bestUserCard}
       </View>
 
-    </Overlay>
+      <Overlay
+        isVisible={visible}
+        onBackdropPress={() => { setVisible(false) }}
+      >
+        <View style={styles.overlayPoi}>
+          <Image
+            source={require('../assets/noImg.jpg')}
+            style={styles.item}
+          />
+          <Text>{title}</Text>
+          <Text>{description}</Text>
+          <Button
+            title={`Go veazit`}
+            containerStyle={{
+              width: '65%',
+              marginHorizontal: 50,
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: theme.color,
+              marginTop: 20,
+            }}
+            buttonStyle={{
+              backgroundColor: theme.background,
+              height: 50,
+            }}
+            titleStyle={{
+              fontFamily: "PressStart2P_400Regular",
+              fontSize: 18,
+              color: theme.color,
+            }}
+            onPress={() => {
+              launchNavigation(); setPoiScore(poi[poiSelected].score)
+            }}
+          />
+        </View>
 
-    <MapView
-      style={{ flex: 1 }}
-      provider={PROVIDER_GOOGLE}
-      customMapStyle={mapStyle}
-      showsUserLocation={location}
-      showsCompass={true}
-      showsMyLocationButton={location}>
+      </Overlay>
 
-      {listPointOfInterest}
+      <Overlay
+        isVisible={visibleWin}
+        onBackdropPress={() => { setVisibleWin(false) }}
+      >
+        <View style={styles.overlayPoi}>
+          <Image
+            source={require('../assets/clap.jpg')}
+            style={styles.item}
+          />
+          <Text>Félicitations tu remportes:</Text>
+          <Text>{poiScore}</Text>
 
-    </MapView>
+          <Button
+            title={'Veazited'}
+            containerStyle={{
+              width: '65%',
+              marginHorizontal: 50,
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: theme.color,
+              marginTop: 20,
+            }}
+            buttonStyle={{
+              backgroundColor: theme.background,
+              height: 50,
+            }}
+            titleStyle={{
+              fontFamily: "PressStart2P_400Regular",
+              fontSize: 18,
+              color: theme.color,
+            }}
+            onPress={() => addScore()}
+          />
+        </View>
 
-    <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
-      <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Ton niveau: {userLevel} </Text>
+      </Overlay>
+
+      <MapView
+        style={{ flex: 1 }}
+        provider={PROVIDER_GOOGLE}
+        customMapStyle={mapStyle}
+        showsUserLocation={location}
+        showsCompass={true}
+        showsMyLocationButton={location}>
+
+        {listPointOfInterest}
+
+      </MapView>
+
+      <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
+        <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Ton niveau: {userLevel} </Text>
+      </View>
+
+      <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
+
     </View>
 
-    <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
-
-  </View>
-
-);
+  );
 }
 
 const styles = StyleSheet.create({

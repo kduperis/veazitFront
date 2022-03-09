@@ -18,7 +18,7 @@ export default function HomepageScreen(props) {
   const theme = useContext(themeContext);
 
   const [pseudo, setPseudo] = useState('');
-  const [errorMsg,setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const dispatch = useDispatch();
 
@@ -47,18 +47,18 @@ export default function HomepageScreen(props) {
     return <AppLoading />
   }
 
-  var submitPseudo= ()=>{
-    if (pseudo != ''){
+  var submitPseudo = () => {
+    if (pseudo != '') {
       setErrorMsg('')
       AsyncStorage.setItem("pseudo", pseudo);
       props.navigation.navigate("HomeFilter");
-    }else{
+    } else {
       setErrorMsg('Merci de remplir le champ')
     }
   }
 
   return (
-    <View style={[styles.container,{backgroundColor: theme.background}]}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Text style={{ color: theme.color, fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>Veazit</Text>
       <Text style={{ color: "#D1D8E0", fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>&</Text>
       <Text style={{ color: theme.color, fontSize: 50, marginBottom: 50, fontFamily: "PressStart2P_400Regular" }}>Play</Text>
@@ -82,11 +82,11 @@ export default function HomepageScreen(props) {
 
       <Text style={styles.error}>{errorMsg}</Text>
 
-      <TouchableOpacity 
-        style={[styles.button,{borderColor: theme.color}]}
+      <TouchableOpacity
+        style={[styles.button, { borderColor: theme.color }]}
         onPress={() => submitPseudo()}>
-          <Text
-            style={[styles.buttonText,{color: theme.color}]}>Start</Text>
+        <Text
+          style={[styles.buttonText, { color: theme.color }]}>Start</Text>
       </TouchableOpacity>
 
     </View>
@@ -106,9 +106,9 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 30,
     borderWidth: 1,
-    justifyContent:'center',
-    alignItems:'center',
-    marginVertical:25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 25,
   },
   buttonText: {
     fontFamily: "PressStart2P_400Regular",
@@ -116,5 +116,5 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
-},
+  },
 });
