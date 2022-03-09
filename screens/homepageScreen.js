@@ -18,12 +18,19 @@ export default function HomepageScreen(props) {
   const theme = useContext(themeContext);
 
   const [pseudo, setPseudo] = useState('');
+  const [errorMsg,setErrorMsg] = useState('');
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
+        AsyncStorage.getItem('category', function (error, category) {
+          if (category) {
+            var categoryParse = JSON.parse(category)
+            dispatch({ type: "addchecked", category: categoryParse })
+          }
+        });
         AsyncStorage.getItem('token', function (error, token) {
           if (token) {
             dispatch({ type: 'addToken', token: token })
@@ -39,6 +46,17 @@ export default function HomepageScreen(props) {
   if (!fontLoaded) {
     return <AppLoading />
   }
+
+  var submitPseudo= ()=>{
+    if (pseudo != ''){
+      setErrorMsg('')
+      AsyncStorage.setItem("pseudo", pseudo);
+      props.navigation.navigate("HomeFilter");
+    }else{
+      setErrorMsg('Merci de remplir le champ')
+    }
+  }
+
   return (
     <View style={[styles.container,{backgroundColor: theme.background}]}>
       <Text style={{ color: theme.color, fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>Veazit</Text>
@@ -62,9 +80,11 @@ export default function HomepageScreen(props) {
         />
       </SafeAreaView>
 
+      <Text style={styles.error}>{errorMsg}</Text>
+
       <TouchableOpacity 
         style={[styles.button,{borderColor: theme.color}]}
-        onPress={() => { AsyncStorage.setItem("pseudo", pseudo), props.navigation.navigate("HomeFilter") }}>
+        onPress={() => submitPseudo()}>
           <Text
             style={[styles.buttonText,{color: theme.color}]}>Start</Text>
       </TouchableOpacity>
@@ -94,5 +114,7 @@ const styles = StyleSheet.create({
     fontFamily: "PressStart2P_400Regular",
     fontSize: 20,
   },
-
+  error: {
+    color: 'red',
+},
 });

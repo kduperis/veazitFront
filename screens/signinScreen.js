@@ -56,11 +56,26 @@ export default function SignIn(props) {
             const { type, accessToken, user } = await Google.logInAsync(config)
             if(type ==='success'){
                 const {email,name,photoUrl} = user;
-                setTimeout(()=>props.navigation.navigate('StackNavigation', { screen: 'Map' },1000))
+
+                const data = await fetch(`http://${IP_URL}:3000/users/google-connect`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `email=${email}&photoUrl=${photoUrl}&name=${name}`
+                })
+
+                const body = await data.json()
+                if(body.result){
+                    console.log(body.infoConnect)
+                    dispatch({ type: 'addToken', token: body.user.token })
+                    AsyncStorage.setItem("token", body.user.token)
+                    setTimeout(()=>props.navigation.navigate('StackNavigation', { screen: 'Map' },1000))
+                }else{
+                    setErrorsSignin(body.error)
+                }
             }else{
                 console.log('Google signin was cancelled');
-            }
-    }        
+        }
+    }     
 
     var tabErrorsSignin = listErrorsSignin.map((error, i) => {
         return (<Text key={i} style={styles.error}>{error}</Text>)

@@ -326,6 +326,7 @@ export default function MapScreen() {
   const [poiSelected, setPoiSelected] = useState(0)
 
   const token = useSelector((state) => state.token)
+  const checked = useSelector((state) => state.category)
 
   const [userScore, setUserScore] = useState(0)
   const [userLevel, setUserLevel] = useState(0)
@@ -367,14 +368,18 @@ export default function MapScreen() {
         break;
     }
 
-    return (
-      <Marker
-        key={i}
-        coordinate={{ latitude: lieu.latitude, longitude: lieu.longitude }}
-        onPress={() => { showOverlay(lieu.title, lieu.description); setPoiSelected(i) }}>
-        <FontAwesomeIcon icon={iconCustom} color={colorCustom} />
-      </Marker>
-    )
+    for (var j=0;j<checked.length;j++){
+      if(lieu.categorie==checked[j]){
+        return (
+          <Marker
+            key={i}
+            coordinate={{ latitude: lieu.latitude, longitude: lieu.longitude }}
+            onPress={() => { showOverlay(lieu.title, lieu.description); setPoiSelected(i) }}>
+            <FontAwesomeIcon icon={iconCustom} color={colorCustom} />
+          </Marker>
+        )
+      }
+    }
 
   })
 
@@ -391,8 +396,6 @@ export default function MapScreen() {
         );
       }
     }
-
-    
     askPermissions();
   }, []);
 
@@ -404,7 +407,11 @@ useEffect(() => {
       userData.sort((a, b) => {
         return b.score - a.score
       })
-      userData = userData.slice(0, 3)
+      if (userData.length<=3){
+        userData = userData.slice(0, 1)
+      }else{
+        userData = userData.slice(0, 3)
+      }
       setBestList(userData);
       if (res.data.result) {
         var calculScore = (userDataToken.score % 1000) / 10
@@ -431,7 +438,11 @@ useEffect(() => {
         userData.sort((a, b) => {
           return b.score - a.score
         })
-        userData = userData.slice(0, 3)
+        if (userData.length<=3){
+          userData = userData.slice(0, 1)
+        }else{
+          userData = userData.slice(0, 3)
+        }
         setBestList(userData);
 
       });
@@ -439,7 +450,6 @@ useEffect(() => {
     bestUser();
 
   }, [userScore])
-  console.log(bestList);
 
   //Changer la facteur d'update
 

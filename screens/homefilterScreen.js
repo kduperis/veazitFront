@@ -19,15 +19,13 @@ export default function HomefilterScreen(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const [check3, setCheck3] = useState(false);
-  const [check4, setCheck4] = useState(false);
 
   const dispatch = useDispatch()
-
 
   const checkBox = () => {
     let category = [];
     if (check1) {
-      category.push("aquatique")
+      category.push("Aquatique")
     }
     if (check2) {
       category.push("Domaine")
@@ -35,12 +33,9 @@ export default function HomefilterScreen(props) {
     if (check3) {
       category.push("Parc")
     }
-    if (check4) {
-      category.push("category 4")
-    }
 
-    AsyncStorage.setItem("category", JSON.stringify(category))
     dispatch({ type: "addchecked", category: category })
+    AsyncStorage.setItem("category", JSON.stringify(category))
     props.navigation.navigate('TutoScreen')
 
   }
@@ -79,14 +74,6 @@ export default function HomefilterScreen(props) {
         checked={check3}
         checkedColor={theme.color}
         onPress={() => setCheck3(!check3)}
-      />
-
-      <CheckBox
-        center
-        title="category 4"
-        checked={check4}
-        checkedColor={theme.color}
-        onPress={() => setCheck4(!check4)}
       />
 
       <TouchableOpacity 

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text, CheckBox, Button } from 'react-native-elements';
@@ -8,6 +8,8 @@ import Modal from 'react-native-modal';
 import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import themeContext from '../config/themeContext';
 
@@ -20,16 +22,16 @@ export default function FilterScreen(props) {
   const [check1, setCheck1] = useState(false);
   const [check2, setCheck2] = useState(false);
   const [check3, setCheck3] = useState(false);
-  const [check4, setCheck4] = useState(false);
 
   const checked = useSelector((state) => state.category)
+  const dispatch = useDispatch()
 
-  var filter = ["aquatique", "Domaine", "Parc", "category 4"]
+  var filter = ["Aquatique", "Domaine", "Parc"]
 
   useEffect(() => {
     function checkB(allCategory, selected) {
       for (var i = 0; i < selected.length; i++) {
-
+        
         switch (allCategory.indexOf(selected[i])) {
           case 0:
             setCheck1(true);
@@ -40,20 +42,37 @@ export default function FilterScreen(props) {
           case 2:
             setCheck3(true);
             break;
-          case 3:
-            setCheck4(true);
-            break;
         }
       }
     }
     checkB(filter, checked)
-  }, [])
+  }, [modalVisible])
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 
   if (!fontLoaded) {
     return <AppLoading />
   }
+
+  var updateFilter = () =>{
+    let category = [];
+    if (check1) {
+      category.push("Aquatique")
+    }
+    if (check2) {
+      category.push("Domaine")
+    }
+    if (check3) {
+      category.push("Parc")
+    }
+
+    dispatch({ type: "addchecked", category: category })
+    AsyncStorage.setItem("category", JSON.stringify(category))
+
+    setModalVisible(false)
+  }
+
+
   return (
 
     <View>
@@ -74,7 +93,6 @@ export default function FilterScreen(props) {
       <Modal
         backdropOpacity={0.3}
         isVisible={modalVisible}
-        onBackdropPress={() => { setModalVisible(false) }}
         style={styles.contentView}
       >
 
@@ -106,18 +124,10 @@ export default function FilterScreen(props) {
               onPress={() => setCheck3(!check3)}
             />
 
-            <CheckBox
-
-              title="category 4"
-              checked={check4}
-              checkedColor={theme.color}
-              onPress={() => setCheck4(!check4)}
-            />
-
           </View>
           <TouchableOpacity
               style={[styles.button, { borderColor: theme.color }]}
-              onPress={() => setModalVisible(false)}>
+              onPress={() => updateFilter()}>
               <Text
                 style={[styles.buttonText, { color: theme.color }]}>Go !</Text>
 
