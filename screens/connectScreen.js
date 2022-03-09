@@ -12,9 +12,11 @@ import { faPowerOff, faGear, faHeart, faCoins, faFolder, faCircleHalfStroke, faQ
 import themeContext from '../config/themeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { IP_URL } from '@env'
+
 export default function ConnectScreen(props) {
 
-  const [light,setLight] =useState(false)
+  const [light,setLight] =useState(true)
   const [userName,setUserName] = useState('');
   const [score,setScore]=useState(0);
 
@@ -38,6 +40,20 @@ export default function ConnectScreen(props) {
     props.navigation.navigate('SignUp')
     AsyncStorage.removeItem('token');
     dispatch({ type: 'addToken', token: '' })
+  }
+
+  var updateTheme = async (value)=>{
+
+    setLight(value);
+    EventRegister.emit('myCustomEvent', light);
+
+    await fetch(`http://${IP_URL}:3000/update-theme?`, {
+      method: 'PUT',
+      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+      body: `token=${tokenUser}&apparence=${light}`, 
+    });
+
+
   }
 
   return (
@@ -76,9 +92,7 @@ export default function ConnectScreen(props) {
         <Switch
         color={"#06D4B6"}
         value={light}
-        onValueChange={(value) => {
-          setLight(value);
-          EventRegister.emit('myCustomEvent', light);}}
+        onValueChange={(value) => updateTheme(value)}
         />
       </ListItem>
 

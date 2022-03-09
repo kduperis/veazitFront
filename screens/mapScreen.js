@@ -1,13 +1,14 @@
 import { useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
+import { EventRegister } from 'react-native-event-listeners'
 
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { Avatar, Button, Overlay } from 'react-native-elements'
 import ProgressBar from "react-native-animated-progress";
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faMapPin, faDroplet, faGopuram, faTree } from '@fortawesome/free-solid-svg-icons'
+import { faMapPin, faDroplet, faGopuram, faTree,faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
@@ -325,7 +326,8 @@ export default function MapScreen() {
   const [poiScore, setPoiScore] = useState(0)
   const [poiSelected, setPoiSelected] = useState(0)
   const [updateScore,setUpdateScore]=useState(false)
-
+  const [firstLaunch,setFirstLaunch]=useState(true)
+  const [infoMsg,setInfoMsg]=useState('')
   
   const token = useSelector((state) => state.token)
   const checked = useSelector((state) => state.category)
@@ -418,11 +420,18 @@ export default function MapScreen() {
         if (res.data.result) {
           var calculScore = (userDataToken.score % 1000) / 10
           var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
+          var nextLv = 1000-(10*calculScore)
           setUserLevel(calculLevel)
           setUserScore(calculScore)
+          setInfoMsg(`Prochain niveau dans ${nextLv} pts`)
+          if(firstLaunch && userDataToken){
+            setFirstLaunch(false)
+            EventRegister.emit('myCustomEvent', userDataToken.apparence);            
+          }
         } else {
           setUserScore(0)
           setUserLevel(1)
+          setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
         }
       });
     }
@@ -437,20 +446,29 @@ export default function MapScreen() {
   }
 
   var addScore = async () => {
+    
+  if(token==''){
+    setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
+  }else{
     await fetch(`http://${IP_URL}:3000/best-users?`, {
       method: 'PUT',
       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `score=${poiScore}&&token=${token}`, 
-  });
+      body: `score=${poiScore}&token=${token}`, 
+    });
+  }
 
   setVisibleWin(false)
   setUpdateScore(!updateScore)
 
-}
+  }
 
 let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
 if (!fontLoaded) {
   return <AppLoading />
+}
+
+var addToFavorite = async () => {
+  console.log('Love')
 }
 
 var bestUserCard = bestList.map((user, i) => {
@@ -491,37 +509,30 @@ return (
     <Overlay
       isVisible={visible}
       onBackdropPress={() => { setVisible(false) }}
+      overlayStyle={[styles.overlayStyle,{borderColor:theme.color, backgroundColor:theme.background}]}
     >
+      <TouchableOpacity 
+          style={styles.loveButton}
+          onPress={()=>addToFavorite()}>
+          <FontAwesomeIcon icon={faHeart} color='white' size={25}/>
+      </TouchableOpacity>
+
       <View style={styles.overlayPoi}>
         <Image
           source={require('../assets/noImg.jpg')}
           style={styles.item}
         />
-        <Text>{title}</Text>
-        <Text>{description}</Text>
-        <Button
-          title={`Go veazit`}
-          containerStyle={{
-            width: '65%',
-            marginHorizontal: 50,
-            borderRadius: 30,
-            borderWidth: 1,
-            borderColor: theme.color,
-            marginTop: 20,
-          }}
-          buttonStyle={{
-            backgroundColor: theme.background,
-            height: 50,
-          }}
-          titleStyle={{
-            fontFamily: "PressStart2P_400Regular",
-            fontSize: 18,
-            color: theme.color,
-          }}
-          onPress={() => {
-            launchNavigation(); setPoiScore(poi[poiSelected].score)
-          }}
-        />
+        <Text style={[styles.titleOverlay,{color:theme.color}]}>{title}</Text>
+        <Text style={[styles.descOverlay,{color:theme.color}]}>{description}</Text>
+        <TouchableOpacity 
+            style={[styles.button,{borderColor: theme.color}]}
+            onPress={() => {
+              launchNavigation(); setPoiScore(poi[poiSelected].score)
+            }}>
+            <Text
+                style={[styles.buttonText,{color: theme.color}]}>Go veazit</Text>
+        </TouchableOpacity>
+        
       </View>
 
     </Overlay>
@@ -529,36 +540,21 @@ return (
     <Overlay
       isVisible={visibleWin}
       onBackdropPress={() => { setVisibleWin(false) }}
+      overlayStyle={[styles.overlayStyle,{borderColor:theme.color, backgroundColor:theme.background}]}
     >
       <View style={styles.overlayPoi}>
         <Image
           source={require('../assets/clap.jpg')}
           style={styles.item}
         />
-        <Text>Félicitations tu remportes:</Text>
-        <Text>{poiScore}</Text>
-
-        <Button
-          title={'Veazited'}
-          containerStyle={{
-            width: '65%',
-            marginHorizontal: 50,
-            borderRadius: 30,
-            borderWidth: 1,
-            borderColor: theme.color,
-            marginTop: 20,
-          }}
-          buttonStyle={{
-            backgroundColor: theme.background,
-            height: 50,
-          }}
-          titleStyle={{
-            fontFamily: "PressStart2P_400Regular",
-            fontSize: 18,
-            color: theme.color,
-          }}
-          onPress={() => addScore()}
-        />
+        <Text style={[styles.titleOverlay,{color:theme.color}]}>Félicitations tu remportes:</Text>
+        <Text style={[styles.descOverlay,{color:theme.color}]}>+ {poiScore} !</Text>
+        <TouchableOpacity 
+            style={[styles.button,{borderColor: theme.color}]}
+            onPress={() => addScore()}>
+            <Text
+                style={[styles.buttonText,{color: theme.color}]}>Veazited</Text>
+        </TouchableOpacity>
       </View>
 
     </Overlay>
@@ -574,13 +570,16 @@ return (
       {listPointOfInterest}
 
     </MapView>
-
+          
+    
     <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
-      <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Ton niveau: {userLevel} </Text>
+      <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Niveau: {userLevel} </Text>
     </View>
 
     <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
-
+    <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
+    <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8}} >{infoMsg}</Text>
+    </View>      
   </View>
 
 );
@@ -598,9 +597,10 @@ const styles = StyleSheet.create({
     height: 500,
   },
   item: {
-    width: 100,
-    height: 100,
-    borderRadius: 100
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+    margin:30
   },
   best: {
     flexDirection: 'row',
@@ -631,6 +631,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 20
-
   },
+  overlayStyle:{
+    padding:0, 
+    borderWidth:2,
+},
+  titleOverlay:{
+    fontSize: 13,
+    fontFamily: "PressStart2P_400Regular",
+  },
+  descOverlay:{
+    marginTop:20,
+    fontSize: 11,
+    fontFamily: "PressStart2P_400Regular",
+  },
+  button: {
+    width: '65%',
+    marginVertical:20,
+    height: 50,
+    borderRadius: 30,
+    borderWidth: 1,
+    justifyContent:'center',
+    alignItems:'center',
+},
+buttonText: {
+    fontFamily: "PressStart2P_400Regular",
+    fontSize: 18,
+},
+loveButton: {
+  position:'absolute',
+  zIndex:1,
+  top:20,
+  right:20,
+},
 });

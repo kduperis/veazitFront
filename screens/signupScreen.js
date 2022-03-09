@@ -177,7 +177,7 @@ export default function SignupScreen(props) {
                 style={[styles.button,{borderColor: theme.color}]}
                 onPress={() => handleSubmitSignup()}>
                 <Text
-                    style={[styles.buttonText,{color: "#06D4B6"}]}>Start</Text>
+                    style={[styles.buttonText,{color: theme.color}]}>Start</Text>
             </TouchableOpacity>
 
             {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}

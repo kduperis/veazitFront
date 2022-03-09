@@ -82,9 +82,9 @@ export default function App() {
   useEffect(()=>{
     EventRegister.addEventListener('myCustomEvent',(data)=>{
       setLight(data);
-      console.log(data)
     })
   })
+  
 
   return (
     <themeContext.Provider value={light ? theme.dark : theme.light }>
