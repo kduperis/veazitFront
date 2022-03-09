@@ -74,7 +74,7 @@ export default function TrophyScreen() {
             popover={
               <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>
                 {
-                  `Il faut que tu veazites ${badge.condition} lieux pour débloquer ce badge`}
+                  `Il faut que tu veazites ${badge.condition/100} lieux pour débloquer ce badge`}
               </Text>
             }
           >
