@@ -16,15 +16,9 @@ import { IP_URL } from '@env'
 
 export default function ConnectScreen(props) {
 
-<<<<<<< HEAD
   const [light,setLight] =useState(true)
   const [userName,setUserName] = useState('');
   const [score,setScore]=useState(0);
-=======
-  const [light, setLight] = useState(false)
-  const [userName, setUserName] = useState('');
-  const [score, setScore] = useState(0);
->>>>>>> ec601c764587514937b2ee835458af46db0eab3c
 
   const theme = useContext(themeContext);
 
@@ -39,6 +33,17 @@ export default function ConnectScreen(props) {
         props.navigation.navigate("SignUp")
       }
     }
+    async function scoreData() {
+      var rawResponse = await fetch(`http://${IP_URL}:3000/userScore?token=${tokenUser}`);
+      var response = await rawResponse.json();
+
+      if (response.result) {
+        setScore(response.user.score);
+        setUserName(response.user.username)
+      }
+
+    }
+    scoreData();
     verifyUser()
   }, [isFocused])
 
@@ -48,7 +53,7 @@ export default function ConnectScreen(props) {
     dispatch({ type: 'addToken', token: '' })
   }
 
-<<<<<<< HEAD
+
   var updateTheme = async (value)=>{
 
     setLight(value);
@@ -62,24 +67,6 @@ export default function ConnectScreen(props) {
 
 
   }
-=======
-  useEffect(() => {
-    async function scoreData() {
-      var rawResponse = await fetch(`http://${IP_URL}:3000/userScore?token=${tokenUser}`);
-      var response = await rawResponse.json();
-
-      if (response.result) {
-        setScore(response.user.score);
-        setUserName(response.user.username)
-
-
-      }
-
-    }
-    scoreData();
-
-  }, [isFocused])
->>>>>>> ec601c764587514937b2ee835458af46db0eab3c
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
@@ -115,18 +102,9 @@ export default function ConnectScreen(props) {
           <Text style={[styles.textList, { color: theme.color }]}>Apparence</Text>
         </ListItem.Content>
         <Switch
-<<<<<<< HEAD
         color={"#06D4B6"}
         value={light}
         onValueChange={(value) => updateTheme(value)}
-=======
-          color={"#06D4B6"}
-          value={light}
-          onValueChange={(value) => {
-            setLight(value);
-            EventRegister.emit('myCustomEvent', light);
-          }}
->>>>>>> ec601c764587514937b2ee835458af46db0eab3c
         />
       </ListItem>
 
