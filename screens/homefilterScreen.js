@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
@@ -49,38 +49,41 @@ export default function HomefilterScreen(props) {
 
   return (
 
-    <View style={[styles.container,{backgroundColor: theme.background}]}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Text style={{ color: theme.color, fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 80 }}>Quel(s) genre(s) de lieu souhaitez-vous Veaziter ?</Text>
+      <View>
+        <CheckBox
+          center
+          title="Aquatique"
+          checked={check1}
+          checkedColor={theme.color}
+          onPress={() => setCheck1(!check1)}
+        />
 
-      <CheckBox
-        center
-        title="Aquatique"
-        checked={check1}
-        checkedColor={theme.color}
-        onPress={() => setCheck1(!check1)}
-      />
+        <CheckBox
+          center
+          title="Domaine"
+          checked={check2}
+          checkedColor={theme.color}
+          onPress={() => setCheck2(!check2)}
+        />
 
-      <CheckBox
-        center
-        title="Domaine"
-        checked={check2}
-        checkedColor={theme.color}
-        onPress={() => setCheck2(!check2)}
-      />
+        <CheckBox
+          center
+          title="Parc"
+          checked={check3}
+          checkedColor={theme.color}
+          onPress={() => setCheck3(!check3)}
+        />
 
-      <CheckBox
-        center
-        title="Parc"
-        checked={check3}
-        checkedColor={theme.color}
-        onPress={() => setCheck3(!check3)}
-      />
+      </View>
 
-      <TouchableOpacity 
-        style={[styles.button,{borderColor: theme.color}]}
+
+      <TouchableOpacity
+        style={[styles.button, { borderColor: theme.color }]}
         onPress={() => checkBox()}>
-          <Text
-            style={[styles.buttonText,{color: theme.color}]}>GO!</Text>
+        <Text
+          style={[styles.buttonText, { color: theme.color }]}>GO!</Text>
       </TouchableOpacity>
 
     </View>
@@ -98,9 +101,9 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 30,
     borderWidth: 1,
-    justifyContent:'center',
-    alignItems:'center',
-    marginVertical:25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 25,
   },
   buttonText: {
     fontFamily: "PressStart2P_400Regular",

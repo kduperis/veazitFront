@@ -4,7 +4,7 @@ import { EventRegister } from 'react-native-event-listeners'
 import { useIsFocused } from '@react-navigation/native';
 
 import { StyleSheet, Text, View } from 'react-native';
-import {ListItem, Switch, Divider, Avatar} from 'react-native-elements'
+import { ListItem, Switch, Divider, Avatar } from 'react-native-elements'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPowerOff, faGear, faHeart, faCoins, faFolder, faCircleHalfStroke, faQuestion } from '@fortawesome/free-solid-svg-icons'
@@ -16,9 +16,15 @@ import { IP_URL } from '@env'
 
 export default function ConnectScreen(props) {
 
+<<<<<<< HEAD
   const [light,setLight] =useState(true)
   const [userName,setUserName] = useState('');
   const [score,setScore]=useState(0);
+=======
+  const [light, setLight] = useState(false)
+  const [userName, setUserName] = useState('');
+  const [score, setScore] = useState(0);
+>>>>>>> ec601c764587514937b2ee835458af46db0eab3c
 
   const theme = useContext(themeContext);
 
@@ -27,21 +33,22 @@ export default function ConnectScreen(props) {
 
   const isFocused = useIsFocused();
 
-  useEffect(()=>{
+  useEffect(() => {
     var verifyUser = () => {
-      if(!tokenUser){
+      if (!tokenUser) {
         props.navigation.navigate("SignUp")
-      } 
+      }
     }
     verifyUser()
-  },[isFocused])
+  }, [isFocused])
 
-  var disconnect = () =>{
+  var disconnect = () => {
     props.navigation.navigate('SignUp')
     AsyncStorage.removeItem('token');
     dispatch({ type: 'addToken', token: '' })
   }
 
+<<<<<<< HEAD
   var updateTheme = async (value)=>{
 
     setLight(value);
@@ -55,102 +62,129 @@ export default function ConnectScreen(props) {
 
 
   }
+=======
+  useEffect(() => {
+    async function scoreData() {
+      var rawResponse = await fetch(`http://${IP_URL}:3000/userScore?token=${tokenUser}`);
+      var response = await rawResponse.json();
+
+      if (response.result) {
+        setScore(response.user.score);
+        setUserName(response.user.username)
+
+
+      }
+
+    }
+    scoreData();
+
+  }, [isFocused])
+>>>>>>> ec601c764587514937b2ee835458af46db0eab3c
 
   return (
-    <View style={[styles.container,{backgroundColor:theme.background}]}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
 
       <View style={{
-        alignItems:'center',
-        marginVertical:20, 
+        alignItems: 'center',
+        marginVertical: 20,
       }}>
         <Avatar
           size={200}
           rounded
           source={require('../assets/noImg.jpg')}
-          containerStyle={{ marginVertical:25 }}
+          containerStyle={{ marginVertical: 25 }}
         />
-        <Text style={[styles.contentTitle,{color: theme.color}]}>{userName}</Text>
-        <Text style={[styles.contentDesc,{color: theme.color}]}>Score: {score}</Text>
+        <Text style={[styles.contentTitle, { color: theme.color }]}>{userName}</Text>
+        <Text style={[styles.contentDesc, { color: theme.color }]}>Score:{score}</Text>
       </View>
 
-      <ListItem 
-          containerStyle={[styles.containerList,{backgroundColor:theme.background}]}
-          onPress={()=>props.navigation.navigate('Parameter')}>
+      <ListItem
+        containerStyle={[styles.containerList, { backgroundColor: theme.background }]}
+        onPress={() => props.navigation.navigate('Parameter')}>
         <FontAwesomeIcon icon={faGear} color={theme.color} size={20} textAlign={'center'} />
         <ListItem.Content>
-          <Text style={[styles.textList,{color:theme.color}]}>Parametres</Text>
+          <Text style={[styles.textList, { color: theme.color }]}>Parametres</Text>
         </ListItem.Content>
       </ListItem>
 
       <Divider />
 
-      <ListItem containerStyle={[styles.containerList,{backgroundColor:theme.background}]}>
+      <ListItem containerStyle={[styles.containerList, { backgroundColor: theme.background }]}>
         <FontAwesomeIcon icon={faCircleHalfStroke} color={theme.color} size={20} textAlign={'center'} />
         <ListItem.Content>
-          <Text style={[styles.textList,{color:theme.color}]}>Apparence</Text>
+          <Text style={[styles.textList, { color: theme.color }]}>Apparence</Text>
         </ListItem.Content>
         <Switch
+<<<<<<< HEAD
         color={"#06D4B6"}
         value={light}
         onValueChange={(value) => updateTheme(value)}
+=======
+          color={"#06D4B6"}
+          value={light}
+          onValueChange={(value) => {
+            setLight(value);
+            EventRegister.emit('myCustomEvent', light);
+          }}
+>>>>>>> ec601c764587514937b2ee835458af46db0eab3c
         />
       </ListItem>
 
       <Divider />
 
-      <ListItem 
-          containerStyle={[styles.containerList,{backgroundColor:theme.background}]}
-          onPress={()=>props.navigation.navigate('Favorite')}>
+      <ListItem
+        containerStyle={[styles.containerList, { backgroundColor: theme.background }]}
+        onPress={() => props.navigation.navigate('Favorite')}>
         <FontAwesomeIcon icon={faHeart} color={theme.color} size={20} textAlign={'center'} />
         <ListItem.Content>
-          <Text style={[styles.textList,{color:theme.color}]}>Favoris POI</Text>
+          <Text style={[styles.textList, { color: theme.color }]}>Favoris POI</Text>
         </ListItem.Content>
       </ListItem>
 
       <Divider />
 
-      <ListItem 
-          containerStyle={[styles.containerList,{backgroundColor:theme.background}]}
-          onPress={()=>props.navigation.navigate('Archive')}>
+      <ListItem
+        containerStyle={[styles.containerList, { backgroundColor: theme.background }]}
+        onPress={() => props.navigation.navigate('Archive')}>
         <FontAwesomeIcon icon={faFolder} color={theme.color} size={20} textAlign={'center'} />
         <ListItem.Content>
-          <Text style={[styles.textList,{color:theme.color}]}>Archive POI</Text>
+          <Text style={[styles.textList, { color: theme.color }]}>Archive POI</Text>
         </ListItem.Content>
       </ListItem>
 
       <Divider />
 
-      <ListItem 
-          containerStyle={[styles.containerList,{backgroundColor:theme.background}]}
-          onPress={()=>props.navigation.navigate('Howto')}>
+      <ListItem
+        containerStyle={[styles.containerList, { backgroundColor: theme.background }]}
+        onPress={() => props.navigation.navigate('Howto')}>
         <FontAwesomeIcon icon={faCoins} color={theme.color} size={20} textAlign={'center'} />
         <ListItem.Content>
-          <Text style={[styles.textList,{color:theme.color}]}>Comment gagner des points ?</Text>
+          <Text style={[styles.textList, { color: theme.color }]}>Comment gagner des points ?</Text>
         </ListItem.Content>
       </ListItem>
 
       <Divider />
 
-      <ListItem 
-          containerStyle={[styles.containerList,{backgroundColor:theme.background}]}
-          onPress={()=>props.navigation.navigate('Who')}>
+      <ListItem
+        containerStyle={[styles.containerList, { backgroundColor: theme.background }]}
+        onPress={() => props.navigation.navigate('Who')}>
         <FontAwesomeIcon icon={faQuestion} color={theme.color} size={20} textAlign={'center'} />
         <ListItem.Content>
-          <Text style={[styles.textList,{color:theme.color}]}>Qui sommes nous ?</Text>
+          <Text style={[styles.textList, { color: theme.color }]}>Qui sommes nous ?</Text>
         </ListItem.Content>
       </ListItem>
 
       <Divider />
 
-      <ListItem 
-          containerStyle={[styles.containerList,{backgroundColor:theme.background}]}
-          onPress={()=>disconnect()}>
+      <ListItem
+        containerStyle={[styles.containerList, { backgroundColor: theme.background }]}
+        onPress={() => disconnect()}>
         <FontAwesomeIcon icon={faPowerOff} color="#EA4335" size={20} textAlign={'center'} />
         <ListItem.Content>
           <Text style={{
-            fontSize:10,
+            fontSize: 10,
             fontFamily: "PressStart2P_400Regular",
-            color:"#EA4335",
+            color: "#EA4335",
           }}>Deconnexion</Text>
         </ListItem.Content>
       </ListItem>
@@ -166,19 +200,19 @@ const styles = StyleSheet.create({
   },
   contentTitle: {
     fontSize: 24,
-    marginBottom:20,
+    marginBottom: 20,
     fontFamily: "PressStart2P_400Regular",
   },
-  contentDesc:{
+  contentDesc: {
     fontSize: 16,
-    marginBottom:20,
+    marginBottom: 20,
     fontFamily: "PressStart2P_400Regular",
   },
-  containerList:{
-    height:50,
+  containerList: {
+    height: 50,
   },
-  textList:{
-    fontSize:10,
+  textList: {
+    fontSize: 10,
     fontFamily: "PressStart2P_400Regular",
   }
 });

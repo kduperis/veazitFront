@@ -4,6 +4,8 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Button, Avatar, Tooltip, colors } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { IP_URL } from '@env'
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { useFonts } from 'expo-font';
@@ -17,7 +19,10 @@ export default function TrophyScreen() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [badgeData, setBadgeData] = useState([])
-  const [visibleDesc, setVisilbleText] = useState("Click sur le trophée pour voir les conditions de déblocage")
+  const [myBadge, setMyBadge] = useState([])
+
+  const token = useSelector((state) => state.token)
+
 
   useEffect(() => {
     async function loadData() {
@@ -26,32 +31,42 @@ export default function TrophyScreen() {
       setBadgeData(response.badgeCollection);
     }
     loadData();
-
   }, [])
+
+  useEffect(() => {
+    async function getTrophy() {
+      axios.get(`http://${IP_URL}:3000/my-badges?token=${token}`).then((res) => {
+        if(res.data.result) {
+          setMyBadge(res.data.myBadge);
+        }
+    });
+    }
+    getTrophy()
+  }, [modalVisible])
+
 
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
   if (!fontLoaded) {
     return <AppLoading />
   }
-
   var badgeCard = badgeData.map((badge, i) => {
+    var imageUrl = `https://res.cloudinary.com/dualrskkc/image/upload/v1646835604/veazit/block_lmhkuy.png`
+    var count = myBadge.length
+    if(count > 0 && i < count) {
+      imageUrl = myBadge[i].img;
+    }
 
     return (
-
       <View key={i} style={{ flexDirection: "row" }}>
         <View style={{ flexDirection: "column", width: '50%' }}>
           <View style={{ alignItems: "center", marginBottom: 15 }} >
-
             <Avatar
               size={80}
-              source={{ uri: badge.img }}
+              source={{ uri: imageUrl }}
             />
-
             <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 12, marginTop: 10, color: "#fff" }} >{badge.title}</Text>
           </View>
-
         </View>
-
         <View style={{ marginTop: 15, width: "50%" }}>
           <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10, color: theme.color }} >{badge.description}</Text>
           <Tooltip
@@ -59,14 +74,13 @@ export default function TrophyScreen() {
             popover={
               <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>
                 {
-                  `Il faut que tu veazits ${badge.condition} lieux pour débloquer ce badge`}
+                  `Il faut que tu veazites ${badge.condition} lieux pour débloquer ce badge`}
               </Text>
             }
           >
             <Text style={{ color: "#fff", fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>More info</Text>
           </Tooltip>
         </View>
-
       </View>
 
     )

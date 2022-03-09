@@ -372,8 +372,8 @@ export default function MapScreen() {
         break;
     }
 
-    for (var j=0;j<checked.length;j++){
-      if(lieu.categorie==checked[j]){
+    for (var j = 0; j < checked.length; j++) {
+      if (lieu.categorie == checked[j]) {
         return (
           <Marker
             key={i}
@@ -403,7 +403,7 @@ export default function MapScreen() {
     askPermissions();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     async function bestUser() {
       axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
         var userData = res.data.bestUserName;
@@ -411,9 +411,9 @@ export default function MapScreen() {
         userData.sort((a, b) => {
           return b.score - a.score
         })
-        if (userData.length<=3){
+        if (userData.length <= 3) {
           userData = userData.slice(0, 1)
-        }else{
+        } else {
           userData = userData.slice(0, 3)
         }
         setBestList(userData);
@@ -435,9 +435,9 @@ export default function MapScreen() {
         }
       });
     }
-    
+
     bestUser();
-  },[isFocused,token,updateScore])
+  }, [isFocused, token, updateScore])
 
   var launchNavigation = async () => {
     //ADD NAVIGATION
@@ -457,15 +457,11 @@ export default function MapScreen() {
     });
   }
 
-  setVisibleWin(false)
-  setUpdateScore(!updateScore)
+    setVisibleWin(false)
+    setUpdateScore(!updateScore)
 
   }
 
-let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
-if (!fontLoaded) {
-  return <AppLoading />
-}
 
 var addToFavorite = async () => {
   console.log('Love')
@@ -492,6 +488,11 @@ var bestUserCard = bestList.map((user, i) => {
     </View>
   )
 })
+
+let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
+  if (!fontLoaded) {
+    return <AppLoading />
+  }
 
 return (
   <View style={styles.container}>
@@ -533,56 +534,61 @@ return (
                 style={[styles.buttonText,{color: theme.color}]}>Go veazit</Text>
         </TouchableOpacity>
         
-      </View>
 
+      </View>
     </Overlay>
 
-    <Overlay
-      isVisible={visibleWin}
-      onBackdropPress={() => { setVisibleWin(false) }}
-      overlayStyle={[styles.overlayStyle,{borderColor:theme.color, backgroundColor:theme.background}]}
-    >
-      <View style={styles.overlayPoi}>
-        <Image
-          source={require('../assets/clap.jpg')}
-          style={styles.item}
-        />
-        <Text style={[styles.titleOverlay,{color:theme.color}]}>Félicitations tu remportes:</Text>
-        <Text style={[styles.descOverlay,{color:theme.color}]}>+ {poiScore} !</Text>
-        <TouchableOpacity 
-            style={[styles.button,{borderColor: theme.color}]}
-            onPress={() => addScore()}>
-            <Text
-                style={[styles.buttonText,{color: theme.color}]}>Veazited</Text>
-        </TouchableOpacity>
+      <View style={[styles.best, { backgroundColor: theme.background }]}>
+        {bestUserCard}
       </View>
+      
+      <Overlay
+        isVisible={visibleWin}
+        onBackdropPress={() => { setVisibleWin(false) }}
+        overlayStyle={[styles.overlayStyle,{borderColor:theme.color, backgroundColor:theme.background}]}
+      >
+          <View style={styles.overlayPoi}>
+            <Image
+              source={require('../assets/clap.jpg')}
+              style={styles.item}
+            />
+            <Text style={[styles.titleOverlay,{color:theme.color}]}>Félicitations tu remportes:</Text>
+            <Text style={[styles.descOverlay,{color:theme.color}]}>+ {poiScore} !</Text>
+          </View>
+          <TouchableOpacity 
+              style={[styles.button,{borderColor: theme.color}]}
+              onPress={() => addScore()}>
+              <Text
+                  style={[styles.buttonText,{color: theme.color}]}>Veazited</Text>
+          </TouchableOpacity>
+      </Overlay>
 
-    </Overlay>
+      <MapView
+        style={{ flex: 1 }}
+        provider={PROVIDER_GOOGLE}
+        customMapStyle={mapStyle}
+        showsUserLocation={location}
+        showsCompass={true}
+        showsMyLocationButton={location}>
 
-    <MapView
-      style={{ flex: 1 }}
-      provider={PROVIDER_GOOGLE}
-      customMapStyle={mapStyle}
-      showsUserLocation={location}
-      showsCompass={true}
-      showsMyLocationButton={location}>
+        {listPointOfInterest}
 
-      {listPointOfInterest}
+      </MapView>
 
-    </MapView>
-          
-    
-    <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
-      <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Niveau: {userLevel} </Text>
+        <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
+          < Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Niveau: {userLevel} </Text>
+        </View>
+
+        <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
+
+        <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
+          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8}} >{infoMsg}</Text>
+        </View>
+
     </View>
 
-    <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
-    <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
-    <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8}} >{infoMsg}</Text>
-    </View>      
-  </View>
+  );
 
-);
 }
 
 const styles = StyleSheet.create({
