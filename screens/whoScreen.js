@@ -15,7 +15,7 @@ export default function WhoScreen(props) {
     <View style={[styles.content, { backgroundColor: theme.background }]}>
       <Text style={[styles.contentTitle, { color: theme.color }]}>Qui est la Bande à Picsou ?</Text>
       <View>
-        <View flexDirection='row' style={{ alignItems: 'center', width: '70%' }}>
+        <View flexDirection='row' style={{ alignItems: 'center', width: '70%', marginTop: 25}}>
           <Avatar
             source={{ uri: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646841698/veazit/kevin_jrojd2.jpg' }}
             size={150}
