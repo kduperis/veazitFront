@@ -40,6 +40,7 @@ export default function ConnectScreen(props) {
       if (response.result) {
         setScore(response.user.score);
         setUserName(response.user.username)
+        setLight(!response.user.apparence)
       }
 
     }

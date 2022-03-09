@@ -537,10 +537,6 @@ return (
 
       </View>
     </Overlay>
-
-      <View style={[styles.best, { backgroundColor: theme.background }]}>
-        {bestUserCard}
-      </View>
       
       <Overlay
         isVisible={visibleWin}
@@ -554,13 +550,15 @@ return (
             />
             <Text style={[styles.titleOverlay,{color:theme.color}]}>Félicitations tu remportes:</Text>
             <Text style={[styles.descOverlay,{color:theme.color}]}>+ {poiScore} !</Text>
-          </View>
+          
           <TouchableOpacity 
-              style={[styles.button,{borderColor: theme.color}]}
-              onPress={() => addScore()}>
-              <Text
-                  style={[styles.buttonText,{color: theme.color}]}>Veazited</Text>
-          </TouchableOpacity>
+            style={[styles.button,{borderColor: theme.color}]}
+            onPress={() => addScore()}>
+            <Text
+                style={[styles.buttonText,{color: theme.color}]}>Veazited</Text>
+        </TouchableOpacity>
+        </View>
+          
       </Overlay>
 
       <MapView
@@ -645,11 +643,13 @@ const styles = StyleSheet.create({
   titleOverlay:{
     fontSize: 13,
     fontFamily: "PressStart2P_400Regular",
+    padding:5,
   },
   descOverlay:{
     marginTop:20,
     fontSize: 11,
     fontFamily: "PressStart2P_400Regular",
+    padding:5,
   },
   button: {
     width: '65%',

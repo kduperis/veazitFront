@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
       },
       buttonText: {
         fontFamily: "PressStart2P_400Regular",
-        fontSize: 20,
+        fontSize: 16,
       },
       closeButton: {
         position:'absolute',
