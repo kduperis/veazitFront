@@ -35,6 +35,7 @@ export default function ConnectScreen(props) {
   },[isFocused])
 
   var disconnect = () =>{
+    props.navigation.navigate('StackNavigation')
     AsyncStorage.removeItem('token');
     dispatch({ type: 'addToken', token: '' })
   }
