@@ -53,7 +53,7 @@ export default function HomepageScreen(props) {
       AsyncStorage.setItem("pseudo", pseudo);
       props.navigation.navigate("HomeFilter");
     } else {
-      setErrorMsg('Merci de remplir le champ')
+      setErrorMsg('Merci de remplir le champs')
     }
   }
 

@@ -602,7 +602,7 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
               style={styles.item}
             />
             <Text style={[styles.titleOverlay,{color:theme.color}]}>Félicitations tu remportes:</Text>
-            <Text style={[styles.descOverlay,{color:theme.color}]}>+ {poiScore} !</Text>
+            <Text style={[styles.descOverlay,{color:theme.color}]}>+ {poiScore} points !</Text>
           
           <TouchableOpacity 
             style={[styles.button,{borderColor: theme.color}]}
