@@ -343,12 +343,12 @@ export default function MapScreen() {
 
   const isFocused = useIsFocused();
 
-  var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique', score: 100 },
-  { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, alreadyView: false, categorie: 'Aquatique', score: 100 },
-  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711, alreadyView: false, categorie: 'Domaine', score: 100 },
-  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, alreadyView: true, categorie: 'Domaine', score: 100 },
-  { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, alreadyView: false, categorie: 'Domaine', score: 4000 },
-  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, alreadyView: false, categorie: 'Parc', score: 100 }]
+  var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
+  { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, alreadyView: false, categorie: 'Aquatique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711, alreadyView: false, categorie: 'Domaine', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, alreadyView: true, categorie: 'Domaine', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, alreadyView: false, categorie: 'Domaine', score: 4000,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, alreadyView: false, categorie: 'Parc', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  }]
 
 
   var showOverlay = (title, description) => {
@@ -463,7 +463,7 @@ export default function MapScreen() {
 
   
 
-  var addScore = async () => {
+  var addScore = async (longitude,latitude,title,description,image,category) => {
     
   if(token==''){
     setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
@@ -471,7 +471,7 @@ export default function MapScreen() {
     await fetch(`http://${IP_URL}:3000/best-users?`, {
       method: 'PUT',
       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `score=${poiScore}&token=${token}`, 
+      body: `score=${poiScore}&token=${token}&longitude=${longitude}&latitude=${latitude}&title=${title}&description=${description}&image=${image}&category=${category}`, 
     });
   }
 
@@ -481,11 +481,12 @@ export default function MapScreen() {
   }
 
 
-var addToFavorite = async () => {
+var addToFavorite = async (longitude,latitude,title,description,image,category) => {
+  console.log(description)
   await fetch(`http://${IP_URL}:3000/add-favorite?`, {
       method: 'PUT',
       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `token=${token}`, 
+      body: `token=${token}&longitude=${longitude}&latitude=${latitude}&title=${title}&description=${description}&image=${image}&category=${category}`, 
     });
 }
 
@@ -538,13 +539,13 @@ return (
     >
       <TouchableOpacity 
           style={styles.loveButton}
-          onPress={()=>addToFavorite()}>
+          onPress={()=>addToFavorite(poi[poiSelected].longitude,poi[poiSelected].latitude,poi[poiSelected].title,poi[poiSelected].description,poi[poiSelected].image,poi[poiSelected].categorie)}>
           <FontAwesomeIcon icon={faHeart} color='white' size={25}/>
       </TouchableOpacity>
 
       <View style={styles.overlayPoi}>
         <Image
-          source={require('../assets/noImg.jpg')}
+          source={{ uri: poi[poiSelected].image }}
           style={styles.item}
         />
         <Text style={[styles.titleOverlay,{color:theme.color}]}>{title}</Text>
@@ -564,7 +565,6 @@ return (
       
       <Overlay
         isVisible={visibleWin}
-        onBackdropPress={() => { setVisibleWin(false) }}
         overlayStyle={[styles.overlayStyle,{borderColor:theme.color, backgroundColor:theme.background}]}
       >
           <View style={styles.overlayPoi}>
@@ -577,7 +577,7 @@ return (
           
           <TouchableOpacity 
             style={[styles.button,{borderColor: theme.color}]}
-            onPress={() => addScore()}>
+            onPress={() => addScore(poi[poiSelected].longitude,poi[poiSelected].latitude,poi[poiSelected].title,poi[poiSelected].description,poi[poiSelected].image,poi[poiSelected].categorie)}>
             <Text
                 style={[styles.buttonText,{color: theme.color}]}>Veazited</Text>
         </TouchableOpacity>
@@ -593,11 +593,6 @@ return (
         showsCompass={true}
         showsMyLocationButton={location}
         >
-
-          <Marker
-            coordinate={{ latitude: -21.021510971546718, longitude: 55.70074707017567 }}>
-            <FontAwesomeIcon icon={faMapPin} color={'blue'} />
-          </Marker>
 
             {directionVisible && 
               <MapViewDirections
