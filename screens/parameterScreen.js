@@ -4,16 +4,12 @@ import { StyleSheet, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Avatar, Text, Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import { useDispatch, useSelector } from 'react-redux';
-
 import themeContext from '../config/themeContext';
 
 export default function ParameterScreen(props) {
 
-  const [imageProfile, setImageProfile] = useState('');
-  const dispatch = useDispatch();
+  const [myImage, setMyImage] = useState('https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg');
 
-  const avatarChecked = useSelector(state => state.avatar)
 
   var avatars = ['https://res.cloudinary.com/dualrskkc/image/upload/v1646862951/veazit/avatar/alchemist_1_bkdg4b.png',
     'https://res.cloudinary.com/dualrskkc/image/upload/v1646862951/veazit/avatar/alchemist_xd3gur.png',
@@ -108,7 +104,7 @@ export default function ParameterScreen(props) {
           borderWidth: 5,
           margin:2
         }}
-        onPress={() => { setImageProfile(avatar), dispatch({type: 'addAvatar', avatar:avatar}) }}
+        
       />
     )
   })
@@ -116,23 +112,12 @@ export default function ParameterScreen(props) {
 
   return (
     <View style={[styles.content, { backgroundColor: theme.background }]}>
-      <View style={{ flex: 1, marginTop: '15%', marginBottom: '30%', width: '80%'}}>
 
-        <View>
-          <Text style={[styles.contentTitle, { color: theme.color}]}>Choose your Avatar !</Text>
-        </View>
-
-          <ScrollView >
-        <View style={{ flexDirection: 'row', flexWrap:'wrap' }}>
-            {listAvatar}
-        </View>
-          </ScrollView>
-
-        <View style={{ alignItems: 'center', alignSelf: 'center', marginTop: 20 }}>
+        <View style={{ alignItems: 'center', alignSelf: 'center', marginTop: 50 }}>
           <Text style={[styles.contentTitle, { color: theme.color }]}>Ton avatar actuel:</Text>
 
           <Avatar
-            source={{ uri: avatarChecked }}
+            source={{ uri: myImage }}
             size={100}
             rounded={true}
             containerStyle={{
@@ -142,6 +127,20 @@ export default function ParameterScreen(props) {
             }}
           />
         </View>
+
+      <View style={{ flex: 1, marginTop:20,marginBottom: '30%', width: '80%', alignItems:'center', justifyContent:'center'}}>
+
+        <View style={{marginBottom:10,}}>
+          <Text style={[styles.contentTitle, { color: theme.color}]}>Choose your Avatar !</Text>
+        </View>
+
+          <ScrollView >
+            <View style={{ flexDirection: 'row', flexWrap:'wrap',alignItems:'center', justifyContent:'center' }}>
+              {listAvatar}
+            </View>
+          </ScrollView>
+
+       
       </View>
 
       <View style={styles.buttonContainer}>
@@ -163,8 +162,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contentTitle: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: "PressStart2P_400Regular",
+    marginBottom:20
   },
   buttonPrevious: {
     borderWidth: 1,

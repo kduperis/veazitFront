@@ -29,12 +29,11 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux'
 import token from './reducers/token';
 import category from './reducers/category'
-import avatar from './reducers/avatar';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const store = createStore(combineReducers({ token, category, avatar }))
+const store = createStore(combineReducers({ token, category }))
 
 var fakeComponent = () => {
   return null

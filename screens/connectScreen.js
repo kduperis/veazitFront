@@ -19,6 +19,7 @@ export default function ConnectScreen(props) {
   const [light,setLight] =useState(true)
   const [userName,setUserName] = useState('');
   const [score,setScore]=useState(0);
+  const [imageUrl,setImageUrl]=useState('https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg')
 
   const theme = useContext(themeContext);
 
@@ -27,8 +28,6 @@ export default function ConnectScreen(props) {
 
   const isFocused = useIsFocused();
 
-  const avatarChecked = useSelector(state => state.avatar)
-
   useEffect(() => {
     var verifyUser = () => {
       if (!tokenUser) {
@@ -36,12 +35,13 @@ export default function ConnectScreen(props) {
       }
     }
     async function scoreData() {
-      var rawResponse = await fetch(`http://${IP_URL}:3000/userScore?token=${tokenUser}`);
+      var rawResponse = await fetch(`http://${IP_URL}:3000/best-users?token=${tokenUser}`);
       var response = await rawResponse.json();
 
       if (response.result) {
         setScore(response.user.score);
         setUserName(response.user.username)
+        setImageUrl(response.user.avatar)
         setLight(!response.user.apparence)
       }
 
@@ -81,7 +81,7 @@ export default function ConnectScreen(props) {
         <Avatar
           size={200}
           rounded
-          source={{ uri: avatarChecked }}
+          source={{ uri: imageUrl }}
           containerStyle={{ marginVertical: 25 }}
         />
         <Text style={[styles.contentTitle, { color: theme.color }]}>{userName}</Text>

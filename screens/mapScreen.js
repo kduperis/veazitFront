@@ -331,6 +331,7 @@ export default function MapScreen() {
   const [firstLaunch, setFirstLaunch] = useState(true)
   const [infoMsg, setInfoMsg] = useState('')
   const [directionVisible, setDirectionVisible] = useState(false)
+  const [stopPoi,setStopPoi]= useState('')
 
   const [originLocation, setOriginLocation] = useState({})
   const [destinationLocation, setDestinationLocation] = useState({})
@@ -340,17 +341,17 @@ export default function MapScreen() {
 
   const [userScore, setUserScore] = useState(0)
   const [userLevel, setUserLevel] = useState(0)
-  const [duration, setDuration] = useState("")
-  const [distance, setDistance] = useState(0)
+  const [duration, setDuration] = useState('')
+  const [distance, setDistance] = useState('')
 
   const isFocused = useIsFocused();
 
-  var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, alreadyView: true, categorie: 'Aquatique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
-  { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, alreadyView: false, categorie: 'Aquatique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711, alreadyView: false, categorie: 'Domaine', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, alreadyView: true, categorie: 'Domaine', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, alreadyView: false, categorie: 'Domaine', score: 4000,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, alreadyView: false, categorie: 'Parc', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  }]
+  var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, categorie: 'Aquatique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
+  { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, categorie: 'Aquatique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711,categorie: 'Domaine', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, categorie: 'Domaine', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, categorie: 'Domaine', score: 4000,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, categorie: 'Parc', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  }]
 
 
   var showOverlay = (title, description) => {
@@ -362,11 +363,6 @@ export default function MapScreen() {
   var listPointOfInterest = poi.map((lieu, i) => {
 
     let iconCustom = faMapPin
-    let colorCustom = 'green'
-
-    if (lieu.alreadyView) {
-      colorCustom = 'black'
-    }
 
     switch (lieu.categorie) {
       case 'Aquatique':
@@ -387,7 +383,7 @@ export default function MapScreen() {
             key={i}
             coordinate={{ latitude: lieu.latitude, longitude: lieu.longitude }}
             onPress={() => { showOverlay(lieu.title, lieu.description); setPoiSelected(i) }}>
-            <FontAwesomeIcon icon={iconCustom} color={colorCustom} />
+            <FontAwesomeIcon icon={iconCustom} color='black' />
           </Marker>
         )
       }
@@ -452,44 +448,56 @@ export default function MapScreen() {
     setOriginLocation(currentPosition)
     setDestinationLocation({ latitude: destLatitude, longitude: destLongitude })
     setDirectionVisible(true)
-    setTimeout(() => {
-      setVisibleWin(true);
-      setDirectionVisible(false)
+    if(stopPoi!=''){
+      
+      setTimeout(() => {
+        setVisibleWin(true);
+        setDirectionVisible(false)
+      }, 10000); //DEMODAY simuler la marche 
+
+    }else{
+      
+      setStopPoi('')
+      setDistance('Trajet Impossible !')
+      setDuration('Veuillez essayer un autre lieu !')
+      setTimeout(() => {
+        setDirectionVisible(false)
+      }, 10000); 
+      
     }
-
-      , 10000); //DEMODAY simuler la marche 
-
+    
   }
   var calculateTravel = (km, min) => {
+
+    var distanceToTravel = km.toFixed(2)
+    var estimatedKm = `Trajet estimé: ${distanceToTravel} KM`
+
     var timeToTravel = min
     var timeToTravelMin = (timeToTravel % 60).toFixed(0)
     var timeToTravelHour = Math.floor(timeToTravel / 60)
     var estimatedTime = ""
 
     if (timeToTravelHour > 0) {
-
-      estimatedTime = timeToTravelHour + " H " + timeToTravelMin + " min"
+      estimatedTime = `Durée estimée: ${timeToTravelHour} H ${timeToTravelMin} min`
     } else {
-
-      estimatedTime = timeToTravelMin + " min"
+      estimatedTime = `Durée estimée: ${timeToTravelMin} min`
     }
 
-    setDistance(km.toFixed(2))
+    setDistance(estimatedKm)
     setDuration(estimatedTime)
   }
 
   var addScore = async (longitude,latitude,title,description,image,category) => {
     
-  if(token==''){
-    setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
-  }else{
-    await fetch(`http://${IP_URL}:3000/best-users?`, {
-      method: 'PUT',
-      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `score=${poiScore}&token=${token}&longitude=${longitude}&latitude=${latitude}&title=${title}&description=${description}&image=${image}&category=${category}`, 
-    });
-  }
-
+    if(token==''){
+      setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
+    }else{
+      await fetch(`http://${IP_URL}:3000/best-users?`, {
+        method: 'PUT',
+        headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+        body: `score=${poiScore}&token=${token}&longitude=${longitude}&latitude=${latitude}&title=${title}&description=${description}&image=${image}&category=${category}`, 
+      });
+    }
     setVisibleWin(false)
     setUpdateScore(!updateScore)
 
@@ -497,7 +505,6 @@ export default function MapScreen() {
 
 
 var addToFavorite = async (longitude,latitude,title,description,image,category) => {
-  console.log(description)
   await fetch(`http://${IP_URL}:3000/add-favorite?`, {
       method: 'PUT',
       headers: { 'Content-Type':'application/x-www-form-urlencoded' },
@@ -548,8 +555,8 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
       </View>
       {directionVisible &&
         <View style={{ alignItems: "center" }} backgroundColor={theme.background} >
-          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8, marginBottom: 5, marginTop: 5 }}>Trajet estimé: {distance} KM</Text>
-          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }}>Durée estimée: {duration} </Text>
+          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8, marginBottom: 5, marginTop: 5 }}>{distance}</Text>
+          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }}>{duration}</Text>
         </View>
 
       }
@@ -614,6 +621,13 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
         showsUserLocation={location}
         showsCompass={true}
         showsMyLocationButton={location}
+        toolbarEnabled={false}
+        initialRegion={{
+          latitude: 45.764354538707636,
+          longitude: 4.835240947932835,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
       >
 
             {directionVisible && 
@@ -627,7 +641,7 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
                 calculateTravel(result.distance, result.duration)
               }}
               onError={(errorMessage) => {
-                console.log('GOT AN ERROR');
+                setStopPoi(errorMessage)
               }}
           />  
             }
