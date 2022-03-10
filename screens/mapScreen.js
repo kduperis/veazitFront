@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faMapPin, faDroplet, faGopuram, faTree,faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 import * as Location from 'expo-location';
 
 import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
@@ -19,7 +20,7 @@ import AppLoading from 'expo-app-loading';
 
 import axios from 'axios';
 
-import { IP_URL } from '@env'
+import { IP_URL,GOOGLE_MAPS_APIKEY } from '@env'
 
 import themeContext from '../config/themeContext';
 
@@ -313,10 +314,11 @@ var mapStyle = [
 
 export default function MapScreen() {
 
+  const destination = {latitude: 37.771707, longitude: -122.4053769};
+
   const theme = useContext(themeContext);
 
-  const [currentLatitude, setCurrentLatitude] = useState(0);
-  const [currentLongitude, setCurrentLongitude] = useState(0);
+  const [currentPosition,setCurrentPosition] = useState({})
   const [visible, setVisible] = useState(false);
   const [bestList, setBestList] = useState([])
   const [title, setTitle] = useState('')
@@ -328,7 +330,11 @@ export default function MapScreen() {
   const [updateScore,setUpdateScore]=useState(false)
   const [firstLaunch,setFirstLaunch]=useState(true)
   const [infoMsg,setInfoMsg]=useState('')
-  
+  const [directionVisible,setDirectionVisible]=useState(false)
+
+  const [originLocation,setOriginLocation]=useState({})
+  const [destinationLocation,setDestinationLocation]=useState({})
+
   const token = useSelector((state) => state.token)
   const checked = useSelector((state) => state.category)
 
@@ -394,8 +400,7 @@ export default function MapScreen() {
         setLocation(true)
         Location.watchPositionAsync({ distanceInterval: 2 },
           (location) => {
-            setCurrentLatitude(location.coords.latitude);
-            setCurrentLongitude(location.coords.longitude);
+            setCurrentPosition({latitude:location.coords.latitude, longitude:location.coords.longitude})
           }
         );
       }
@@ -439,11 +444,24 @@ export default function MapScreen() {
     bestUser();
   }, [isFocused, token, updateScore])
 
-  var launchNavigation = async () => {
+  var launchNavigation = async (destLatitude,destLongitude) => {
     //ADD NAVIGATION
     setVisible(false)
-    setTimeout(() => setVisibleWin(true), 5000); //DEMODAY simuler la marche
+    setOriginLocation(currentPosition)
+    setDestinationLocation({latitude: destLatitude,longitude:destLongitude})
+    setDirectionVisible(true)
+    setTimeout(() => 
+
+      {
+        setVisibleWin(true);
+        setDirectionVisible(false)
+      }
+
+    , 10000); //DEMODAY simuler la marche 
+    
   }
+
+  
 
   var addScore = async () => {
     
@@ -464,7 +482,11 @@ export default function MapScreen() {
 
 
 var addToFavorite = async () => {
-  console.log('Love')
+  await fetch(`http://${IP_URL}:3000/add-favorite?`, {
+      method: 'PUT',
+      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+      body: `token=${token}`, 
+    });
 }
 
 var bestUserCard = bestList.map((user, i) => {
@@ -488,6 +510,8 @@ var bestUserCard = bestList.map((user, i) => {
     </View>
   )
 })
+
+
 
 let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
   if (!fontLoaded) {
@@ -528,7 +552,7 @@ return (
         <TouchableOpacity 
             style={[styles.button,{borderColor: theme.color}]}
             onPress={() => {
-              launchNavigation(); setPoiScore(poi[poiSelected].score)
+              launchNavigation(poi[poiSelected].latitude,poi[poiSelected].longitude); setPoiScore(poi[poiSelected].score)
             }}>
             <Text
                 style={[styles.buttonText,{color: theme.color}]}>Go veazit</Text>
@@ -567,9 +591,32 @@ return (
         customMapStyle={mapStyle}
         showsUserLocation={location}
         showsCompass={true}
-        showsMyLocationButton={location}>
+        showsMyLocationButton={location}
+        >
 
-        {listPointOfInterest}
+          <Marker
+            coordinate={{ latitude: -21.021510971546718, longitude: 55.70074707017567 }}>
+            <FontAwesomeIcon icon={faMapPin} color={'blue'} />
+          </Marker>
+
+            {directionVisible && 
+              <MapViewDirections
+              origin={originLocation}
+              destination={destinationLocation}
+              apikey={GOOGLE_MAPS_APIKEY}
+              strokeWidth={3}
+              strokeColor="hotpink"
+              onReady={result => {
+                console.log(`Distance: ${result.distance} km`)
+                console.log(`Duration: ${result.duration} min.`)
+              }}
+              onError={(errorMessage) => {
+                console.log('GOT AN ERROR');
+              }}
+          />  
+            }
+        
+        {listPointOfInterest} 
 
       </MapView>
 

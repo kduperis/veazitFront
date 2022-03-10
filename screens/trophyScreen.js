@@ -51,10 +51,14 @@ export default function TrophyScreen() {
   }
   var badgeCard = badgeData.map((badge, i) => {
     var imageUrl = `https://res.cloudinary.com/dualrskkc/image/upload/v1646835604/veazit/block_lmhkuy.png`
-    var count = myBadge.length
-    if(count > 0 && i < count) {
-      imageUrl = myBadge[i].img;
+    
+    if(token != ''){
+      var count = myBadge.length
+      if(count > 0 && i < count) {
+        imageUrl = myBadge[i].img;
+      }
     }
+    
 
     return (
       <View key={i} style={{ flexDirection: "row" }}>
