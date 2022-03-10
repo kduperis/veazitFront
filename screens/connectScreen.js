@@ -27,6 +27,8 @@ export default function ConnectScreen(props) {
 
   const isFocused = useIsFocused();
 
+  const avatarChecked = useSelector(state => state.avatar)
+
   useEffect(() => {
     var verifyUser = () => {
       if (!tokenUser) {
@@ -79,7 +81,7 @@ export default function ConnectScreen(props) {
         <Avatar
           size={200}
           rounded
-          source={require('../assets/noImg.jpg')}
+          source={{ uri: avatarChecked }}
           containerStyle={{ marginVertical: 25 }}
         />
         <Text style={[styles.contentTitle, { color: theme.color }]}>{userName}</Text>

@@ -20,7 +20,6 @@ export default function HomepageScreen(props) {
   const [pseudo, setPseudo] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
