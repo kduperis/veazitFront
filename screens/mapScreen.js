@@ -331,7 +331,6 @@ export default function MapScreen() {
   const [firstLaunch, setFirstLaunch] = useState(true)
   const [infoMsg, setInfoMsg] = useState('')
   const [directionVisible, setDirectionVisible] = useState(false)
-  const [stopPoi,setStopPoi]= useState('')
 
   const [originLocation, setOriginLocation] = useState({})
   const [destinationLocation, setDestinationLocation] = useState({})
@@ -448,25 +447,14 @@ export default function MapScreen() {
     setOriginLocation(currentPosition)
     setDestinationLocation({ latitude: destLatitude, longitude: destLongitude })
     setDirectionVisible(true)
-    if(stopPoi!=''){
       
       setTimeout(() => {
-        setVisibleWin(true);
-        setDirectionVisible(false)
+          setVisibleWin(true);
+          setDirectionVisible(false)
       }, 10000); //DEMODAY simuler la marche 
 
-    }else{
-      
-      setStopPoi('')
-      setDistance('Trajet Impossible !')
-      setDuration('Veuillez essayer un autre lieu !')
-      setTimeout(() => {
-        setDirectionVisible(false)
-      }, 10000); 
-      
-    }
-    
   }
+ 
   var calculateTravel = (km, min) => {
 
     var distanceToTravel = km.toFixed(2)
@@ -582,7 +570,9 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
         <TouchableOpacity 
             style={[styles.button,{borderColor: theme.color}]}
             onPress={() => {
-              launchNavigation(poi[poiSelected].latitude, poi[poiSelected].longitude); setPoiScore(poi[poiSelected].score)
+              launchNavigation(poi[poiSelected].latitude, poi[poiSelected].longitude); 
+              setPoiScore(poi[poiSelected].score);
+              setStopPoi('')
             }}>
             <Text
               style={[styles.buttonText, { color: theme.color }]}>Go veazit</Text>
@@ -592,6 +582,7 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
         </View>
       </Overlay>
 
+      
       <Overlay
         isVisible={visibleWin}
         overlayStyle={[styles.overlayStyle,{borderColor:theme.color, backgroundColor:theme.background}]}
@@ -613,6 +604,7 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
         </View>
 
       </Overlay>
+      
 
       <MapView
         style={{ flex: 1 }}
@@ -641,7 +633,7 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
                 calculateTravel(result.distance, result.duration)
               }}
               onError={(errorMessage) => {
-                setStopPoi(errorMessage)
+                console.log(errorMessage)
               }}
           />  
             }
