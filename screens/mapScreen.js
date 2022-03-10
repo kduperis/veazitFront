@@ -8,7 +8,7 @@ import { Avatar, Button, Overlay } from 'react-native-elements'
 import ProgressBar from "react-native-animated-progress";
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faMapPin, faDroplet, faGopuram, faTree,faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faMapPin, faDroplet, faGopuram, faTree, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
@@ -20,7 +20,7 @@ import AppLoading from 'expo-app-loading';
 
 import axios from 'axios';
 
-import { IP_URL,GOOGLE_MAPS_APIKEY } from '@env'
+import { IP_URL, GOOGLE_MAPS_APIKEY } from '@env'
 
 import themeContext from '../config/themeContext';
 
@@ -314,11 +314,11 @@ var mapStyle = [
 
 export default function MapScreen() {
 
-  const destination = {latitude: 37.771707, longitude: -122.4053769};
+  const destination = { latitude: 37.771707, longitude: -122.4053769 };
 
   const theme = useContext(themeContext);
 
-  const [currentPosition,setCurrentPosition] = useState({})
+  const [currentPosition, setCurrentPosition] = useState({})
   const [visible, setVisible] = useState(false);
   const [bestList, setBestList] = useState([])
   const [title, setTitle] = useState('')
@@ -327,19 +327,21 @@ export default function MapScreen() {
   const [visibleWin, setVisibleWin] = useState(false)
   const [poiScore, setPoiScore] = useState(0)
   const [poiSelected, setPoiSelected] = useState(0)
-  const [updateScore,setUpdateScore]=useState(false)
-  const [firstLaunch,setFirstLaunch]=useState(true)
-  const [infoMsg,setInfoMsg]=useState('')
-  const [directionVisible,setDirectionVisible]=useState(false)
+  const [updateScore, setUpdateScore] = useState(false)
+  const [firstLaunch, setFirstLaunch] = useState(true)
+  const [infoMsg, setInfoMsg] = useState('')
+  const [directionVisible, setDirectionVisible] = useState(false)
 
-  const [originLocation,setOriginLocation]=useState({})
-  const [destinationLocation,setDestinationLocation]=useState({})
+  const [originLocation, setOriginLocation] = useState({})
+  const [destinationLocation, setDestinationLocation] = useState({})
 
   const token = useSelector((state) => state.token)
   const checked = useSelector((state) => state.category)
 
   const [userScore, setUserScore] = useState(0)
   const [userLevel, setUserLevel] = useState(0)
+  const [duration, setDuration] = useState("")
+  const [distance, setDistance] = useState(0)
 
   const isFocused = useIsFocused();
 
@@ -348,7 +350,8 @@ export default function MapScreen() {
   { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711, alreadyView: false, categorie: 'Domaine', score: 100 },
   { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, alreadyView: true, categorie: 'Domaine', score: 100 },
   { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, alreadyView: false, categorie: 'Domaine', score: 4000 },
-  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, alreadyView: false, categorie: 'Parc', score: 100 }]
+  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, alreadyView: false, categorie: 'Parc', score: 100 },
+  { title: 'Andore', description: 'Parc 1', latitude: 41.854344965036273, longitude: 2.74555369377989, alreadyView: false, categorie: 'Domaine', score: 100 }]
 
 
   var showOverlay = (title, description) => {
@@ -400,7 +403,7 @@ export default function MapScreen() {
         setLocation(true)
         Location.watchPositionAsync({ distanceInterval: 2 },
           (location) => {
-            setCurrentPosition({latitude:location.coords.latitude, longitude:location.coords.longitude})
+            setCurrentPosition({ latitude: location.coords.latitude, longitude: location.coords.longitude })
           }
         );
       }
@@ -425,13 +428,13 @@ export default function MapScreen() {
         if (res.data.result) {
           var calculScore = (userDataToken.score % 1000) / 10
           var calculLevel = parseInt(1 + Math.floor(userDataToken.score / 1000))
-          var nextLv = 1000-(10*calculScore)
+          var nextLv = 1000 - (10 * calculScore)
           setUserLevel(calculLevel)
           setUserScore(calculScore)
           setInfoMsg(`Prochain niveau dans ${nextLv} pts`)
-          if(firstLaunch && userDataToken){
+          if (firstLaunch && userDataToken) {
             setFirstLaunch(false)
-            EventRegister.emit('myCustomEvent', userDataToken.apparence);            
+            EventRegister.emit('myCustomEvent', userDataToken.apparence);
           }
         } else {
           setUserScore(0)
@@ -444,36 +447,49 @@ export default function MapScreen() {
     bestUser();
   }, [isFocused, token, updateScore])
 
-  var launchNavigation = async (destLatitude,destLongitude) => {
+  var launchNavigation = async (destLatitude, destLongitude) => {
     //ADD NAVIGATION
     setVisible(false)
     setOriginLocation(currentPosition)
-    setDestinationLocation({latitude: destLatitude,longitude:destLongitude})
+    setDestinationLocation({ latitude: destLatitude, longitude: destLongitude })
     setDirectionVisible(true)
-    setTimeout(() => 
+    setTimeout(() => {
+      setVisibleWin(true);
+      setDirectionVisible(false)
+    }
 
-      {
-        setVisibleWin(true);
-        setDirectionVisible(false)
-      }
+      , 10000); //DEMODAY simuler la marche 
 
-    , 10000); //DEMODAY simuler la marche 
-    
   }
+  var calculateTravel = (km, min) => {
+    var timeToTravel = min
+    var timeToTravelMin = (timeToTravel % 60).toFixed(0)
+    var timeToTravelHour = Math.floor(timeToTravel / 60)
+    var estimatedTime = ""
 
-  
+    if (timeToTravelHour > 0) {
+
+      estimatedTime = timeToTravelHour + " H " + timeToTravelMin + " min"
+    } else {
+
+      estimatedTime = timeToTravelMin + " min"
+    }
+
+    setDistance(km.toFixed(2))
+    setDuration(estimatedTime)
+  }
 
   var addScore = async () => {
-    
-  if(token==''){
-    setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
-  }else{
-    await fetch(`http://${IP_URL}:3000/best-users?`, {
-      method: 'PUT',
-      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `score=${poiScore}&token=${token}`, 
-    });
-  }
+
+    if (token == '') {
+      setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
+    } else {
+      await fetch(`http://${IP_URL}:3000/best-users?`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `score=${poiScore}&token=${token}`,
+      });
+    }
 
     setVisibleWin(false)
     setUpdateScore(!updateScore)
@@ -481,108 +497,115 @@ export default function MapScreen() {
   }
 
 
-var addToFavorite = async () => {
-  await fetch(`http://${IP_URL}:3000/add-favorite?`, {
+  var addToFavorite = async () => {
+    await fetch(`http://${IP_URL}:3000/add-favorite?`, {
       method: 'PUT',
-      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `token=${token}`, 
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `token=${token}`,
     });
-}
+  }
 
-var bestUserCard = bestList.map((user, i) => {
-  return (
-    <View key={i} style={styles.cardPlayer} >
-      <Avatar
-        size={55}
-        rounded
-        source={{ uri: user.avatar }}
-        containerStyle={{
-          borderColor: '#c0c0c0',
-          borderStyle: 'solid',
-          borderWidth: 3,
-        }}
-      />
+  var bestUserCard = bestList.map((user, i) => {
+    return (
+      <View key={i} style={styles.cardPlayer} >
+        <Avatar
+          size={55}
+          rounded
+          source={{ uri: user.avatar }}
+          containerStyle={{
+            borderColor: '#c0c0c0',
+            borderStyle: 'solid',
+            borderWidth: 3,
+          }}
+        />
 
-      <View style={styles.detailPlayer}>
-        <Text style={styles.nameScorePlayer}>{user.username}</Text>
-        <Text style={styles.nameScorePlayer}>{user.score}</Text>
+        <View style={styles.detailPlayer}>
+          <Text style={styles.nameScorePlayer}>{user.username}</Text>
+          <Text style={styles.nameScorePlayer}>{user.score}</Text>
+        </View>
       </View>
-    </View>
-  )
-})
+    )
+  })
 
 
 
-let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
+  let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
   if (!fontLoaded) {
     return <AppLoading />
   }
 
-return (
-  <View style={styles.container}>
-    <View style={[styles.subtitle, { backgroundColor: theme.background }]}>
-      <Text style={[styles.desc, { color: theme.color }]}>
-        Nos meilleurs Veaziteurs:
-      </Text>
-    </View>
+  return (
+    <View style={styles.container}>
+      <View style={[styles.subtitle, { backgroundColor: theme.background }]}>
+        <Text style={[styles.desc, { color: theme.color }]}>
+          Nos meilleurs Veaziteurs:
+        </Text>
+      </View>
 
-    <View style={[styles.best, { backgroundColor: theme.background }]}>
+      <View style={[styles.best, { backgroundColor: theme.background }]}>
 
-      {bestUserCard}
-    </View>
+        {bestUserCard}
+      </View>
+      {directionVisible &&
+        <View style={{ alignItems: "center" }} backgroundColor={theme.background} >
+          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8, marginBottom: 5, marginTop: 5 }}>Trajet estimé: {distance} KM</Text>
+          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }}>Durée estimée: {duration} </Text>
+        </View>
 
-    <Overlay
-      isVisible={visible}
-      onBackdropPress={() => { setVisible(false) }}
-      overlayStyle={[styles.overlayStyle,{borderColor:theme.color, backgroundColor:theme.background}]}
-    >
-      <TouchableOpacity 
+      }
+
+      <Overlay
+        isVisible={visible}
+        onBackdropPress={() => { setVisible(false) }}
+        overlayStyle={[styles.overlayStyle, { borderColor: theme.color, backgroundColor: theme.background }]}
+      >
+        <TouchableOpacity
           style={styles.loveButton}
-          onPress={()=>addToFavorite()}>
-          <FontAwesomeIcon icon={faHeart} color='white' size={25}/>
-      </TouchableOpacity>
+          onPress={() => addToFavorite()}>
+          <FontAwesomeIcon icon={faHeart} color='white' size={25} />
+        </TouchableOpacity>
 
-      <View style={styles.overlayPoi}>
-        <Image
-          source={require('../assets/noImg.jpg')}
-          style={styles.item}
-        />
-        <Text style={[styles.titleOverlay,{color:theme.color}]}>{title}</Text>
-        <Text style={[styles.descOverlay,{color:theme.color}]}>{description}</Text>
-        <TouchableOpacity 
-            style={[styles.button,{borderColor: theme.color}]}
+        <View style={styles.overlayPoi}>
+          <Image
+            source={require('../assets/noImg.jpg')}
+            style={styles.item}
+          />
+          <Text style={[styles.titleOverlay, { color: theme.color }]}>{title}</Text>
+          <Text style={[styles.descOverlay, { color: theme.color }]}>{description}</Text>
+          <TouchableOpacity
+            style={[styles.button, { borderColor: theme.color }]}
             onPress={() => {
-              launchNavigation(poi[poiSelected].latitude,poi[poiSelected].longitude); setPoiScore(poi[poiSelected].score)
+              launchNavigation(poi[poiSelected].latitude, poi[poiSelected].longitude); setPoiScore(poi[poiSelected].score)
             }}>
             <Text
-                style={[styles.buttonText,{color: theme.color}]}>Go veazit</Text>
-        </TouchableOpacity>
-        
+              style={[styles.buttonText, { color: theme.color }]}>Go veazit</Text>
+          </TouchableOpacity>
 
-      </View>
-    </Overlay>
-      
+
+        </View>
+      </Overlay>
+
       <Overlay
         isVisible={visibleWin}
         onBackdropPress={() => { setVisibleWin(false) }}
-        overlayStyle={[styles.overlayStyle,{borderColor:theme.color, backgroundColor:theme.background}]}
+        overlayStyle={[styles.overlayStyle, { borderColor: theme.color, backgroundColor: theme.background }]}
       >
-          <View style={styles.overlayPoi}>
-            <Image
-              source={require('../assets/clap.jpg')}
-              style={styles.item}
-            />
-            <Text style={[styles.titleOverlay,{color:theme.color}]}>Félicitations tu remportes:</Text>
-            <Text style={[styles.descOverlay,{color:theme.color}]}>+ {poiScore} !</Text>
-          
-          <TouchableOpacity 
-            style={[styles.button,{borderColor: theme.color}]}
+        <View style={styles.overlayPoi}>
+          <Image
+            source={require('../assets/clap.jpg')}
+            style={styles.item}
+          />
+          <Text style={[styles.titleOverlay, { color: theme.color }]}>Félicitations tu remportes:</Text>
+          <Text style={[styles.descOverlay, { color: theme.color }]}>+ {poiScore} !</Text>
+
+          <TouchableOpacity
+            style={[styles.button, { borderColor: theme.color }]}
             onPress={() => addScore()}>
             <Text
-                style={[styles.buttonText,{color: theme.color}]}>Veazited</Text>
-        </TouchableOpacity>
+              style={[styles.buttonText, { color: theme.color }]}>Veazited</Text>
+          </TouchableOpacity>
         </View>
-          
+
       </Overlay>
 
       <MapView
@@ -592,45 +615,45 @@ return (
         showsUserLocation={location}
         showsCompass={true}
         showsMyLocationButton={location}
-        >
+      >
 
-          <Marker
-            coordinate={{ latitude: -21.021510971546718, longitude: 55.70074707017567 }}>
-            <FontAwesomeIcon icon={faMapPin} color={'blue'} />
-          </Marker>
+        <Marker
+          coordinate={{ latitude: -21.021510971546718, longitude: 55.70074707017567 }}>
+          <FontAwesomeIcon icon={faMapPin} color={'blue'} />
+        </Marker>
 
-            {directionVisible && 
-              <MapViewDirections
-              origin={originLocation}
-              destination={destinationLocation}
-              apikey={GOOGLE_MAPS_APIKEY}
-              strokeWidth={3}
-              strokeColor="hotpink"
-              onReady={result => {
-                console.log(`Distance: ${result.distance} km`)
-                console.log(`Duration: ${result.duration} min.`)
-              }}
-              onError={(errorMessage) => {
-                console.log('GOT AN ERROR');
-              }}
-          />  
-            }
-        
-        {listPointOfInterest} 
+        {directionVisible &&
+
+          <MapViewDirections
+            origin={originLocation}
+            destination={destinationLocation}
+            apikey={GOOGLE_MAPS_APIKEY}
+            strokeWidth={3}
+            strokeColor="hotpink"
+            onReady={result => calculateTravel(result.distance, result.duration)}
+
+
+            onError={(errorMessage) => {
+              console.log('GOT AN ERROR');
+            }}
+          />
+        }
+
+        {listPointOfInterest}
 
       </MapView>
 
-        <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
-          < Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Niveau: {userLevel} </Text>
-        </View>
+      <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
+        < Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Niveau: {userLevel} </Text>
+      </View>
 
-        <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
+      <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
 
-        <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
-          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8}} >{infoMsg}</Text>
-        </View>
+      <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
+        <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} >{infoMsg}</Text>
+      </View>
 
-    </View>
+    </View >
 
   );
 
@@ -651,7 +674,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 100,
-    margin:30
+    margin: 30
   },
   best: {
     flexDirection: 'row',
@@ -683,38 +706,38 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 20
   },
-  overlayStyle:{
-    padding:0, 
-    borderWidth:2,
-},
-  titleOverlay:{
+  overlayStyle: {
+    padding: 0,
+    borderWidth: 2,
+  },
+  titleOverlay: {
     fontSize: 13,
     fontFamily: "PressStart2P_400Regular",
-    padding:5,
+    padding: 5,
   },
-  descOverlay:{
-    marginTop:20,
+  descOverlay: {
+    marginTop: 20,
     fontSize: 11,
     fontFamily: "PressStart2P_400Regular",
-    padding:5,
+    padding: 5,
   },
   button: {
     width: '65%',
-    marginVertical:20,
+    marginVertical: 20,
     height: 50,
     borderRadius: 30,
     borderWidth: 1,
-    justifyContent:'center',
-    alignItems:'center',
-},
-buttonText: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
     fontFamily: "PressStart2P_400Regular",
     fontSize: 18,
-},
-loveButton: {
-  position:'absolute',
-  zIndex:1,
-  top:20,
-  right:20,
-},
+  },
+  loveButton: {
+    position: 'absolute',
+    zIndex: 1,
+    top: 20,
+    right: 20,
+  },
 });
