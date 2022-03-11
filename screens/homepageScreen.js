@@ -21,6 +21,7 @@ export default function HomepageScreen(props) {
   const [errorMsg, setErrorMsg] = useState('');
 
   const dispatch = useDispatch();
+  AsyncStorage.clear()
 
   useEffect(() => {
     AsyncStorage.getItem('pseudo', function (error, pseudo) {

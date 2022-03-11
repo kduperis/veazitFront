@@ -102,9 +102,9 @@ export default function ParameterScreen(props) {
           borderColor: 'white',
           borderStyle: 'solid',
           borderWidth: 5,
-          margin:2
+          margin: 2
         }}
-        
+
       />
     )
   })
@@ -113,34 +113,34 @@ export default function ParameterScreen(props) {
   return (
     <View style={[styles.content, { backgroundColor: theme.background }]}>
 
-        <View style={{ alignItems: 'center', alignSelf: 'center', marginTop: 50 }}>
-          <Text style={[styles.contentTitle, { color: theme.color }]}>Ton avatar actuel:</Text>
+      <View style={{ alignItems: 'center', alignSelf: 'center', marginTop: 50 }}>
+        <Text style={[styles.contentTitle, { color: theme.color }]}>Ton avatar actuel:</Text>
 
-          <Avatar
-            source={{ uri: myImage }}
-            size={100}
-            rounded={true}
-            containerStyle={{
-              borderColor: '#06D6b6',
-              borderStyle: 'solid',
-              borderWidth: 4,
-            }}
-          />
+        <Avatar
+          source={{ uri: myImage }}
+          size={100}
+          rounded={true}
+          containerStyle={{
+            borderColor: '#06D6b6',
+            borderStyle: 'solid',
+            borderWidth: 4,
+          }}
+        />
+      </View>
+
+      <View style={{ flex: 1, marginTop: 20, marginBottom: '30%', width: '80%', alignItems: 'center', justifyContent: 'center' }}>
+
+        <View style={{ marginBottom: 10, }}>
+          <Text style={[styles.contentTitle, { color: theme.color }]}>Choose your Avatar !</Text>
         </View>
 
-      <View style={{ flex: 1, marginTop:20,marginBottom: '30%', width: '80%', alignItems:'center', justifyContent:'center'}}>
+        <ScrollView >
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+            {listAvatar}
+          </View>
+        </ScrollView>
 
-        <View style={{marginBottom:10,}}>
-          <Text style={[styles.contentTitle, { color: theme.color}]}>Choose your Avatar !</Text>
-        </View>
 
-          <ScrollView >
-            <View style={{ flexDirection: 'row', flexWrap:'wrap',alignItems:'center', justifyContent:'center' }}>
-              {listAvatar}
-            </View>
-          </ScrollView>
-
-       
       </View>
 
       <View style={styles.buttonContainer}>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 16,
     fontFamily: "PressStart2P_400Regular",
-    marginBottom:20
+    marginBottom: 20
   },
   buttonPrevious: {
     borderWidth: 1,
