@@ -101,7 +101,7 @@ export default function TutoScreen(props) {
                         size={75}
                         textAlign={'center'} />
                     <View>
-                        <Text style={styles.textWhite}>Cette icône te montrera tes </Text>
+                        <Text style={styles.textWhite}>Cet icône te montrera tes </Text>
                         <Text style={[styles.textGreen,{color: theme.color}]}>Filtres de Veazit</Text>
                     </View>
 
@@ -141,7 +141,7 @@ export default function TutoScreen(props) {
                         size={75}
                         textAlign={'center'} />
                     <View>
-                        <Text style={styles.textWhite}>Cette icône te montrera des </Text>
+                        <Text style={styles.textWhite}>Cet icône te montrera des </Text>
                         <Text style={[styles.textGreen,{color: theme.color}]}>Quêtes de Veazit</Text>
                     </View>
 
@@ -181,7 +181,7 @@ export default function TutoScreen(props) {
                         size={75}
                         textAlign={'center'} />
                     <View>
-                        <Text style={styles.textWhite}>Cette icône te montrera tes </Text>
+                        <Text style={styles.textWhite}>Cet icône te montrera tes </Text>
                         <Text style={[styles.textGreen,{color: theme.color}]}>Trophées</Text>
                     </View>
 
@@ -214,7 +214,7 @@ export default function TutoScreen(props) {
                     </View>
 
                     <View>
-                        <Text style={styles.textWhite}>Cette icône te montrera ton </Text>
+                        <Text style={styles.textWhite}>Cet icône te montrera ton </Text>
                         <Text style={[styles.textGreen,{color: theme.color}]}>Profil Veaziter</Text>
                     </View>
 

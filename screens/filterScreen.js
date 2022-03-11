@@ -98,7 +98,7 @@ export default function FilterScreen(props) {
 
         <View style={[styles.content, { backgroundColor: theme.background }]}>
           <Text style={[styles.contentTitle, { color: theme.color }]}>Filtres</Text>
-          <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20, lineHeight:30 }}>Modifiez vos categories de point d'interet : </Text>
+          <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20, lineHeight:30 }}>Modifiez vos catégories de point d'intérêt : </Text>
           <View style={{alignItems:'flex-start'}}>
             <CheckBox
               title="Musée"

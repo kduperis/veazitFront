@@ -50,7 +50,7 @@ export default function HomefilterScreen(props) {
   return (
 
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={{ color: theme.color, fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 25, lineHeight:40 }}>Quelle(s) categorie(s) de point d'interet souhaitez-vous Veaziter ?</Text>
+      <Text style={{ color: theme.color, fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 25, lineHeight:40 }}>Quelle(s) catégorie(s) de point d'intérêt souhaitez-vous Veaziter ?</Text>
       <View style={{alignItems:'flex-start'}}>
         <CheckBox
           center

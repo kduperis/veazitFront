@@ -382,7 +382,7 @@ export default function MapScreen() {
             key={i}
             coordinate={{ latitude: lieu.latitude, longitude: lieu.longitude }}
             onPress={() => { showOverlay(lieu.title, lieu.description); setPoiSelected(i) }}>
-            <FontAwesomeIcon icon={iconCustom} color='black' size={25}/>
+            <FontAwesomeIcon icon={iconCustom} color='#B53471' size={25}/>
           </Marker>
         )
       }

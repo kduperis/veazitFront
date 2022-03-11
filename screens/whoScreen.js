@@ -13,7 +13,7 @@ export default function WhoScreen(props) {
   return (
 
     <View style={[styles.content, { backgroundColor: theme.background }]}>
-      <Text style={[styles.contentTitle, { color: theme.color }]}>Qui sommes nous ?</Text>
+      <Text style={[styles.contentTitle, { color: theme.color }]}>Qui sommes-nous ?</Text>
       <View style={{alignItems:'center',justifyContent:'center', marginTop:15}}>
 
         <View style={{ alignItems: 'center', width: '70%', marginTop: 10,justifyContent:'center'}}>

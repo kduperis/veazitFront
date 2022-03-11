@@ -93,7 +93,7 @@ export default function ConnectScreen(props) {
         onPress={() => props.navigation.navigate('Parameter')}>
         <FontAwesomeIcon icon={faGear} color={theme.color} size={20} textAlign={'center'} />
         <ListItem.Content>
-          <Text style={[styles.textList, { color: theme.color }]}>Parametres</Text>
+          <Text style={[styles.textList, { color: theme.color }]}>Paramètres</Text>
         </ListItem.Content>
       </ListItem>
 
