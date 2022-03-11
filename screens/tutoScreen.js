@@ -61,7 +61,7 @@ export default function TutoScreen(props) {
                         size={75}
                         textAlign={'center'} />
                     <View>
-                        <Text style={styles.textWhite}>Cette icône te montrera ta </Text>
+                        <Text style={styles.textWhite}>Cet icône te montrera ta </Text>
                         <Text style={[styles.textGreen,{color: theme.color}]}>Carte de Veazit</Text>
                     </View>
 

@@ -8,7 +8,7 @@ import themeContext from '../config/themeContext';
 
 export default function ParameterScreen(props) {
 
-  const [myImage, setMyImage] = useState('https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg');
+  const [myImage, setMyImage] = useState('https://res.cloudinary.com/dualrskkc/image/upload/v1646863162/veazit/anonymous_ra8ndn.png');
 
 
   var avatars = ['https://res.cloudinary.com/dualrskkc/image/upload/v1646862951/veazit/avatar/alchemist_1_bkdg4b.png',
