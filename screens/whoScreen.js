@@ -13,49 +13,41 @@ export default function WhoScreen(props) {
   return (
 
     <View style={[styles.content, { backgroundColor: theme.background }]}>
-      <Text style={[styles.contentTitle, { color: theme.color }]}>Qui est la Bande à Picsou ?</Text>
-      <View>
-        <View flexDirection='row' style={{ alignItems: 'center', width: '70%', marginTop: 25}}>
-          <Avatar
-            source={{ uri: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646841698/veazit/kevin_jrojd2.jpg' }}
-            size={150}
-            rounded={true}
-            marginTop={5}
-            marginBottom={10}
-          />
-          <View style={{flexDirection:'column', alignItems: 'flex-start', width: '70%', marginLeft:20 }}>
-            <Text style={{ color: '#06D6b6', fontSize: 24, fontWeight:'bold'}}>KEVIN</Text>
-            <Text style={{ color: 'white', fontSize: 24 }}>Stagiaire Full Stack</Text>
-          </View>
-        </View>
+      <Text style={[styles.contentTitle, { color: theme.color }]}>Qui sommes nous ?</Text>
+      <View style={{alignItems:'center',justifyContent:'center', marginTop:15}}>
 
-        <View flexDirection='row' style={{ alignItems: 'center', width: '70%' }}>
+        <View style={{ alignItems: 'center', width: '70%', marginTop: 10,justifyContent:'center'}}>
           <Avatar
             source={{ uri: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646842845/veazit/regis_iwb9wn.jpg' }}
-            size={150}
+            size={125}
             rounded={true}
             marginBottom={10}
           />
-          <View style={{flexDirection:'column', alignItems: 'flex-start', width: '70%', marginLeft:20 }}>
-            <Text style={{ color: '#06D6b6', fontSize: 24, fontWeight:'bold'}}>RÉGIS</Text>
-            <Text style={{ color: 'white', fontSize: 24 }}>Développeur Senior</Text>
-          </View>
+            <Text style={{ color: theme.color, fontSize: 18, fontWeight:'bold'}}>RÉGIS</Text>
         </View>
 
-        <View flexDirection='row' style={{ alignItems: 'center', width: '70%' }}>
+        <View style={{ alignItems: 'center', width: '70%', marginTop: 10,justifyContent:'center'}}>
           <Avatar
-            source={{ uri: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646841698/veazit/nicolas_a7vwkl.jpg' }}
-            size={150}
+            source={{ uri: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646841698/veazit/kevin_jrojd2.jpg' }}
+            size={125}
             rounded={true}
             marginBottom={10}
           />
-          <View style={{flexDirection:'column', alignItems: 'flex-start', width: '70%', marginLeft:20 }}>
-            <Text style={{ color: '#06D6b6', fontSize: 24, fontWeight:'bold'}}>NICOLAS</Text>
-            <Text style={{ color: 'white', fontSize: 24 }}>Directeur Artistique</Text>
-          </View>
+            <Text style={{ color: theme.color, fontSize: 18, fontWeight:'bold'}}>KEVIN</Text>
+        </View>
+
+        <View style={{ alignItems: 'center', width: '70%', marginTop: 10,justifyContent:'center'}}>
+          <Avatar
+            source={{ uri: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646841698/veazit/nicolas_a7vwkl.jpg' }}
+            size={125}
+            rounded={true}
+            marginBottom={10}
+          />
+            <Text style={{ color: theme.color, fontSize: 18, fontWeight:'bold'}}>NICOLAS</Text>
         </View>
 
       </View>
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => props.navigation.navigate('StackNavigation', { screen: 'ConnectScreen' })}>
           <View style={[styles.buttonPrevious, { borderColor: theme.color }]}>

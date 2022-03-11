@@ -82,7 +82,7 @@ export default function TrophyScreen() {
               </Text>
             }
           >
-            <Text style={{ color: "#fff", fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>More info</Text>
+            <Text style={{ color: "#fff", fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>Plus d'info.</Text>
           </Tooltip>
         </View>
       </View>
@@ -102,7 +102,7 @@ export default function TrophyScreen() {
           color: '#4b667f',
         }}
         iconPosition='top'
-        title={<Text style={{ fontSize: 10, color: '#4b667f', marginTop: 7 }}>Trophy</Text>}
+        title={<Text style={{ fontSize: 10, color: '#4b667f', marginTop: 7 }}>Trophée</Text>}
       />
 
       <Modal
@@ -114,7 +114,7 @@ export default function TrophyScreen() {
         <View style={[styles.content,{backgroundColor:theme.background}]}>
 
           <View style={{ alignItems: 'center', marginBottom: 20 }}>
-            <Text style={[styles.contentTitle,{color: theme.color}]}> Liste des trophées</Text>
+            <Text style={[styles.contentTitle,{color: theme.color}]}>Trophées</Text>
           </View>
           <ScrollView >
 

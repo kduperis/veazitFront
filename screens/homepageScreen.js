@@ -69,7 +69,7 @@ export default function HomepageScreen(props) {
           value={pseudo}
           containerStyle={{ width: 275 }}
           inputStyle={{ marginLeft: 10, color: '#fff' }}
-          placeholder='Entrez votre nom'
+          placeholder='Entrez votre pseudo'
           leftIcon={
             <Icon
               name='user-astronaut'
@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   button: {
     width: '50%',
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 25,
+    marginTop:10,
   },
   buttonText: {
     fontFamily: "PressStart2P_400Regular",
@@ -116,5 +115,8 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
+    fontFamily: "PressStart2P_400Regular",
+    fontSize: 12,
+    marginVertical:5,
   },
 });

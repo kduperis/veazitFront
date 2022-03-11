@@ -26,7 +26,7 @@ export default function FilterScreen(props) {
   const checked = useSelector((state) => state.category)
   const dispatch = useDispatch()
 
-  var filter = ["Aquatique", "Domaine", "Parc"]
+  var filter = ["Musée", "Nature", "Site touristique"]
 
   useEffect(() => {
     function checkB(allCategory, selected) {
@@ -57,13 +57,13 @@ export default function FilterScreen(props) {
   var updateFilter = () =>{
     let category = [];
     if (check1) {
-      category.push("Aquatique")
+      category.push("Musée")
     }
     if (check2) {
-      category.push("Domaine")
+      category.push("Nature")
     }
     if (check3) {
-      category.push("Parc")
+      category.push("Site touristique")
     }
 
     dispatch({ type: "addchecked", category: category })
@@ -86,7 +86,7 @@ export default function FilterScreen(props) {
           color: '#4b667f',
         }}
         iconPosition='top'
-        title={<Text style={{ fontSize: 10, color: '#4b667f', marginTop: 7 }}>Filter</Text>}
+        title={<Text style={{ fontSize: 10, color: '#4b667f', marginTop: 7 }}>Filtre</Text>}
       />
 
 
@@ -97,31 +97,34 @@ export default function FilterScreen(props) {
       >
 
         <View style={[styles.content, { backgroundColor: theme.background }]}>
-          <Text style={[styles.contentTitle, { color: theme.color }]}>Filter Screen !</Text>
-          <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20 }}>Modifiez vos genres de lieu ici : </Text>
-          <View>
+          <Text style={[styles.contentTitle, { color: theme.color }]}>Filtres</Text>
+          <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20, lineHeight:30 }}>Modifiez vos categories de point d'interet : </Text>
+          <View style={{alignItems:'flex-start'}}>
             <CheckBox
-
-              title="Aquatique"
+              title="Musée"
               checked={check1}
               checkedColor={theme.color}
               onPress={() => setCheck1(!check1)}
+              textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
+              containerStyle={{backgroundColor: theme.background,borderWidth:0}}
             />
 
             <CheckBox
-
-              title="Domaine"
+              title="Nature"
               checked={check2}
               checkedColor={theme.color}
               onPress={() => setCheck2(!check2)}
+              textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
+              containerStyle={{backgroundColor: theme.background,borderWidth:0}}
             />
 
             <CheckBox
-
-              title="Parc"
+              title="Site touristique"
               checked={check3}
               checkedColor={theme.color}
               onPress={() => setCheck3(!check3)}
+              textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
+              containerStyle={{backgroundColor: theme.background,borderWidth:0}}
             />
 
           </View>
@@ -129,7 +132,7 @@ export default function FilterScreen(props) {
               style={[styles.button, { borderColor: theme.color }]}
               onPress={() => updateFilter()}>
               <Text
-                style={[styles.buttonText, { color: theme.color }]}>Go !</Text>
+                style={[styles.buttonText, { color: theme.color }]}>Valider</Text>
 
             </TouchableOpacity>
         </View>

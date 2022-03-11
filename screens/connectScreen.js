@@ -129,7 +129,7 @@ export default function ConnectScreen(props) {
         onPress={() => props.navigation.navigate('Archive')}>
         <FontAwesomeIcon icon={faFolder} color={theme.color} size={20} textAlign={'center'} />
         <ListItem.Content>
-          <Text style={[styles.textList, { color: theme.color }]}>Archive POI</Text>
+          <Text style={[styles.textList, { color: theme.color }]}>Archives POI</Text>
         </ListItem.Content>
       </ListItem>
 
@@ -151,7 +151,7 @@ export default function ConnectScreen(props) {
         onPress={() => props.navigation.navigate('Who')}>
         <FontAwesomeIcon icon={faQuestion} color={theme.color} size={20} textAlign={'center'} />
         <ListItem.Content>
-          <Text style={[styles.textList, { color: theme.color }]}>Qui sommes nous ?</Text>
+          <Text style={[styles.textList, { color: theme.color }]}>À propos de nous</Text>
         </ListItem.Content>
       </ListItem>
 

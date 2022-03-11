@@ -142,7 +142,7 @@ export default function SignIn(props) {
                 onPress={()=>handleGoogleSignin()}>
                     <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                         <Icon name='google' size={22} color='white'/>
-                        <Text style={styles.buttonTextGoogle}>Sign in</Text>
+                        <Text style={styles.buttonTextGoogle}>Connexion</Text>
                     </View>
             </TouchableOpacity>
 
@@ -169,6 +169,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        fontFamily: "PressStart2P_400Regular",
+        fontSize:12
     },
     textConnect: {
         alignItems: 'center',

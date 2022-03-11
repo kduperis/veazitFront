@@ -51,7 +51,7 @@ export default function TutoScreen(props) {
                     </TouchableOpacity>
 
                     <View style={styles.titleContainer}>
-                        <Text style={styles.titleWhite}>Tutorial </Text>
+                        <Text style={styles.titleWhite}>Tutoriel</Text>
                         <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
@@ -91,7 +91,7 @@ export default function TutoScreen(props) {
                     </TouchableOpacity>
 
                     <View style={styles.titleContainer}>
-                        <Text style={styles.titleWhite}>Tutorial</Text>
+                        <Text style={styles.titleWhite}>Tutoriel</Text>
                         <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
@@ -131,7 +131,7 @@ export default function TutoScreen(props) {
 
 
                     <View style={styles.titleContainer}>
-                        <Text style={styles.titleWhite}>Tutorial</Text>
+                        <Text style={styles.titleWhite}>Tutoriel</Text>
                         <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
@@ -142,7 +142,7 @@ export default function TutoScreen(props) {
                         textAlign={'center'} />
                     <View>
                         <Text style={styles.textWhite}>Cette icône te montrera des </Text>
-                        <Text style={[styles.textGreen,{color: theme.color}]}>Quetes de Veazit</Text>
+                        <Text style={[styles.textGreen,{color: theme.color}]}>Quêtes de Veazit</Text>
                     </View>
 
                     <TouchableOpacity 
@@ -171,7 +171,7 @@ export default function TutoScreen(props) {
                     </TouchableOpacity>
 
                     <View style={styles.titleContainer}>
-                        <Text style={styles.titleWhite}>Tutorial</Text>
+                        <Text style={styles.titleWhite}>Tutoriel</Text>
                         <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
@@ -201,7 +201,7 @@ export default function TutoScreen(props) {
 
                 <View style={[styles.overlayTuto,{backgroundColor: theme.background}]}>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.titleWhite}>Tutorial</Text>
+                        <Text style={styles.titleWhite}>Tutoriel</Text>
                         <Text style={[styles.titleGreen,{color: theme.color}]}>Veazit & Play </Text>
                     </View>
 
@@ -255,9 +255,10 @@ const styles = StyleSheet.create({
     },
     titleWhite: {
         color: 'white',
-        fontSize: 30,
+        fontSize: 25,
         textAlign: 'center',
         paddingHorizontal: 5,
+        fontFamily: "PressStart2P_400Regular"
     },
     titleGreen: {
         fontSize: 18,
@@ -268,12 +269,13 @@ const styles = StyleSheet.create({
     },
     textWhite: {
         color: 'white',
-        fontSize: 20,
+        fontSize: 15,
         textAlign: 'center',
-        paddingBottom: 10
+        paddingBottom: 10,
+        fontFamily: "PressStart2P_400Regular"
     },
     textGreen: {
-        fontSize: 16,
+        fontSize: 15,
         textAlign: 'center',
         fontFamily: "PressStart2P_400Regular"
     },

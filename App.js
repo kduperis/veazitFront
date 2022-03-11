@@ -66,9 +66,9 @@ var StackNavigation = () => {
 
     >
       <Tab.Screen name="Map" component={MapScreen} />
-      <Tab.Screen name="Filter" component={fakeComponent} options={{ tabBarButton: () => (<FilterScreen />), }} />
-      <Tab.Screen name="Quest" component={fakeComponent} options={{ tabBarButton: () => (<QuestScreen />), }} />
-      <Tab.Screen name="Trophy" component={fakeComponent} options={{ tabBarButton: () => (<TrophyScreen />), }} />
+      <Tab.Screen name="Filtre" component={fakeComponent} options={{ tabBarButton: () => (<FilterScreen />), }} />
+      <Tab.Screen name="Quête" component={fakeComponent} options={{ tabBarButton: () => (<QuestScreen />), }} />
+      <Tab.Screen name="Trophée" component={fakeComponent} options={{ tabBarButton: () => (<TrophyScreen />), }} />
       <Tab.Screen name="Profil" component={ConnectScreen} />
     </Tab.Navigator>
   )

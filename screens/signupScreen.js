@@ -111,7 +111,7 @@ export default function SignupScreen(props) {
                 onPress={()=>handleGoogleSignup()}>
                     <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                         <Icon name='google' size={22} color='white'/>
-                        <Text style={styles.buttonTextGoogle}>Sign up</Text>
+                        <Text style={styles.buttonTextGoogle}>Connexion</Text>
                     </View>
             </TouchableOpacity>
 
@@ -127,7 +127,7 @@ export default function SignupScreen(props) {
                 value={signUpUsername}
                 containerStyle={{ marginBottom: 15, width: '70%' }}
                 inputStyle={{ marginLeft: 10, color: '#fff' }}
-                placeholder='Username'
+                placeholder='Pseudo'
                 leftIcon={
                     <Icon
                         name='user-astronaut'
@@ -200,6 +200,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        fontFamily: "PressStart2P_400Regular",
+        fontSize:12
     },
     textConnect: {
         alignItems: 'center',

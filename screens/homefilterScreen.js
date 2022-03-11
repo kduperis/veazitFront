@@ -25,13 +25,13 @@ export default function HomefilterScreen(props) {
   const checkBox = () => {
     let category = [];
     if (check1) {
-      category.push("Aquatique")
+      category.push("Musée")
     }
     if (check2) {
-      category.push("Domaine")
+      category.push("Nature")
     }
     if (check3) {
-      category.push("Parc")
+      category.push("Site touristique")
     }
 
     dispatch({ type: "addchecked", category: category })
@@ -50,30 +50,36 @@ export default function HomefilterScreen(props) {
   return (
 
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={{ color: theme.color, fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 80 }}>Quel(s) genre(s) de lieu souhaitez-vous Veaziter ?</Text>
-      <View>
+      <Text style={{ color: theme.color, fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 25, lineHeight:40 }}>Quelle(s) categorie(s) de point d'interet souhaitez-vous Veaziter ?</Text>
+      <View style={{alignItems:'flex-start'}}>
         <CheckBox
           center
-          title="Aquatique"
+          title="Musée"
           checked={check1}
           checkedColor={theme.color}
           onPress={() => setCheck1(!check1)}
+          textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
+          containerStyle={{backgroundColor: theme.background,borderWidth:0}}
         />
 
         <CheckBox
           center
-          title="Domaine"
+          title="Nature"
           checked={check2}
           checkedColor={theme.color}
           onPress={() => setCheck2(!check2)}
+          textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
+          containerStyle={{backgroundColor: theme.background,borderWidth:0}}
         />
 
         <CheckBox
           center
-          title="Parc"
+          title="Site touristique"
           checked={check3}
           checkedColor={theme.color}
           onPress={() => setCheck3(!check3)}
+          textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
+          containerStyle={{backgroundColor: theme.background,borderWidth:0}}
         />
 
       </View>
@@ -83,7 +89,7 @@ export default function HomefilterScreen(props) {
         style={[styles.button, { borderColor: theme.color }]}
         onPress={() => checkBox()}>
         <Text
-          style={[styles.buttonText, { color: theme.color }]}>GO!</Text>
+          style={[styles.buttonText, { color: theme.color }]}>Valider</Text>
       </TouchableOpacity>
 
     </View>
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 25,
+    marginTop: 25,
   },
   buttonText: {
     fontFamily: "PressStart2P_400Regular",

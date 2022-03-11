@@ -24,7 +24,7 @@ export default function QuestScreen() {
                         color: '#4b667f',
                       }}
                       iconPosition='top'
-                      title={<Text style={{ fontSize: 10, color:'#4b667f', marginTop:7 }}>Quest</Text>}
+                      title={<Text style={{ fontSize: 10, color:'#4b667f', marginTop:7 }}>Quête</Text>}
       />
 
       
@@ -36,7 +36,7 @@ export default function QuestScreen() {
         >
 
           <View style={[styles.content,{backgroundColor:theme.background}]}>
-            <Text style={[styles.contentTitle,{color: theme.color}]}>Quest Screen !</Text>
+            <Text style={[styles.contentTitle,{color: theme.color}]}>Quêtes</Text>
           </View>
 
         </Modal>

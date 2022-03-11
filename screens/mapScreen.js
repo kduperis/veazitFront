@@ -8,7 +8,7 @@ import { Avatar, Button, Overlay } from 'react-native-elements'
 import ProgressBar from "react-native-animated-progress";
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faMapPin, faDroplet, faGopuram, faTree, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faMapPin, faCamera, faGopuram, faTree, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
@@ -345,12 +345,12 @@ export default function MapScreen() {
 
   const isFocused = useIsFocused();
 
-  var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, categorie: 'Aquatique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
-  { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, categorie: 'Aquatique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711,categorie: 'Domaine', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, categorie: 'Domaine', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, categorie: 'Domaine', score: 4000,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, categorie: 'Parc', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  }]
+  var poi = [{ title: 'Bassin La Paix', description: 'Le bassin', latitude: -21.020110692131183, longitude: 55.66926374606402, categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
+  { title: 'Anse des cascades', description: 'Des cascades', latitude: -21.177591548568518, longitude: 55.83068689565736, categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Domaine 1', latitude: -20.898463033811716, longitude: 55.59040358066711,categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Domaine 2', latitude: 45.76511763913665, longitude: 4.834717377872742, categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: 'Musée des Moulages', description: 'Domaine 3', latitude: 45.75224289744716, longitude: 4.854372604035073, categorie: 'Musée', score: 4000,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
+  { title: 'Parc Sergent Blandan', description: 'Parc 1', latitude: 45.74555369377989, longitude: 4.854344965036273, categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  }]
 
 
   var showOverlay = (title, description) => {
@@ -364,14 +364,14 @@ export default function MapScreen() {
     let iconCustom = faMapPin
 
     switch (lieu.categorie) {
-      case 'Aquatique':
-        iconCustom = faDroplet
-        break;
-      case 'Domaine':
+      case 'Musée':
         iconCustom = faGopuram
         break;
-      case 'Parc':
+      case 'Nature':
         iconCustom = faTree
+        break;
+      case 'Site touristique':
+        iconCustom = faCamera
         break;
     }
 
@@ -382,7 +382,7 @@ export default function MapScreen() {
             key={i}
             coordinate={{ latitude: lieu.latitude, longitude: lieu.longitude }}
             onPress={() => { showOverlay(lieu.title, lieu.description); setPoiSelected(i) }}>
-            <FontAwesomeIcon icon={iconCustom} color='black' />
+            <FontAwesomeIcon icon={iconCustom} color='black' size={25}/>
           </Marker>
         )
       }
@@ -433,7 +433,7 @@ export default function MapScreen() {
         } else {
           setUserScore(0)
           setUserLevel(1)
-          setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
+          setInfoMsg('Inscris toi pour jouer avec Veazit')
         }
       });
     }
@@ -533,7 +533,7 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
     <View style={styles.container}>
       <View style={[styles.subtitle, { backgroundColor: theme.background }]}>
         <Text style={[styles.desc, { color: theme.color }]}>
-          Nos meilleurs Veaziteurs:
+          Nos meilleurs Veaziteurs
         </Text>
       </View>
 
@@ -543,8 +543,8 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
       </View>
       {directionVisible &&
         <View style={{ alignItems: "center" }} backgroundColor={theme.background} >
-          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8, marginBottom: 5, marginTop: 5 }}>{distance}</Text>
-          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }}>{duration}</Text>
+          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 10, marginBottom: 5, marginTop: 5 }}>{distance}</Text>
+          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 10, marginBottom:5 }}>{duration}</Text>
         </View>
 
       }
@@ -572,7 +572,6 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
             onPress={() => {
               launchNavigation(poi[poiSelected].latitude, poi[poiSelected].longitude); 
               setPoiScore(poi[poiSelected].score);
-              setStopPoi('')
             }}>
             <Text
               style={[styles.buttonText, { color: theme.color }]}>Go veazit</Text>
@@ -643,13 +642,13 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
       </MapView>
 
       <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
-        < Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} > Niveau: {userLevel} </Text>
+        < Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize:10 }} > Niveau: {userLevel} </Text>
       </View>
 
       <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />
 
       <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
-        <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 8 }} >{infoMsg}</Text>
+        <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 10 }} >{infoMsg}</Text>
       </View>
 
     </View >
@@ -703,7 +702,7 @@ const styles = StyleSheet.create({
   progressContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 20
+    height: 25
   },
   overlayStyle: {
     padding: 0,
