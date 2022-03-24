@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useContext  } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Button, Avatar, Tooltip, colors } from 'react-native-elements';
 import Modal from 'react-native-modal';
@@ -26,7 +26,7 @@ export default function TrophyScreen() {
 
   useEffect(() => {
     async function loadData() {
-      var rawResponse = await fetch(`http://${IP_URL}:3000/badgesData`);
+      var rawResponse = await fetch(`${IP_URL}badgesData`);
       var response = await rawResponse.json();
       setBadgeData(response.badgeCollection);
     }
@@ -35,11 +35,11 @@ export default function TrophyScreen() {
 
   useEffect(() => {
     async function getTrophy() {
-      axios.get(`http://${IP_URL}:3000/my-badges?token=${token}`).then((res) => {
-        if(res.data.result) {
+      axios.get(`${IP_URL}my-badges?token=${token}`).then((res) => {
+        if (res.data.result) {
           setMyBadge(res.data.myBadge);
         }
-    });
+      });
     }
     getTrophy()
   }, [modalVisible])
@@ -51,14 +51,14 @@ export default function TrophyScreen() {
   }
   var badgeCard = badgeData.map((badge, i) => {
     var imageUrl = `https://res.cloudinary.com/dualrskkc/image/upload/v1646835604/veazit/block_lmhkuy.png`
-    
-    if(token != ''){
+
+    if (token != '') {
       var count = myBadge.length
-      if(count > 0 && i < count) {
+      if (count > 0 && i < count) {
         imageUrl = myBadge[i].img;
       }
     }
-    
+
 
     return (
       <View key={i} style={{ flexDirection: "row" }}>
@@ -78,7 +78,7 @@ export default function TrophyScreen() {
             popover={
               <Text style={{ fontFamily: "PressStart2P_400Regular", fontSize: 10 }}>
                 {
-                  `Il faut que tu veazites ${badge.condition/100} lieu(x) pour débloquer ce badge`}
+                  `Il faut que tu veazites ${badge.condition / 100} lieu(x) pour débloquer ce badge`}
               </Text>
             }
           >
@@ -94,7 +94,7 @@ export default function TrophyScreen() {
     <View>
 
       <Button onPress={() => setModalVisible(true)}
-        buttonStyle={[styles.buttonStyle,{backgroundColor:theme.background}]}
+        buttonStyle={[styles.buttonStyle, { backgroundColor: theme.background }]}
         icon={{
           name: 'trophy',
           type: 'font-awesome',
@@ -111,10 +111,10 @@ export default function TrophyScreen() {
         onBackdropPress={() => { setModalVisible(false) }}
         style={styles.contentView}
       >
-        <View style={[styles.content,{backgroundColor:theme.background}]}>
+        <View style={[styles.content, { backgroundColor: theme.background }]}>
 
           <View style={{ alignItems: 'center', marginBottom: 20 }}>
-            <Text style={[styles.contentTitle,{color: theme.color}]}>Trophées</Text>
+            <Text style={[styles.contentTitle, { color: theme.color }]}>Trophées</Text>
           </View>
           <ScrollView >
 

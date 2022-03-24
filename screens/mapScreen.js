@@ -345,19 +345,19 @@ export default function MapScreen() {
 
   const isFocused = useIsFocused();
 
-  var poi = [{ title: 'Bassin La Paix', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -21.020110692131183, longitude: 55.66926374606402, categorie: 'Nature', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
-  { title: 'Anse des cascades', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -21.177591548568518, longitude: 55.83068689565736, categorie: 'Nature', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -20.898463033811716, longitude: 55.59040358066711,categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
-  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.76511763913665, longitude: 4.834717377872742, categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/museeImprimerie_ecyfon.jpg'  },
-  { title: 'Musée des Moulages', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.75224289744716, longitude: 4.854372604035073, categorie: 'Musée', score: 4000,image:`https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/museeMoulage_bofvir.jpg`},
-  { title: 'Parc Sergent Blandan', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.74555369377989, longitude: 4.854344965036273, categorie: 'Nature', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988022/veazit/visites/parcSergentBlandant_h1uc1p.png'  },
-  { title: 'Place Bellecour', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.75859390463612, longitude: 4.8320457057347275, categorie: 'Site touristique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/placeBellecour_ectxum.jpg'  },
-  { title: 'Mur des Canuts', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.77962208717258, longitude: 4.8279484099319765, categorie: 'Site touristique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/murDesCanuts_qfzlbs.jpg'  },
-  { title: 'La Basilique Notre Dame de Fourvière', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.7620670402596, longitude: 4.821810608525698, categorie: 'Site touristique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/basiliqueFourviere_dagzii.jpg'  },
-  { title: 'Cathédrale Saint-Jean-Baptiste', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.760991647055846, longitude: 4.827343942121724, categorie: 'Site touristique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/cathedraleSaintJeanBaptiste_ihal5e.jpg'  },
-  { title: 'Musée Lumière', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.7626670402596, longitude: 4.821810608525698, categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988022/veazit/visites/muse%CC%81eLumiere_gvh9nx.jpg'  },
-  { title: 'Parc Sisley', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.753937790936725, longitude: 4.867428054262551, categorie: 'Nature', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/parcSisley_rbopfi.jpg'  },
-  { title: 'Parc du Grillon', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.74026227041241, longitude: 4.7740899070069895, categorie: 'Nature', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/parcGrillon_w484ln.jpg'  },]
+  var poi = [{ title: 'Bassin La Paix', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -21.020110692131183, longitude: 55.66926374606402, categorie: 'Nature', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
+  { title: 'Anse des cascades', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -21.177591548568518, longitude: 55.83068689565736, categorie: 'Nature', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
+  { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -20.898463033811716, longitude: 55.59040358066711, categorie: 'Musée', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
+  { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.76511763913665, longitude: 4.834717377872742, categorie: 'Musée', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/museeImprimerie_ecyfon.jpg' },
+  { title: 'Musée des Moulages', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.75224289744716, longitude: 4.854372604035073, categorie: 'Musée', score: 4000, image: `https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/museeMoulage_bofvir.jpg` },
+  { title: 'Parc Sergent Blandan', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.74555369377989, longitude: 4.854344965036273, categorie: 'Nature', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988022/veazit/visites/parcSergentBlandant_h1uc1p.png' },
+  { title: 'Place Bellecour', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.75859390463612, longitude: 4.8320457057347275, categorie: 'Site touristique', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/placeBellecour_ectxum.jpg' },
+  { title: 'Mur des Canuts', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.77962208717258, longitude: 4.8279484099319765, categorie: 'Site touristique', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/murDesCanuts_qfzlbs.jpg' },
+  { title: 'La Basilique Notre Dame de Fourvière', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.7620670402596, longitude: 4.821810608525698, categorie: 'Site touristique', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/basiliqueFourviere_dagzii.jpg' },
+  { title: 'Cathédrale Saint-Jean-Baptiste', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.760991647055846, longitude: 4.827343942121724, categorie: 'Site touristique', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/cathedraleSaintJeanBaptiste_ihal5e.jpg' },
+  { title: 'Musée Lumière', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.7626670402596, longitude: 4.821810608525698, categorie: 'Musée', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988022/veazit/visites/muse%CC%81eLumiere_gvh9nx.jpg' },
+  { title: 'Parc Sisley', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.753937790936725, longitude: 4.867428054262551, categorie: 'Nature', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/parcSisley_rbopfi.jpg' },
+  { title: 'Parc du Grillon', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.74026227041241, longitude: 4.7740899070069895, categorie: 'Nature', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/parcGrillon_w484ln.jpg' },]
 
 
   var showOverlay = (title, description) => {
@@ -389,7 +389,7 @@ export default function MapScreen() {
             key={i}
             coordinate={{ latitude: lieu.latitude, longitude: lieu.longitude }}
             onPress={() => { showOverlay(lieu.title, lieu.description); setPoiSelected(i) }}>
-            <FontAwesomeIcon icon={iconCustom} color='#B53471' size={25}/>
+            <FontAwesomeIcon icon={iconCustom} color='#B53471' size={25} />
           </Marker>
         )
       }
@@ -414,7 +414,7 @@ export default function MapScreen() {
 
   useEffect(() => {
     async function bestUser() {
-      axios.get(`http://${IP_URL}:3000/best-users?token=${token}`).then((res) => {
+      axios.get(`${IP_URL}best-users?token=${token}`).then((res) => {
         var userData = res.data.bestUserName;
         var userDataToken = res.data.user;
         userData.sort((a, b) => {
@@ -454,14 +454,14 @@ export default function MapScreen() {
     setOriginLocation(currentPosition)
     setDestinationLocation({ latitude: destLatitude, longitude: destLongitude })
     setDirectionVisible(true)
-      
-      setTimeout(() => {
-          setVisibleWin(true);
-          setDirectionVisible(false)
-      }, 10000); //DEMODAY simuler la marche 
+
+    setTimeout(() => {
+      setVisibleWin(true);
+      setDirectionVisible(false)
+    }, 10000); //DEMODAY simuler la marche 
 
   }
- 
+
   var calculateTravel = (km, min) => {
 
     var distanceToTravel = km.toFixed(2)
@@ -482,15 +482,15 @@ export default function MapScreen() {
     setDuration(estimatedTime)
   }
 
-  var addScore = async (longitude,latitude,title,description,image,category) => {
-    
-    if(token==''){
+  var addScore = async (longitude, latitude, title, description, image, category) => {
+
+    if (token == '') {
       setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
-    }else{
-      await fetch(`http://${IP_URL}:3000/best-users?`, {
+    } else {
+      await fetch(`${IP_URL}best-users?`, {
         method: 'PUT',
-        headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-        body: `score=${poiScore}&token=${token}&longitude=${longitude}&latitude=${latitude}&title=${title}&description=${description}&image=${image}&category=${category}`, 
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `score=${poiScore}&token=${token}&longitude=${longitude}&latitude=${latitude}&title=${title}&description=${description}&image=${image}&category=${category}`,
       });
     }
     setVisibleWin(false)
@@ -499,11 +499,11 @@ export default function MapScreen() {
   }
 
 
-var addToFavorite = async (longitude,latitude,title,description,image,category) => {
-  await fetch(`http://${IP_URL}:3000/add-favorite?`, {
+  var addToFavorite = async (longitude, latitude, title, description, image, category) => {
+    await fetch(`${IP_URL}add-favorite?`, {
       method: 'PUT',
-      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `token=${token}&longitude=${longitude}&latitude=${latitude}&title=${title}&description=${description}&image=${image}&category=${category}`, 
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `token=${token}&longitude=${longitude}&latitude=${latitude}&title=${title}&description=${description}&image=${image}&category=${category}`,
     });
   }
 
@@ -551,7 +551,7 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
       {directionVisible &&
         <View style={{ alignItems: "center" }} backgroundColor={theme.background} >
           <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 10, marginBottom: 5, marginTop: 5 }}>{distance}</Text>
-          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 10, marginBottom:5 }}>{duration}</Text>
+          <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 10, marginBottom: 5 }}>{duration}</Text>
         </View>
 
       }
@@ -563,21 +563,21 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
       >
         <TouchableOpacity
           style={styles.loveButton}
-          onPress={()=>addToFavorite(poi[poiSelected].longitude,poi[poiSelected].latitude,poi[poiSelected].title,poi[poiSelected].description,poi[poiSelected].image,poi[poiSelected].categorie)}>
-          <FontAwesomeIcon icon={faHeart} color='white' size={25}/>
-      </TouchableOpacity>
+          onPress={() => addToFavorite(poi[poiSelected].longitude, poi[poiSelected].latitude, poi[poiSelected].title, poi[poiSelected].description, poi[poiSelected].image, poi[poiSelected].categorie)}>
+          <FontAwesomeIcon icon={faHeart} color='white' size={25} />
+        </TouchableOpacity>
 
-      <View style={styles.overlayPoi}>
-        <Image
-          source={{ uri: poi[poiSelected].image }}
-          style={styles.item}
-        />
-        <Text style={[styles.titleOverlay,{color:theme.color}]}>{title}</Text>
-        <Text style={[styles.descOverlay,{color:theme.color}]}>{description}</Text>
-        <TouchableOpacity 
-            style={[styles.button,{borderColor: theme.color}]}
+        <View style={styles.overlayPoi}>
+          <Image
+            source={{ uri: poi[poiSelected].image }}
+            style={styles.item}
+          />
+          <Text style={[styles.titleOverlay, { color: theme.color }]}>{title}</Text>
+          <Text style={[styles.descOverlay, { color: theme.color }]}>{description}</Text>
+          <TouchableOpacity
+            style={[styles.button, { borderColor: theme.color }]}
             onPress={() => {
-              launchNavigation(poi[poiSelected].latitude, poi[poiSelected].longitude); 
+              launchNavigation(poi[poiSelected].latitude, poi[poiSelected].longitude);
               setPoiScore(poi[poiSelected].score);
             }}>
             <Text
@@ -588,29 +588,29 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
         </View>
       </Overlay>
 
-      
+
       <Overlay
         isVisible={visibleWin}
-        overlayStyle={[styles.overlayStyle,{borderColor:theme.color, backgroundColor:theme.background}]}
+        overlayStyle={[styles.overlayStyle, { borderColor: theme.color, backgroundColor: theme.background }]}
       >
-          <View style={styles.overlayPoi}>
-            <Image
-              source={require('../assets/clap.jpg')}
-              style={styles.item}
-            />
-            <Text style={[styles.titleOverlay,{color:theme.color}]}>Félicitations tu remportes:</Text>
-            <Text style={[styles.descOverlay,{color:theme.color}]}>+ {poiScore} points !</Text>
-          
-          <TouchableOpacity 
-            style={[styles.button,{borderColor: theme.color}]}
-            onPress={() => addScore(poi[poiSelected].longitude,poi[poiSelected].latitude,poi[poiSelected].title,poi[poiSelected].description,poi[poiSelected].image,poi[poiSelected].categorie)}>
+        <View style={styles.overlayPoi}>
+          <Image
+            source={require('../assets/clap.jpg')}
+            style={styles.item}
+          />
+          <Text style={[styles.titleOverlay, { color: theme.color }]}>Félicitations tu remportes:</Text>
+          <Text style={[styles.descOverlay, { color: theme.color }]}>+ {poiScore} points !</Text>
+
+          <TouchableOpacity
+            style={[styles.button, { borderColor: theme.color }]}
+            onPress={() => addScore(poi[poiSelected].longitude, poi[poiSelected].latitude, poi[poiSelected].title, poi[poiSelected].description, poi[poiSelected].image, poi[poiSelected].categorie)}>
             <Text
               style={[styles.buttonText, { color: theme.color }]}>Veazited</Text>
           </TouchableOpacity>
         </View>
 
       </Overlay>
-      
+
 
       <MapView
         style={{ flex: 1 }}
@@ -628,28 +628,28 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
         }}
       >
 
-            {directionVisible && 
-              <MapViewDirections
-              origin={originLocation}
-              destination={destinationLocation}
-              apikey={GOOGLE_MAPS_APIKEY}
-              strokeWidth={3}
-              strokeColor="hotpink"
-              onReady={result => {
-                calculateTravel(result.distance, result.duration)
-              }}
-              onError={(errorMessage) => {
-                console.log(errorMessage)
-              }}
-          />  
-            }
-        
-        {listPointOfInterest} 
+        {directionVisible &&
+          <MapViewDirections
+            origin={originLocation}
+            destination={destinationLocation}
+            apikey={GOOGLE_MAPS_APIKEY}
+            strokeWidth={3}
+            strokeColor="hotpink"
+            onReady={result => {
+              calculateTravel(result.distance, result.duration)
+            }}
+            onError={(errorMessage) => {
+              console.log(errorMessage)
+            }}
+          />
+        }
+
+        {listPointOfInterest}
 
       </MapView>
 
       <View style={[styles.progressContainer, { backgroundColor: theme.background }]}>
-        < Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize:10 }} > Niveau: {userLevel} </Text>
+        < Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 10 }} > Niveau: {userLevel} </Text>
       </View>
 
       <ProgressBar progress={userScore} height={20} backgroundColor={theme.color} />

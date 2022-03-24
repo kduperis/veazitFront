@@ -16,10 +16,10 @@ import { IP_URL } from '@env'
 
 export default function ConnectScreen(props) {
 
-  const [light,setLight] =useState(true)
-  const [userName,setUserName] = useState('');
-  const [score,setScore]=useState(0);
-  const [imageUrl,setImageUrl]=useState('https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg')
+  const [light, setLight] = useState(true)
+  const [userName, setUserName] = useState('');
+  const [score, setScore] = useState(0);
+  const [imageUrl, setImageUrl] = useState('https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg')
 
   const theme = useContext(themeContext);
 
@@ -35,7 +35,7 @@ export default function ConnectScreen(props) {
       }
     }
     async function scoreData() {
-      var rawResponse = await fetch(`http://${IP_URL}:3000/best-users?token=${tokenUser}`);
+      var rawResponse = await fetch(`${IP_URL}best-users?token=${tokenUser}`);
       var response = await rawResponse.json();
 
       if (response.result) {
@@ -57,15 +57,15 @@ export default function ConnectScreen(props) {
   }
 
 
-  var updateTheme = async (value)=>{
+  var updateTheme = async (value) => {
 
     setLight(value);
     EventRegister.emit('myCustomEvent', light);
 
-    await fetch(`http://${IP_URL}:3000/update-theme?`, {
+    await fetch(`${IP_URL}/update-theme?`, {
       method: 'PUT',
-      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `token=${tokenUser}&apparence=${light}`, 
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `token=${tokenUser}&apparence=${light}`,
     });
 
 
@@ -105,9 +105,9 @@ export default function ConnectScreen(props) {
           <Text style={[styles.textList, { color: theme.color }]}>Apparence</Text>
         </ListItem.Content>
         <Switch
-        color={"#06D4B6"}
-        value={light}
-        onValueChange={(value) => updateTheme(value)}
+          color={"#06D4B6"}
+          value={light}
+          onValueChange={(value) => updateTheme(value)}
         />
       </ListItem>
 
