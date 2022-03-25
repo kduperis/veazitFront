@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import themeContext from '../config/themeContext';
 
 export default function HomepageScreen(props) {
-
+  
   const theme = useContext(themeContext);
 
   const [pseudo, setPseudo] = useState('');
