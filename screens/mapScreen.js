@@ -8,7 +8,7 @@ import { Avatar, Button, Overlay } from 'react-native-elements'
 import ProgressBar from "react-native-animated-progress";
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faMapPin, faCamera, faGopuram, faTree, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faMapPin, faCamera, faGopuram, faTree, faHeart, faLocationCrosshairs } from '@fortawesome/free-solid-svg-icons'
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
@@ -349,7 +349,7 @@ export default function MapScreen() {
   { title: 'Anse des cascades', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -21.177591548568518, longitude: 55.83068689565736, categorie: 'Nature', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
   { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -20.898463033811716, longitude: 55.59040358066711,categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg'  },
   { title: "Musée de l'Imprimerie et de la Communication graphique", description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.76511763913665, longitude: 4.834717377872742, categorie: 'Musée', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/museeImprimerie_ecyfon.jpg'  },
-  { title: 'Musée des Moulages', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.75224289744716, longitude: 4.854372604035073, categorie: 'Musée', score: 4000,image:`https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/museeMoulage_bofvir.jpg`},
+  { title: 'Musée des Moulages', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.75224289744716, longitude: 4.854372604035073, categorie: 'Musée', score: 100,image:`https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/museeMoulage_bofvir.jpg`},
   { title: 'Parc Sergent Blandan', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.74555369377989, longitude: 4.854344965036273, categorie: 'Nature', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988022/veazit/visites/parcSergentBlandant_h1uc1p.png'  },
   { title: 'Place Bellecour', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.75859390463612, longitude: 4.8320457057347275, categorie: 'Site touristique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/placeBellecour_ectxum.jpg'  },
   { title: 'Mur des Canuts', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.77962208717258, longitude: 4.8279484099319765, categorie: 'Site touristique', score: 100,image:'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/murDesCanuts_qfzlbs.jpg'  },
@@ -485,7 +485,7 @@ export default function MapScreen() {
   var addScore = async (longitude,latitude,title,description,image,category) => {
     
     if(token==''){
-      setInfoMsg('Inscris toi pour profiter au maximum de Veazit')
+      setInfoMsg('Inscris toi pour jouer avec Veazit')
     }else{
       await fetch(`http://${IP_URL}:3000/best-users?`, {
         method: 'PUT',
@@ -627,10 +627,14 @@ var addToFavorite = async (longitude,latitude,title,description,image,category) 
           longitudeDelta: 0.0421,
         }}
       >
+            <Marker
+              coordinate={{ latitude: 45.75933548310976, longitude: 4.855602295766094 }}>
+              <FontAwesomeIcon icon={faLocationCrosshairs} color='blue' size={25}/>
+            </Marker>
 
             {directionVisible && 
               <MapViewDirections
-              origin={originLocation}
+              origin={{ latitude: 45.75933548310976, longitude: 4.855602295766094 }}
               destination={destinationLocation}
               apikey={GOOGLE_MAPS_APIKEY}
               strokeWidth={3}
