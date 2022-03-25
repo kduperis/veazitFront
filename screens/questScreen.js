@@ -44,6 +44,7 @@ export default function QuestScreen() {
   );
 }
 
+
 const styles = StyleSheet.create({
   content: {
     padding: 22,

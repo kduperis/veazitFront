@@ -140,7 +140,6 @@ export default function ParameterScreen(props) {
           </View>
         </ScrollView>
 
-
       </View>
 
       <View style={styles.buttonContainer}>

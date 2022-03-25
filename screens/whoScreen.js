@@ -26,6 +26,7 @@ export default function WhoScreen(props) {
             <Text style={{ color: theme.color, fontSize: 18, fontWeight:'bold'}}>RÉGIS</Text>
         </View>
 
+
         <View style={{ alignItems: 'center', width: '70%', marginTop: 10,justifyContent:'center'}}>
           <Avatar
             source={{ uri: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646841698/veazit/kevin_jrojd2.jpg' }}
@@ -35,6 +36,7 @@ export default function WhoScreen(props) {
           />
             <Text style={{ color: theme.color, fontSize: 18, fontWeight:'bold'}}>KEVIN</Text>
         </View>
+
 
         <View style={{ alignItems: 'center', width: '70%', marginTop: 10,justifyContent:'center'}}>
           <Avatar

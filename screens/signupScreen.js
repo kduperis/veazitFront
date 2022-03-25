@@ -138,6 +138,7 @@ export default function SignupScreen(props) {
                 }
             />
 
+
             {/*Input pour l'EMAIL'*/}
             <Input
                 onChangeText={(e) => setSignUpEmail(e)}
