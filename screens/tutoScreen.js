@@ -31,6 +31,7 @@ export default function TutoScreen(props) {
         return <AppLoading />
     }
 
+    
     return (
 
         <View>

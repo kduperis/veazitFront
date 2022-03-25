@@ -38,7 +38,6 @@ export default function HowtoScreen(props) {
           </View>
 
         </ScrollView>
-       
 
         <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={() => props.navigation.navigate('StackNavigation', { screen: 'ConnectScreen' })}>

@@ -397,6 +397,7 @@ export default function MapScreen() {
 
   })
 
+  
   useEffect(() => {
     async function askPermissions() {
       let { status } = await Location.requestForegroundPermissionsAsync();

@@ -33,6 +33,7 @@ export default function FavoriteScreen(props) {
     favorite();
   },[isFocused])
 
+  
   var deleteThis = async (id)=>{
     const deletedArticle =  await fetch (`http://${IP_URL}:3000/delete-favorite/${id}/${tokenUser}`,
       {method: 'DELETE'})

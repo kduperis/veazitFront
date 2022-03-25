@@ -77,6 +77,7 @@ export default function ArchiveScreen(props) {
   );
 }
 
+
 const styles = StyleSheet.create({
     content: {
         flex:1,

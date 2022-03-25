@@ -143,6 +143,7 @@ export default function FilterScreen(props) {
   );
 }
 
+
 const styles = StyleSheet.create({
   content: {
     padding: 22,

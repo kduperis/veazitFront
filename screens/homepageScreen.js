@@ -22,6 +22,7 @@ export default function HomepageScreen(props) {
 
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {

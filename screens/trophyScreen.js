@@ -128,6 +128,7 @@ export default function TrophyScreen() {
   );
 }
 
+
 const styles = StyleSheet.create({
   content: {
     padding: 22,

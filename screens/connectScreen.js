@@ -68,7 +68,6 @@ export default function ConnectScreen(props) {
       body: `token=${tokenUser}&apparence=${light}`, 
     });
 
-
   }
 
   return (
