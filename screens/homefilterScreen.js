@@ -22,6 +22,7 @@ export default function HomefilterScreen(props) {
 
   const dispatch = useDispatch()
 
+
   const checkBox = () => {
     let category = [];
     if (check1) {
@@ -33,7 +34,7 @@ export default function HomefilterScreen(props) {
     if (check3) {
       category.push("Site touristique")
     }
-
+    //Mise en local storage des categories sélectionnées et envoi dans store de Rédux et redirection sur TutoScreen
     dispatch({ type: "addchecked", category: category })
     AsyncStorage.setItem("category", JSON.stringify(category))
     props.navigation.navigate('TutoScreen')
@@ -50,16 +51,16 @@ export default function HomefilterScreen(props) {
   return (
 
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={{ color: theme.color, fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 25, lineHeight:40 }}>Quelle(s) catégorie(s) de point d'intérêt souhaitez-vous Veaziter ?</Text>
-      <View style={{alignItems:'flex-start'}}>
+      <Text style={{ color: theme.color, fontSize: 15, fontFamily: "PressStart2P_400Regular", marginBottom: 25, lineHeight: 40 }}>Quelle(s) catégorie(s) de point d'intérêt souhaitez-vous Veaziter ?</Text>
+      <View style={{ alignItems: 'flex-start' }}>
         <CheckBox
           center
           title="Musée"
           checked={check1}
           checkedColor={theme.color}
           onPress={() => setCheck1(!check1)}
-          textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
-          containerStyle={{backgroundColor: theme.background,borderWidth:0}}
+          textStyle={{ color: theme.color, fontFamily: "PressStart2P_400Regular" }}
+          containerStyle={{ backgroundColor: theme.background, borderWidth: 0 }}
         />
 
         <CheckBox
@@ -68,8 +69,8 @@ export default function HomefilterScreen(props) {
           checked={check2}
           checkedColor={theme.color}
           onPress={() => setCheck2(!check2)}
-          textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
-          containerStyle={{backgroundColor: theme.background,borderWidth:0}}
+          textStyle={{ color: theme.color, fontFamily: "PressStart2P_400Regular" }}
+          containerStyle={{ backgroundColor: theme.background, borderWidth: 0 }}
         />
 
         <CheckBox
@@ -78,8 +79,8 @@ export default function HomefilterScreen(props) {
           checked={check3}
           checkedColor={theme.color}
           onPress={() => setCheck3(!check3)}
-          textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
-          containerStyle={{backgroundColor: theme.background,borderWidth:0}}
+          textStyle={{ color: theme.color, fontFamily: "PressStart2P_400Regular" }}
+          containerStyle={{ backgroundColor: theme.background, borderWidth: 0 }}
         />
 
       </View>

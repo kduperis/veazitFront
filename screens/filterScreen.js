@@ -23,15 +23,17 @@ export default function FilterScreen(props) {
   const [check2, setCheck2] = useState(false);
   const [check3, setCheck3] = useState(false);
 
+  //Récupère les categories du store
   const checked = useSelector((state) => state.category)
   const dispatch = useDispatch()
 
   var filter = ["Musée", "Nature", "Site touristique"]
 
+  //Vient cocher ou non les filtres en fonction des préselections de l'user
   useEffect(() => {
     function checkB(allCategory, selected) {
       for (var i = 0; i < selected.length; i++) {
-        
+
         switch (allCategory.indexOf(selected[i])) {
           case 0:
             setCheck1(true);
@@ -53,8 +55,8 @@ export default function FilterScreen(props) {
   if (!fontLoaded) {
     return <AppLoading />
   }
-
-  var updateFilter = () =>{
+  //au press sur valider les filtres sont sauvegardés en local storage et envoyé au store
+  var updateFilter = () => {
     let category = [];
     if (check1) {
       category.push("Musée")
@@ -98,15 +100,15 @@ export default function FilterScreen(props) {
 
         <View style={[styles.content, { backgroundColor: theme.background }]}>
           <Text style={[styles.contentTitle, { color: theme.color }]}>Filtres</Text>
-          <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20, lineHeight:30 }}>Modifiez vos catégories de point d'intérêt : </Text>
-          <View style={{alignItems:'flex-start'}}>
+          <Text style={{ color: theme.color, fontSize: 14, fontFamily: "PressStart2P_400Regular", marginBottom: 20, lineHeight: 30 }}>Modifiez vos catégories de point d'intérêt : </Text>
+          <View style={{ alignItems: 'flex-start' }}>
             <CheckBox
               title="Musée"
               checked={check1}
               checkedColor={theme.color}
               onPress={() => setCheck1(!check1)}
-              textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
-              containerStyle={{backgroundColor: theme.background,borderWidth:0}}
+              textStyle={{ color: theme.color, fontFamily: "PressStart2P_400Regular" }}
+              containerStyle={{ backgroundColor: theme.background, borderWidth: 0 }}
             />
 
             <CheckBox
@@ -114,8 +116,8 @@ export default function FilterScreen(props) {
               checked={check2}
               checkedColor={theme.color}
               onPress={() => setCheck2(!check2)}
-              textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
-              containerStyle={{backgroundColor: theme.background,borderWidth:0}}
+              textStyle={{ color: theme.color, fontFamily: "PressStart2P_400Regular" }}
+              containerStyle={{ backgroundColor: theme.background, borderWidth: 0 }}
             />
 
             <CheckBox
@@ -123,18 +125,18 @@ export default function FilterScreen(props) {
               checked={check3}
               checkedColor={theme.color}
               onPress={() => setCheck3(!check3)}
-              textStyle={{color:theme.color, fontFamily:"PressStart2P_400Regular"}}
-              containerStyle={{backgroundColor: theme.background,borderWidth:0}}
+              textStyle={{ color: theme.color, fontFamily: "PressStart2P_400Regular" }}
+              containerStyle={{ backgroundColor: theme.background, borderWidth: 0 }}
             />
 
           </View>
           <TouchableOpacity
-              style={[styles.button, { borderColor: theme.color }]}
-              onPress={() => updateFilter()}>
-              <Text
-                style={[styles.buttonText, { color: theme.color }]}>Valider</Text>
+            style={[styles.button, { borderColor: theme.color }]}
+            onPress={() => updateFilter()}>
+            <Text
+              style={[styles.buttonText, { color: theme.color }]}>Valider</Text>
 
-            </TouchableOpacity>
+          </TouchableOpacity>
         </View>
       </Modal>
 

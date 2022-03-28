@@ -13,15 +13,13 @@ import { IP_URL } from '@env'
 export default function ArchiveScreen(props) {
 
   const theme = useContext(themeContext);
-
   const tokenUser = useSelector(state => state.token);
-
   const isFocused = useIsFocused();
-
   const [listArchive, setListArchive] = useState([])
 
   useEffect(() => {
     async function favorite() {
+      //Vient récupérer l'historique des visites de l'utilisateur
       var rawResponse = await fetch(`${IP_URL}my-archive?token=${tokenUser}`);
       var response = await rawResponse.json();
       if (response.result) {
@@ -54,7 +52,6 @@ export default function ArchiveScreen(props) {
   })
 
   return (
-
     <View style={[styles.content, { backgroundColor: theme.background }]}>
       <Text style={[styles.contentTitle, { color: theme.color }]}>Archives</Text>
 
@@ -73,7 +70,6 @@ export default function ArchiveScreen(props) {
         </TouchableOpacity>
       </View>
     </View>
-
   );
 }
 

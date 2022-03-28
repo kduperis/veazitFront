@@ -50,13 +50,14 @@ export default function ConnectScreen(props) {
     verifyUser()
   }, [isFocused])
 
+  //vient déconnecter l'user en retirant le token de l'user en local storage
   var disconnect = () => {
     props.navigation.navigate('SignUp')
     AsyncStorage.removeItem('token');
     dispatch({ type: 'addToken', token: '' })
   }
 
-
+  //Vient 'dispatch' la valeur que l'user attribue et envoie l'info en BDD
   var updateTheme = async (value) => {
 
     setLight(value);

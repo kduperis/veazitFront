@@ -31,6 +31,7 @@ export default function SignIn(props) {
     var handleSubmitSignin = async () => {
 
         const data = await fetch(`${IP_URL}users/sign-in`, {
+            //Vient vérifier l'existence d'un user en BDD
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `emailFromFront=${signInEmail}&passwordFromFront=${signInPassword}`
@@ -47,7 +48,6 @@ export default function SignIn(props) {
         }
     }
 
-    
     var handleGoogleSignin = async () => {
         const config = {
             iosClientId: '847688372567-4kjumpe2p0itpt10dbp0a3fpo8uvp6ru.apps.googleusercontent.com',
@@ -60,6 +60,7 @@ export default function SignIn(props) {
             const { email, name, photoUrl } = user;
 
             const data = await fetch(`${IP_URL}users/google-connect`, {
+                //Vient connecter ou inscrire un user via google connect
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `email=${email}&photoUrl=${photoUrl}&name=${name}`
@@ -68,8 +69,10 @@ export default function SignIn(props) {
             const body = await data.json()
             if (body.result) {
                 console.log(body.infoConnect)
+                //Vient dispatcher le token de l'user dans le store et sauvegarde dans le local storage
                 dispatch({ type: 'addToken', token: body.user.token })
                 AsyncStorage.setItem("token", body.user.token)
+                //Timer pour mettre en place un spinner
                 setTimeout(() => props.navigation.navigate('StackNavigation', { screen: 'Map' }, 1000))
             } else {
                 setErrorsSignin(body.error)

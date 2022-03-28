@@ -1,7 +1,7 @@
 import { LogBox } from 'react-native';
 LogBox.ignoreAllLogs();
 
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -27,7 +27,7 @@ import theme from './config/theme';
 import themeContext from './config/themeContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faUserAstronaut, faTrophy, faMapLocationDot, faFilter } from '@fortawesome/free-solid-svg-icons'
+import { faUserAstronaut, faMapLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux'
 import token from './reducers/token';
@@ -36,6 +36,7 @@ import category from './reducers/category'
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+//Store de Rédux
 const store = createStore(combineReducers({ token, category }))
 
 var fakeComponent = () => {
@@ -80,17 +81,19 @@ var StackNavigation = () => {
 
 export default function App() {
 
-  const [light,setLight] =useState(true);
+  const [light, setLight] = useState(true);
 
-  useEffect(()=>{
-    EventRegister.addEventListener('myCustomEvent',(data)=>{
+  //Récupère la data de connect Screen 'dispatchée' pour attribuer la valeur à un booléen
+  useEffect(() => {
+    EventRegister.addEventListener('myCustomEvent', (data) => {
       setLight(data);
     })
   })
-  
+
 
   return (
-    <themeContext.Provider value={light ? theme.dark : theme.light }>
+    //Condition ternaire, si light true alors ... sinon ...
+    <themeContext.Provider value={light ? theme.dark : theme.light}>
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>

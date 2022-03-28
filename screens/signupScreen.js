@@ -34,6 +34,7 @@ export default function SignupScreen(props) {
     var handleSubmitSignup = async () => {
 
         const data = await fetch(`${IP_URL}users/sign-up`, {
+            //Vient inscrire un user en BDD
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `usernameFromFront=${signUpUsername}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
@@ -61,6 +62,7 @@ export default function SignupScreen(props) {
             const { email, name, photoUrl } = user;
 
             const data = await fetch(`${IP_URL}users/google-connect`, {
+                //Vient connecter ou inscrire un user via google connect
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `email=${email}&photoUrl=${photoUrl}&name=${name}`
@@ -69,11 +71,13 @@ export default function SignupScreen(props) {
             const body = await data.json()
             if (body.result) {
                 console.log(body.infoConnect)
+                //Vient dispatcher le token de l'user dans le store et sauvegarde dans le local storage
                 dispatch({ type: 'addToken', token: body.user.token })
                 AsyncStorage.setItem("token", body.user.token)
+                //Timer pour mettre en place un spinner
                 setTimeout(() => props.navigation.navigate('StackNavigation', { screen: 'Map' }, 1000))
             } else {
-                setErrorsSignin(body.error)
+                setErrorsSignup(body.error)
             }
         } else {
             console.log('Google signin was cancelled');
@@ -93,7 +97,6 @@ export default function SignupScreen(props) {
     return (
         <View style={[styles.container, { backgroundColor: theme.background }]}>
 
-            {/*Bouton previous*/}
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={() => props.navigation.navigate('StackNavigation', { screen: 'Map' })}>
                     <View style={[styles.buttonPrevious, { borderColor: theme.color }]}>
@@ -102,8 +105,6 @@ export default function SignupScreen(props) {
                 </TouchableOpacity>
             </View>
 
-
-            {/*Titre*/}
             <Text h2 style={{ color: '#FFFFFF', fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Welcome new</Text>
             <Text h2 style={{ marginBottom: 15, color: theme.color, fontSize: 25, fontFamily: 'PressStart2P_400Regular' }}>Veaziter</Text>
 
@@ -122,7 +123,6 @@ export default function SignupScreen(props) {
                 <View style={{ backgroundColor: '#A1A1A1', height: 1, flex: 1, alignSelf: 'center' }} />
             </View>
 
-            {/*Input pour l'USERNAME'*/}
             <Input
                 onChangeText={(e) => setSignUpUsername(e)}
                 value={signUpUsername}
@@ -138,8 +138,6 @@ export default function SignupScreen(props) {
                 }
             />
 
-
-            {/*Input pour l'EMAIL'*/}
             <Input
                 onChangeText={(e) => setSignUpEmail(e)}
                 value={signUpEmail}
@@ -155,7 +153,6 @@ export default function SignupScreen(props) {
                 }
             />
 
-            {/*Input pour le MOT DE PASSE*/}
             <Input
                 onChangeText={(e) => setSignUpPassword(e)}
                 value={signUpPassword}
@@ -174,7 +171,6 @@ export default function SignupScreen(props) {
 
             {tabErrorsSignup}
 
-            {/*Bouton qui redirige vers le 'JEU'*/}
             <TouchableOpacity
                 style={[styles.button, { borderColor: theme.color }]}
                 onPress={() => handleSubmitSignup()}>
@@ -182,14 +178,11 @@ export default function SignupScreen(props) {
                     style={[styles.buttonText, { color: theme.color }]}>Start</Text>
             </TouchableOpacity>
 
-            {/*Redirection vers la page SIGN IN si l'USER possède un compte*/}
             <Text style={styles.text}>Vous avez un compte ?</Text>
             <Text style={[styles.textConnect, { color: theme.color }]} onPress={() => props.navigation.navigate('SignIn')}>Connectez-vous</Text>
         </View >
     );
-
 }
-
 
 const styles = StyleSheet.create({
     container: {

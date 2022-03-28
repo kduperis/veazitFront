@@ -15,15 +15,13 @@ import { IP_URL } from '@env'
 export default function FavoriteScreen(props) {
 
   const theme = useContext(themeContext);
-
   const tokenUser = useSelector(state => state.token);
-
   const isFocused = useIsFocused();
-
   const [listFavorite, setListFavorite] = useState([])
 
   useEffect(() => {
     async function favorite() {
+      //Vient récupérer les favoris de l'utilisateur
       var rawResponse = await fetch(`${IP_URL}my-favorite?token=${tokenUser}`);
       var response = await rawResponse.json();
       if (response.result) {
@@ -35,7 +33,8 @@ export default function FavoriteScreen(props) {
 
 
   var deleteThis = async (id) => {
-    const deletedArticle = await fetch(`http://${IP_URL}:3000/delete-favorite/${id}/${tokenUser}`,
+    //Vient supprimer un élément des favoris
+    const deletedArticle = await fetch(`${IP_URL}delete-favorite/${id}/${tokenUser}`,
       { method: 'DELETE' })
     const data = await deletedArticle.json()
     setListFavorite(data.myFavorite)
@@ -72,7 +71,6 @@ export default function FavoriteScreen(props) {
   })
 
   return (
-
     <View style={[styles.content, { backgroundColor: theme.background }]}>
       <Text style={[styles.contentTitle, { color: theme.color }]}>Favoris</Text>
 
@@ -91,9 +89,6 @@ export default function FavoriteScreen(props) {
         </TouchableOpacity>
       </View>
     </View>
-
-
-
   );
 }
 

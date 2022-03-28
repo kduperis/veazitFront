@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Button, Avatar, Tooltip, colors } from 'react-native-elements';
@@ -23,9 +22,9 @@ export default function TrophyScreen() {
 
   const token = useSelector((state) => state.token)
 
-
   useEffect(() => {
     async function loadData() {
+      //requête de l'ensemble des badges en BDD
       var rawResponse = await fetch(`${IP_URL}badgesData`);
       var response = await rawResponse.json();
       setBadgeData(response.badgeCollection);
@@ -35,6 +34,7 @@ export default function TrophyScreen() {
 
   useEffect(() => {
     async function getTrophy() {
+      //requête des badges de l'utilisateur connecté
       axios.get(`${IP_URL}my-badges?token=${token}`).then((res) => {
         if (res.data.result) {
           setMyBadge(res.data.myBadge);
@@ -58,7 +58,6 @@ export default function TrophyScreen() {
         imageUrl = myBadge[i].img;
       }
     }
-
 
     return (
       <View key={i} style={{ flexDirection: "row" }}>

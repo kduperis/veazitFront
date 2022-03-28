@@ -121,7 +121,7 @@ export default function ParameterScreen(props) {
           size={100}
           rounded={true}
           containerStyle={{
-            borderColor: '#06D6b6',
+            borderColor: theme.color,
             borderStyle: 'solid',
             borderWidth: 4,
           }}

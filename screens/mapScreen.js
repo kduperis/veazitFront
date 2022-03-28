@@ -24,6 +24,7 @@ import { IP_URL, GOOGLE_MAPS_APIKEY } from '@env'
 
 import themeContext from '../config/themeContext';
 
+//customisation de la Map
 var mapStyle = [
   {
     "featureType": "all",
@@ -314,8 +315,6 @@ var mapStyle = [
 
 export default function MapScreen() {
 
-  const destination = { latitude: 37.771707, longitude: -122.4053769 };
-
   const theme = useContext(themeContext);
 
   const [currentPosition, setCurrentPosition] = useState({})
@@ -345,6 +344,7 @@ export default function MapScreen() {
 
   const isFocused = useIsFocused();
 
+  //Liste des POI en dur
   var poi = [{ title: 'Bassin La Paix', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -21.020110692131183, longitude: 55.66926374606402, categorie: 'Nature', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
   { title: 'Anse des cascades', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -21.177591548568518, longitude: 55.83068689565736, categorie: 'Nature', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
   { title: 'La Vanilleraie, Domaine du Grand Hazier', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: -20.898463033811716, longitude: 55.59040358066711, categorie: 'Musée', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646813911/veazit/unknown_lgsmmw.jpg' },
@@ -359,7 +359,7 @@ export default function MapScreen() {
   { title: 'Parc Sisley', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.753937790936725, longitude: 4.867428054262551, categorie: 'Nature', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988019/veazit/visites/parcSisley_rbopfi.jpg' },
   { title: 'Parc du Grillon', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ', latitude: 45.74026227041241, longitude: 4.7740899070069895, categorie: 'Nature', score: 100, image: 'https://res.cloudinary.com/dualrskkc/image/upload/v1646988020/veazit/visites/parcGrillon_w484ln.jpg' },]
 
-
+  //Modale qui va décrire un POI
   var showOverlay = (title, description) => {
     setTitle(title)
     setDescription(description)
@@ -369,7 +369,6 @@ export default function MapScreen() {
   var listPointOfInterest = poi.map((lieu, i) => {
 
     let iconCustom = faMapPin
-
     switch (lieu.categorie) {
       case 'Musée':
         iconCustom = faGopuram
@@ -382,6 +381,7 @@ export default function MapScreen() {
         break;
     }
 
+    //Créé des marqueurs en fonction des filtres sélectionnés
     for (var j = 0; j < checked.length; j++) {
       if (lieu.categorie == checked[j]) {
         return (
@@ -394,10 +394,9 @@ export default function MapScreen() {
         )
       }
     }
-
   })
 
-
+  //demande pour exploiter la géoloc' de l'user et renvoie les données dans une variable d'état
   useEffect(() => {
     async function askPermissions() {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -413,14 +412,18 @@ export default function MapScreen() {
     askPermissions();
   }, []);
 
+  //requête pour obtenir les utilisateurs au backend (route best-users)
+  //si user connecté récupère l'ensemble de ses infos
   useEffect(() => {
     async function bestUser() {
       axios.get(`${IP_URL}best-users?token=${token}`).then((res) => {
         var userData = res.data.bestUserName;
         var userDataToken = res.data.user;
+        //trie en ordre décroissant
         userData.sort((a, b) => {
           return b.score - a.score
         })
+        //Si moins de trois users en BDD, montre le 1er sinon montre 3
         if (userData.length <= 3) {
           userData = userData.slice(0, 1)
         } else {
@@ -460,7 +463,6 @@ export default function MapScreen() {
       setVisibleWin(true);
       setDirectionVisible(false)
     }, 10000); //DEMODAY simuler la marche 
-
   }
 
   var calculateTravel = (km, min) => {
@@ -488,7 +490,8 @@ export default function MapScreen() {
     if (token == '') {
       setInfoMsg('Inscris toi pour jouer avec Veazit')
     } else {
-      await fetch(`http://${IP_URL}:3000/best-users?`, {
+      //requête pour actualiser les données de l'utilisateur
+      await fetch(`${IP_URL}best-users?`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `score=${poiScore}&token=${token}&longitude=${longitude}&latitude=${latitude}&title=${title}&description=${description}&image=${image}&category=${category}`,
@@ -496,11 +499,10 @@ export default function MapScreen() {
     }
     setVisibleWin(false)
     setUpdateScore(!updateScore)
-
   }
 
-
   var addToFavorite = async (longitude, latitude, title, description, image, category) => {
+    //requête pour actualiser les favoris de l'utilisateur
     await fetch(`${IP_URL}add-favorite?`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -508,6 +510,7 @@ export default function MapScreen() {
     });
   }
 
+  //Créé une card pour users du scoreboard
   var bestUserCard = bestList.map((user, i) => {
     return (
       <View key={i} style={styles.cardPlayer} >
@@ -530,8 +533,6 @@ export default function MapScreen() {
     )
   })
 
-
-
   let [fontLoaded, error] = useFonts({ PressStart2P_400Regular });
   if (!fontLoaded) {
     return <AppLoading />
@@ -546,15 +547,14 @@ export default function MapScreen() {
       </View>
 
       <View style={[styles.best, { backgroundColor: theme.background }]}>
-
         {bestUserCard}
       </View>
+
       {directionVisible &&
         <View style={{ alignItems: "center" }} backgroundColor={theme.background} >
           <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 10, marginBottom: 5, marginTop: 5 }}>{distance}</Text>
           <Text style={{ color: "white", fontFamily: "PressStart2P_400Regular", fontSize: 10, marginBottom: 5 }}>{duration}</Text>
         </View>
-
       }
 
       <Overlay
@@ -589,7 +589,6 @@ export default function MapScreen() {
         </View>
       </Overlay>
 
-
       <Overlay
         isVisible={visibleWin}
         overlayStyle={[styles.overlayStyle, { borderColor: theme.color, backgroundColor: theme.background }]}
@@ -611,7 +610,6 @@ export default function MapScreen() {
         </View>
 
       </Overlay>
-
 
       <MapView
         style={{ flex: 1 }}
@@ -664,9 +662,7 @@ export default function MapScreen() {
       </View>
 
     </View >
-
   );
-
 }
 
 const styles = StyleSheet.create({

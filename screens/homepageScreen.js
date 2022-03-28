@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import themeContext from '../config/themeContext';
 
 export default function HomepageScreen(props) {
-  
+  //définition du thème selon préférence user
   const theme = useContext(themeContext);
 
   const [pseudo, setPseudo] = useState('');
@@ -22,11 +22,12 @@ export default function HomepageScreen(props) {
 
   const dispatch = useDispatch();
 
-  
+  //Récupère les valeurs du local storage et envoie vers le store Redux category et token
   useEffect(() => {
     AsyncStorage.getItem('pseudo', function (error, pseudo) {
       if (pseudo) {
         AsyncStorage.getItem('category', function (error, category) {
+          //Category est une string, il faut parser pour récupérer l'info sous forme de tableau
           if (category) {
             var categoryParse = JSON.parse(category)
             dispatch({ type: "addchecked", category: categoryParse })
@@ -48,6 +49,7 @@ export default function HomepageScreen(props) {
     return <AppLoading />
   }
 
+  //Mise en local storage du pseudo et redirection vers HomeFilter si pseudo != null
   var submitPseudo = () => {
     if (pseudo != '') {
       setErrorMsg('')
@@ -59,6 +61,7 @@ export default function HomepageScreen(props) {
   }
 
   return (
+    //Récupère le style de container et thème
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Text style={{ color: theme.color, fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>Veazit</Text>
       <Text style={{ color: "#D1D8E0", fontSize: 50, fontFamily: "PressStart2P_400Regular" }}>&</Text>
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:10,
+    marginTop: 10,
   },
   buttonText: {
     fontFamily: "PressStart2P_400Regular",
@@ -118,6 +121,6 @@ const styles = StyleSheet.create({
     color: 'red',
     fontFamily: "PressStart2P_400Regular",
     fontSize: 12,
-    marginVertical:5,
+    marginVertical: 5,
   },
 });
