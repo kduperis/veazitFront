@@ -626,14 +626,14 @@ export default function MapScreen() {
           longitudeDelta: 0.0421,
         }}
       >
-        <Marker
+        {/* <Marker
           coordinate={{ latitude: 45.75933548310976, longitude: 4.855602295766094 }}>
           <FontAwesomeIcon icon={faLocationCrosshairs} color='blue' size={25} />
-        </Marker>
+        </Marker> */}
 
         {directionVisible &&
           <MapViewDirections
-            origin={{ latitude: 45.75933548310976, longitude: 4.855602295766094 }}
+            origin={currentPosition}
             destination={destinationLocation}
             apikey={GOOGLE_MAPS_APIKEY}
             strokeWidth={3}

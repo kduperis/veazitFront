@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as Google from 'expo-google-app-auth';
 
-import { IP_URL } from '@env'
+import { IP_URL,IOS_CLIENT,ANDROID_CLIENT } from '@env'
 
 import themeContext from '../config/themeContext';
 
@@ -50,8 +50,8 @@ export default function SignIn(props) {
 
     var handleGoogleSignin = async () => {
         const config = {
-            iosClientId: '847688372567-4kjumpe2p0itpt10dbp0a3fpo8uvp6ru.apps.googleusercontent.com',
-            androidClientId: '847688372567-t2vo8pfml6bthegn1hd7r7hto8b3g2hv.apps.googleusercontent.com',
+            iosClientId:`${IOS_CLIENT}` ,
+            androidClientId: `${ANDROID_CLIENT}`,
             scopes: ['profile', 'email']
         };
 
